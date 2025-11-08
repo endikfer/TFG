@@ -12,6 +12,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.UI;
 
 public class PrometeoCarController : MonoBehaviour
@@ -272,6 +273,49 @@ public class PrometeoCarController : MonoBehaviour
       */
       // We call the method AnimateWheelMeshes() in order to match the wheel collider movements with the 3D meshes of the wheels.
       AnimateWheelMeshes();
+
+
+
+
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            GoForward();
+        }
+
+        // Marcha atrás
+        if (Input.GetKey(KeyCode.S))
+        {
+            GoReverse();
+        }
+
+        // Girar a la izquierda
+        if (Input.GetKey(KeyCode.A))
+        {
+            TurnLeft();
+        }
+        // Girar a la derecha
+        else if (Input.GetKey(KeyCode.D))
+        {
+            TurnRight();
+        }
+        // Si no se pulsa A ni D, resetear dirección
+        else
+        {
+            ResetSteeringAngle();
+        }
+
+        // Frenar / handbrake
+        if (Input.GetKey(KeyCode.Space))
+        {
+            Brakes();
+        }
+
+        // Si no se pulsa W, S ni Space, desacelerar
+        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.Space))
+        {
+            DecelerateCar();
+        }
 
     }
 
