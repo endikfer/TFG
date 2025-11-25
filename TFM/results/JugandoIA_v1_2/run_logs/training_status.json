@@ -1,0 +1,29 @@
+{
+    "AgentToDrive": {
+        "checkpoints": [
+            {
+                "steps": 35199,
+                "file_path": "results\\JugandoIA_v1_2\\AgentToDrive\\AgentToDrive-35199.onnx",
+                "reward": -100.0,
+                "creation_time": 1676629045.974428,
+                "auxillary_file_paths": [
+                    "results\\JugandoIA_v1_2\\AgentToDrive\\AgentToDrive-35199.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 35199,
+            "file_path": "results\\JugandoIA_v1_2\\AgentToDrive.onnx",
+            "reward": -100.0,
+            "creation_time": 1676629045.974428,
+            "auxillary_file_paths": [
+                "results\\JugandoIA_v1_2\\AgentToDrive\\AgentToDrive-35199.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.13.1+cu117"
+    }
+}

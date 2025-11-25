@@ -1,0 +1,29 @@
+{
+    "AgentToDrive": {
+        "checkpoints": [
+            {
+                "steps": 76260,
+                "file_path": "results\\beh2\\AgentToDrive\\AgentToDrive-76260.onnx",
+                "reward": null,
+                "creation_time": 1677693628.1373513,
+                "auxillary_file_paths": [
+                    "results\\beh2\\AgentToDrive\\AgentToDrive-76260.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 76260,
+            "file_path": "results\\beh2\\AgentToDrive.onnx",
+            "reward": null,
+            "creation_time": 1677693628.1373513,
+            "auxillary_file_paths": [
+                "results\\beh2\\AgentToDrive\\AgentToDrive-76260.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.13.1+cu117"
+    }
+}

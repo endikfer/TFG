@@ -1,0 +1,47 @@
+{
+    "AgentToDrive": {
+        "checkpoints": [
+            {
+                "steps": 2398,
+                "file_path": "results\\JugandoIA_v1_1\\AgentToDrive\\AgentToDrive-2398.onnx",
+                "reward": -1.371680008172989,
+                "creation_time": 1676628210.3771338,
+                "auxillary_file_paths": [
+                    "results\\JugandoIA_v1_1\\AgentToDrive\\AgentToDrive-2398.pt"
+                ]
+            },
+            {
+                "steps": 6456,
+                "file_path": "results\\JugandoIA_v1_1\\AgentToDrive\\AgentToDrive-6456.onnx",
+                "reward": -100.34406239555237,
+                "creation_time": 1676628374.7909777,
+                "auxillary_file_paths": [
+                    "results\\JugandoIA_v1_1\\AgentToDrive\\AgentToDrive-6456.pt"
+                ]
+            },
+            {
+                "steps": 8891,
+                "file_path": "results\\JugandoIA_v1_1\\AgentToDrive\\AgentToDrive-8891.onnx",
+                "reward": -100.0,
+                "creation_time": 1676628471.1879406,
+                "auxillary_file_paths": [
+                    "results\\JugandoIA_v1_1\\AgentToDrive\\AgentToDrive-8891.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 8891,
+            "file_path": "results\\JugandoIA_v1_1\\AgentToDrive.onnx",
+            "reward": -100.0,
+            "creation_time": 1676628471.1879406,
+            "auxillary_file_paths": [
+                "results\\JugandoIA_v1_1\\AgentToDrive\\AgentToDrive-8891.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.13.1+cu117"
+    }
+}

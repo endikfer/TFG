@@ -1,0 +1,42 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1677506101",
+        "python_version": "3.9.16 (main, Jan 11 2023, 16:16:36) [MSC v.1916 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\gonzalez.asier\\AppData\\Local\\miniconda3\\envs\\TFFRL\\Scripts\\mlagents-learn trainer_config.yaml --run-id=HeuristicPrueba1",
+        "mlagents_version": "0.30.0",
+        "mlagents_envs_version": "0.30.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.13.1+cu117",
+        "numpy_version": "1.21.2",
+        "end_time_seconds": "1677506175"
+    },
+    "total": 73.6419982,
+    "count": 1,
+    "self": 0.013863599999993426,
+    "children": {
+        "run_training.setup": {
+            "total": 0.06519399999999997,
+            "count": 1,
+            "self": 0.06519399999999997
+        },
+        "TrainerController.start_learning": {
+            "total": 73.5629406,
+            "count": 1,
+            "self": 0.00010969999999588254,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 73.5628068,
+                    "count": 1,
+                    "self": 73.5628068
+                },
+                "TrainerController._save_models": {
+                    "total": 2.410000000452328e-05,
+                    "count": 1,
+                    "self": 2.410000000452328e-05
+                }
+            }
+        }
+    }
+}

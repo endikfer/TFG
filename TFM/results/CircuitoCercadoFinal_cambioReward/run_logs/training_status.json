@@ -1,0 +1,29 @@
+{
+    "AgentToDrive": {
+        "checkpoints": [
+            {
+                "steps": 70644,
+                "file_path": "results\\CircuitoCercadoFinal_cambioReward\\AgentToDrive\\AgentToDrive-70644.onnx",
+                "reward": 324.1446071288415,
+                "creation_time": 1677489145.6915312,
+                "auxillary_file_paths": [
+                    "results\\CircuitoCercadoFinal_cambioReward\\AgentToDrive\\AgentToDrive-70644.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 70644,
+            "file_path": "results\\CircuitoCercadoFinal_cambioReward\\AgentToDrive.onnx",
+            "reward": 324.1446071288415,
+            "creation_time": 1677489145.6915312,
+            "auxillary_file_paths": [
+                "results\\CircuitoCercadoFinal_cambioReward\\AgentToDrive\\AgentToDrive-70644.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.13.1+cu117"
+    }
+}

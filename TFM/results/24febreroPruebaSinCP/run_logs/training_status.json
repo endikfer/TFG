@@ -1,0 +1,47 @@
+{
+    "AgentToDrive": {
+        "checkpoints": [
+            {
+                "steps": 200047,
+                "file_path": "results\\24febreroPruebaSinCP\\AgentToDrive\\AgentToDrive-200047.onnx",
+                "reward": null,
+                "creation_time": 1677236778.2951605,
+                "auxillary_file_paths": [
+                    "results\\24febreroPruebaSinCP\\AgentToDrive\\AgentToDrive-200047.pt"
+                ]
+            },
+            {
+                "steps": 200047,
+                "file_path": "results\\24febreroPruebaSinCP\\AgentToDrive\\AgentToDrive-200047.onnx",
+                "reward": null,
+                "creation_time": 1677237295.6896946,
+                "auxillary_file_paths": [
+                    "results\\24febreroPruebaSinCP\\AgentToDrive\\AgentToDrive-200047.pt"
+                ]
+            },
+            {
+                "steps": 210415,
+                "file_path": "results\\24febreroPruebaSinCP\\AgentToDrive\\AgentToDrive-210415.onnx",
+                "reward": null,
+                "creation_time": 1677237847.1893487,
+                "auxillary_file_paths": [
+                    "results\\24febreroPruebaSinCP\\AgentToDrive\\AgentToDrive-210415.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 210415,
+            "file_path": "results\\24febreroPruebaSinCP\\AgentToDrive.onnx",
+            "reward": null,
+            "creation_time": 1677237847.1893487,
+            "auxillary_file_paths": [
+                "results\\24febreroPruebaSinCP\\AgentToDrive\\AgentToDrive-210415.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.13.1+cu117"
+    }
+}

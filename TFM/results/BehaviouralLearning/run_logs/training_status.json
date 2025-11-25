@@ -1,0 +1,47 @@
+{
+    "AgentToDrive": {
+        "checkpoints": [
+            {
+                "steps": 199695,
+                "file_path": "results\\BehaviouralLearning\\AgentToDrive\\AgentToDrive-199695.onnx",
+                "reward": 849.800025165081,
+                "creation_time": 1677499830.6765742,
+                "auxillary_file_paths": [
+                    "results\\BehaviouralLearning\\AgentToDrive\\AgentToDrive-199695.pt"
+                ]
+            },
+            {
+                "steps": 200975,
+                "file_path": "results\\BehaviouralLearning\\AgentToDrive\\AgentToDrive-200975.onnx",
+                "reward": null,
+                "creation_time": 1677499941.8687663,
+                "auxillary_file_paths": [
+                    "results\\BehaviouralLearning\\AgentToDrive\\AgentToDrive-200975.pt"
+                ]
+            },
+            {
+                "steps": 212220,
+                "file_path": "results\\BehaviouralLearning\\AgentToDrive\\AgentToDrive-212220.onnx",
+                "reward": null,
+                "creation_time": 1677500220.7987955,
+                "auxillary_file_paths": [
+                    "results\\BehaviouralLearning\\AgentToDrive\\AgentToDrive-212220.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 212220,
+            "file_path": "results\\BehaviouralLearning\\AgentToDrive.onnx",
+            "reward": null,
+            "creation_time": 1677500220.7987955,
+            "auxillary_file_paths": [
+                "results\\BehaviouralLearning\\AgentToDrive\\AgentToDrive-212220.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.13.1+cu117"
+    }
+}

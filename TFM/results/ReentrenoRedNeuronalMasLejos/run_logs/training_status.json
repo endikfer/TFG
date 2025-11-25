@@ -1,0 +1,29 @@
+{
+    "AgentToDrive": {
+        "checkpoints": [
+            {
+                "steps": 14592,
+                "file_path": "results\\ReentrenoRedNeuronalMasLejos\\AgentToDrive\\AgentToDrive-14592.onnx",
+                "reward": null,
+                "creation_time": 1677349656.2488427,
+                "auxillary_file_paths": [
+                    "results\\ReentrenoRedNeuronalMasLejos\\AgentToDrive\\AgentToDrive-14592.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 14592,
+            "file_path": "results\\ReentrenoRedNeuronalMasLejos\\AgentToDrive.onnx",
+            "reward": null,
+            "creation_time": 1677349656.2488427,
+            "auxillary_file_paths": [
+                "results\\ReentrenoRedNeuronalMasLejos\\AgentToDrive\\AgentToDrive-14592.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.13.1+cu117"
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1677073788",
+        "python_version": "3.9.16 (main, Jan 11 2023, 16:16:36) [MSC v.1916 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\gonzalez.asier\\AppData\\Local\\miniconda3\\envs\\TFFRL\\Scripts\\mlagents-learn --run-id=prueba22feb1",
+        "mlagents_version": "0.30.0",
+        "mlagents_envs_version": "0.30.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.13.1+cu117",
+        "numpy_version": "1.21.2",
+        "end_time_seconds": "1677073805"
+    },
+    "total": 17.228800999999997,
+    "count": 1,
+    "self": 0.05367559999999827,
+    "children": {
+        "run_training.setup": {
+            "total": 0.12341390000000096,
+            "count": 1,
+            "self": 0.12341390000000096
+        },
+        "TrainerController.start_learning": {
+            "total": 17.051711499999996,
+            "count": 1,
+            "self": 0.0008715999999964197,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 17.0508123,
+                    "count": 1,
+                    "self": 17.0508123
+                },
+                "trainer_threads": {
+                    "total": 2.69999999957804e-06,
+                    "count": 1,
+                    "self": 2.69999999957804e-06
+                },
+                "TrainerController._save_models": {
+                    "total": 2.4899999999661304e-05,
+                    "count": 1,
+                    "self": 2.4899999999661304e-05
+                }
+            }
+        }
+    }
+}

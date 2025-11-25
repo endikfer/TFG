@@ -1,0 +1,65 @@
+{
+    "AgentToDrive": {
+        "checkpoints": [
+            {
+                "steps": 2499936,
+                "file_path": "results\\27022023\\AgentToDrive\\AgentToDrive-2499936.onnx",
+                "reward": null,
+                "creation_time": 1677558512.3743615,
+                "auxillary_file_paths": [
+                    "results\\27022023\\AgentToDrive\\AgentToDrive-2499936.pt"
+                ]
+            },
+            {
+                "steps": 2999948,
+                "file_path": "results\\27022023\\AgentToDrive\\AgentToDrive-2999948.onnx",
+                "reward": null,
+                "creation_time": 1677569768.139917,
+                "auxillary_file_paths": [
+                    "results\\27022023\\AgentToDrive\\AgentToDrive-2999948.pt"
+                ]
+            },
+            {
+                "steps": 3379359,
+                "file_path": "results\\27022023\\AgentToDrive\\AgentToDrive-3379359.onnx",
+                "reward": null,
+                "creation_time": 1677578120.6322596,
+                "auxillary_file_paths": [
+                    "results\\27022023\\AgentToDrive\\AgentToDrive-3379359.pt"
+                ]
+            },
+            {
+                "steps": 3379359,
+                "file_path": "results\\27022023\\AgentToDrive\\AgentToDrive-3379359.onnx",
+                "reward": null,
+                "creation_time": 1677691612.7013292,
+                "auxillary_file_paths": [
+                    "results\\27022023\\AgentToDrive\\AgentToDrive-3379359.pt"
+                ]
+            },
+            {
+                "steps": 3381087,
+                "file_path": "results\\27022023\\AgentToDrive\\AgentToDrive-3381087.onnx",
+                "reward": null,
+                "creation_time": 1677691739.2772918,
+                "auxillary_file_paths": [
+                    "results\\27022023\\AgentToDrive\\AgentToDrive-3381087.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 3381087,
+            "file_path": "results\\27022023\\AgentToDrive.onnx",
+            "reward": null,
+            "creation_time": 1677691739.2772918,
+            "auxillary_file_paths": [
+                "results\\27022023\\AgentToDrive\\AgentToDrive-3381087.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.13.1+cu117"
+    }
+}

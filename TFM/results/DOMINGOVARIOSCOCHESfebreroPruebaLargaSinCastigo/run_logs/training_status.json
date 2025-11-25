@@ -1,0 +1,56 @@
+{
+    "AgentToDrive": {
+        "checkpoints": [
+            {
+                "steps": 499940,
+                "file_path": "results\\DOMINGOVARIOSCOCHESfebreroPruebaLargaSinCastigo\\AgentToDrive\\AgentToDrive-499940.onnx",
+                "reward": null,
+                "creation_time": 1677426374.5633535,
+                "auxillary_file_paths": [
+                    "results\\DOMINGOVARIOSCOCHESfebreroPruebaLargaSinCastigo\\AgentToDrive\\AgentToDrive-499940.pt"
+                ]
+            },
+            {
+                "steps": 999936,
+                "file_path": "results\\DOMINGOVARIOSCOCHESfebreroPruebaLargaSinCastigo\\AgentToDrive\\AgentToDrive-999936.onnx",
+                "reward": null,
+                "creation_time": 1677427358.01689,
+                "auxillary_file_paths": [
+                    "results\\DOMINGOVARIOSCOCHESfebreroPruebaLargaSinCastigo\\AgentToDrive\\AgentToDrive-999936.pt"
+                ]
+            },
+            {
+                "steps": 1499996,
+                "file_path": "results\\DOMINGOVARIOSCOCHESfebreroPruebaLargaSinCastigo\\AgentToDrive\\AgentToDrive-1499996.onnx",
+                "reward": null,
+                "creation_time": 1677428341.0749667,
+                "auxillary_file_paths": [
+                    "results\\DOMINGOVARIOSCOCHESfebreroPruebaLargaSinCastigo\\AgentToDrive\\AgentToDrive-1499996.pt"
+                ]
+            },
+            {
+                "steps": 1540200,
+                "file_path": "results\\DOMINGOVARIOSCOCHESfebreroPruebaLargaSinCastigo\\AgentToDrive\\AgentToDrive-1540200.onnx",
+                "reward": null,
+                "creation_time": 1677428483.1734524,
+                "auxillary_file_paths": [
+                    "results\\DOMINGOVARIOSCOCHESfebreroPruebaLargaSinCastigo\\AgentToDrive\\AgentToDrive-1540200.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1540200,
+            "file_path": "results\\DOMINGOVARIOSCOCHESfebreroPruebaLargaSinCastigo\\AgentToDrive.onnx",
+            "reward": null,
+            "creation_time": 1677428483.1734524,
+            "auxillary_file_paths": [
+                "results\\DOMINGOVARIOSCOCHESfebreroPruebaLargaSinCastigo\\AgentToDrive\\AgentToDrive-1540200.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.13.1+cu117"
+    }
+}

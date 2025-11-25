@@ -1,0 +1,65 @@
+{
+    "AgentToDrive": {
+        "checkpoints": [
+            {
+                "steps": 1499947,
+                "file_path": "results\\24febreroPruebaFinalLargaDefinitiva\\AgentToDrive\\AgentToDrive-1499947.onnx",
+                "reward": null,
+                "creation_time": 1677257257.8617737,
+                "auxillary_file_paths": [
+                    "results\\24febreroPruebaFinalLargaDefinitiva\\AgentToDrive\\AgentToDrive-1499947.pt"
+                ]
+            },
+            {
+                "steps": 1999965,
+                "file_path": "results\\24febreroPruebaFinalLargaDefinitiva\\AgentToDrive\\AgentToDrive-1999965.onnx",
+                "reward": null,
+                "creation_time": 1677259736.381108,
+                "auxillary_file_paths": [
+                    "results\\24febreroPruebaFinalLargaDefinitiva\\AgentToDrive\\AgentToDrive-1999965.pt"
+                ]
+            },
+            {
+                "steps": 2499972,
+                "file_path": "results\\24febreroPruebaFinalLargaDefinitiva\\AgentToDrive\\AgentToDrive-2499972.onnx",
+                "reward": null,
+                "creation_time": 1677262197.9197283,
+                "auxillary_file_paths": [
+                    "results\\24febreroPruebaFinalLargaDefinitiva\\AgentToDrive\\AgentToDrive-2499972.pt"
+                ]
+            },
+            {
+                "steps": 2828051,
+                "file_path": "results\\24febreroPruebaFinalLargaDefinitiva\\AgentToDrive\\AgentToDrive-2828051.onnx",
+                "reward": null,
+                "creation_time": 1677263807.7861776,
+                "auxillary_file_paths": [
+                    "results\\24febreroPruebaFinalLargaDefinitiva\\AgentToDrive\\AgentToDrive-2828051.pt"
+                ]
+            },
+            {
+                "steps": 2842931,
+                "file_path": "results\\24febreroPruebaFinalLargaDefinitiva\\AgentToDrive\\AgentToDrive-2842931.onnx",
+                "reward": null,
+                "creation_time": 1677264068.8400638,
+                "auxillary_file_paths": [
+                    "results\\24febreroPruebaFinalLargaDefinitiva\\AgentToDrive\\AgentToDrive-2842931.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2842931,
+            "file_path": "results\\24febreroPruebaFinalLargaDefinitiva\\AgentToDrive.onnx",
+            "reward": null,
+            "creation_time": 1677264068.8400638,
+            "auxillary_file_paths": [
+                "results\\24febreroPruebaFinalLargaDefinitiva\\AgentToDrive\\AgentToDrive-2842931.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.13.1+cu117"
+    }
+}
