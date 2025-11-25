@@ -24,19 +24,6 @@ public class AgentToDrive : Agent {
 
     public int contadorSalidaPista = 0;
 
-    public float timeReset = 200.0f; 
-    public float timeRemaining = 200.0f; // Tiempo total en segundos , cambiarlo en el UPDATE
-    private bool timerIsRunning = true;
-
-
-
-    public override void Initialize()
-    {
-        ResetCar();
-        timeRemaining = timeReset; 
-        timerIsRunning = true;
-    }
-
     private void Update()
     {
 
@@ -53,22 +40,6 @@ public class AgentToDrive : Agent {
             ResetCar();//_checkpointManager.ResetCheckpoints();
             EndEpisode();
 
-        }
-        //AddReward(-0.1f);
-        if (timerIsRunning)
-        {
-            if (timeRemaining > 0)
-            {
-                // Resta el tiempo del temporizador en cada frame
-                timeRemaining -= Time.deltaTime;
-            }
-            else
-            {
-                ResetCar(); //_checkpointManager.ResetCheckpoints();
-                EndEpisode();
-                
-                timeRemaining = 200.0f;
-            }
         }
 
     }
@@ -188,8 +159,7 @@ public class AgentToDrive : Agent {
         SetReward(1000f);
 
         // By marking an agent as done AgentReset() will be called automatically.
-        //_checkpointManager.ResetCheckpoints();
-        timeRemaining = 200f;
+        //_checkpointManager.ResetCheckpoints()
         EndEpisode();
         Debug.Log("GOOOOOOOOOOOOOOOOOOAAAAAL!!! REACHED");
         ResetCar();
