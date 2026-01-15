@@ -52,6 +52,11 @@ public class AgentToDrive : Agent {
         //_checkpointManager.ResetCheckpoints();
         ResetCar();
 
+        foreach (var checkpoint in _checkpointManager.checkpp.checkPoints)
+        {
+            checkpoint.ResetTrigger();
+        }
+
     }
 
 

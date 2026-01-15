@@ -28,13 +28,21 @@ public class CheckPointManager : MonoBehaviour
     private List<check1> Checkpoints;
 
     private List<Camera> Camaras; 
-    [SerializeField] private Checkpointss checkpp;
+    [SerializeField] public Checkpointss checkpp;
     [SerializeField] private camaraConjunto camarass;
     //private Checkpointss checkpp;
 
     private check1 lastCheckpoint;
 
-    public event Action<check1> reachedCheckpoint; 
+    public event Action<check1> reachedCheckpoint;
+
+    private void Awake()
+    {
+        for (int i = 0; i < checkpp.checkPoints.Count; i++)
+        {
+            checkpp.checkPoints[i].checkpointID = i;
+        }
+    }
 
     void Start()
     {
@@ -99,7 +107,7 @@ public class CheckPointManager : MonoBehaviour
 
         distance = Vector3.Distance(kartAgentPosition, nextCheckpointPosition);
 
-        Debug.Log(CurrentCheckpointIndex);
+        Debug.Log("Indice de check point actual: " + CurrentCheckpointIndex);
         
     }
 
@@ -122,7 +130,7 @@ public class CheckPointManager : MonoBehaviour
         else
         {
             //kartAgent.GiveReward((50f) / Checkpoints.Count);
-            kartAgent.AddReward( 10 * CurrentCheckpointIndex);
+            kartAgent.AddReward( 20 * CurrentCheckpointIndex);
             SetNextCheckpoint();
             Vector3 kartAgentPosition = kartAgent.transform.position;
             Vector3 nextCheckpointPosition = nextCheckPointToReach.transform.position;

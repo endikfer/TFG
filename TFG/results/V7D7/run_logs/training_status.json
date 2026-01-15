@@ -1,0 +1,65 @@
+{
+    "AgentToDrive": {
+        "checkpoints": [
+            {
+                "steps": 499948,
+                "file_path": "results\\V7D7\\AgentToDrive\\AgentToDrive-499948.onnx",
+                "reward": 0.0,
+                "creation_time": 1764413591.2825706,
+                "auxillary_file_paths": [
+                    "results\\V7D7\\AgentToDrive\\AgentToDrive-499948.pt"
+                ]
+            },
+            {
+                "steps": 999998,
+                "file_path": "results\\V7D7\\AgentToDrive\\AgentToDrive-999998.onnx",
+                "reward": null,
+                "creation_time": 1764415209.4009037,
+                "auxillary_file_paths": [
+                    "results\\V7D7\\AgentToDrive\\AgentToDrive-999998.pt"
+                ]
+            },
+            {
+                "steps": 1499979,
+                "file_path": "results\\V7D7\\AgentToDrive\\AgentToDrive-1499979.onnx",
+                "reward": 0.0,
+                "creation_time": 1764416931.9604921,
+                "auxillary_file_paths": [
+                    "results\\V7D7\\AgentToDrive\\AgentToDrive-1499979.pt"
+                ]
+            },
+            {
+                "steps": 1999958,
+                "file_path": "results\\V7D7\\AgentToDrive\\AgentToDrive-1999958.onnx",
+                "reward": 0.0,
+                "creation_time": 1764418794.6135516,
+                "auxillary_file_paths": [
+                    "results\\V7D7\\AgentToDrive\\AgentToDrive-1999958.pt"
+                ]
+            },
+            {
+                "steps": 2377078,
+                "file_path": "results\\V7D7\\AgentToDrive\\AgentToDrive-2377078.onnx",
+                "reward": 0.0,
+                "creation_time": 1764420080.3506074,
+                "auxillary_file_paths": [
+                    "results\\V7D7\\AgentToDrive\\AgentToDrive-2377078.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2377078,
+            "file_path": "results\\V7D7\\AgentToDrive.onnx",
+            "reward": 0.0,
+            "creation_time": 1764420080.3506074,
+            "auxillary_file_paths": [
+                "results\\V7D7\\AgentToDrive\\AgentToDrive-2377078.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.7.0+cpu"
+    }
+}
