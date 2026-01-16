@@ -1,18 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Checkpoint : MonoBehaviour
+public class CheckPoint : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    [SerializeField] private ManagerCheckPoints manager;
+
+    private bool atravesado = false; // 🔹 Evita que se llame más de una vez
+
+    public int checkpointID;
+
+    private void OnTriggerExit(Collider other)
     {
-
-         Debug.Log("CheckPointTrigger");
-
-/*          
-        if (other.GetComponent<CheckpointManager>() != null)
+        if (!atravesado && manager != null)
         {
-            other.GetComponent<CheckpointManager>().CheckPointReached(this);
-        } */
+            atravesado = true; // Marca como ya usado
+            manager.CheckPointReached(this);
+            Debug.Log($"Alcanzado el checkpoint {checkpointID}.");
+        }
+    }
+
+    // 🔹 Si quieres que se resetee cada episodio:
+    public void ResetTrigger()
+    {
+        atravesado = false;
     }
 }
