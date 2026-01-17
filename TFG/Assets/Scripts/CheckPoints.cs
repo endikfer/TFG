@@ -8,6 +8,5 @@ public class CheckPoints : MonoBehaviour
     private void Awake()
     {
         checkPoints = new List<CheckPoint>(GetComponentsInChildren<CheckPoint>());
-        Debug.Log(checkPoints.Count);
     }
 }
