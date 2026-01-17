@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 
-public class CheckPoint : MonoBehaviour
+public class CheckPoint2 : MonoBehaviour
 {
-    [SerializeField] private ManagerCheckPoints manager;
+    [SerializeField] private CheckPointsManager manager;
 
     private bool atravesado = false; // 🔹 Evita que se llame más de una vez
 
     public int checkpointID;
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (!atravesado && manager != null)
         {

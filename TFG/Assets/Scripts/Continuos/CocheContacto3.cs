@@ -1,24 +1,12 @@
 using UnityEngine;
 
-public class ContactoCoche2 : MonoBehaviour
+public class CocheContacto3 : MonoBehaviour
 {
-    [SerializeField] private Agente karAgent;
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    [SerializeField] private Agente2 karAgent;
 
     private void OnCollisionEnter(Collision col)
     {
-
         karAgent.salidaDePista = true;
-
     }
 
     private void OnCollisionExit(Collision collision)

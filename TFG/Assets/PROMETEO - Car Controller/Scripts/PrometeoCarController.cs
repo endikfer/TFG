@@ -713,4 +713,90 @@ public class PrometeoCarController : MonoBehaviour
       }
     }
 
+    public void SetSteering(float value)
+    {
+        // Clamp por seguridad
+        steeringAxis = Mathf.Clamp(value, -1f, 1f);
+
+        float steeringAngle = steeringAxis * maxSteeringAngle;
+
+        frontLeftCollider.steerAngle =
+            Mathf.Lerp(frontLeftCollider.steerAngle, steeringAngle, steeringSpeed);
+
+        frontRightCollider.steerAngle =
+            Mathf.Lerp(frontRightCollider.steerAngle, steeringAngle, steeringSpeed);
+    }
+
+
+    public void SetThrottle(float value)
+    {
+        throttleAxis = Mathf.Clamp(value, -1f, 1f);
+
+        // Frenar suave cuando no hay gas
+        if (Mathf.Abs(throttleAxis) < 0.05f)
+        {
+            ThrottleOff();
+            return;
+        }
+
+        // Si quiere ir hacia delante
+        if (throttleAxis > 0f)
+        {
+            // Evita acelerar si va marcha atrás
+            if (localVelocityZ < -1f)
+            {
+                Brakes();
+                return;
+            }
+
+            if (Mathf.RoundToInt(carSpeed) < maxSpeed)
+            {
+                float torque = (accelerationMultiplier * 50f) * throttleAxis;
+
+                frontLeftCollider.motorTorque = torque;
+                frontRightCollider.motorTorque = torque;
+                rearLeftCollider.motorTorque = torque;
+                rearRightCollider.motorTorque = torque;
+
+                frontLeftCollider.brakeTorque = 0;
+                frontRightCollider.brakeTorque = 0;
+                rearLeftCollider.brakeTorque = 0;
+                rearRightCollider.brakeTorque = 0;
+            }
+            else
+            {
+                ThrottleOff();
+            }
+        }
+        // Si quiere ir marcha atrás
+        else
+        {
+            if (localVelocityZ > 1f)
+            {
+                Brakes();
+                return;
+            }
+
+            if (Mathf.Abs(Mathf.RoundToInt(carSpeed)) < maxReverseSpeed)
+            {
+                float torque = (accelerationMultiplier * 50f) * throttleAxis;
+
+                frontLeftCollider.motorTorque = torque;
+                frontRightCollider.motorTorque = torque;
+                rearLeftCollider.motorTorque = torque;
+                rearRightCollider.motorTorque = torque;
+
+                frontLeftCollider.brakeTorque = 0;
+                frontRightCollider.brakeTorque = 0;
+                rearLeftCollider.brakeTorque = 0;
+                rearRightCollider.brakeTorque = 0;
+            }
+            else
+            {
+                ThrottleOff();
+            }
+        }
+    }
+
+
 }

@@ -3,8 +3,8 @@ behaviors:
   AgentToDrive:
     trainer_type: ppo
     hyperparameters:
-      batch_size: 1024
-      buffer_size: 10240
+      batch_size: 512
+      buffer_size: 8192
       learning_rate: 0.0003
       beta: 0.005
       epsilon: 0.2
@@ -39,7 +39,7 @@ behaviors:
     keep_checkpoints: 5
     even_checkpoints: false
     max_steps: 20000000
-    time_horizon: 64
+    time_horizon: 512
     summary_freq: 50000
     threaded: false
     self_play: null
