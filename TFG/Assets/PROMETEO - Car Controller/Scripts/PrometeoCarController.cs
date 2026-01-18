@@ -1,4 +1,4 @@
-/*
+﻿/*
 MESSAGE FROM CREATOR: This script was coded by Mena. You can use it in your games either these are commercial or
 personal projects. You can even add or remove functions as you wish. However, you cannot sell copies of this
 script by itself, since it is originally distributed as a free product.
@@ -23,22 +23,22 @@ public class PrometeoCarController : MonoBehaviour
       [Space(20)]
       //[Header("CAR SETUP")]
       [Space(10)]
-      [Range(20, 190)]
-      public int maxSpeed = 90; //The maximum speed that the car can reach in km/h.
+      [Range(20, 300)]
+      public int maxSpeed = 250; //The maximum speed that the car can reach in km/h.
       [Range(10, 120)]
-      public int maxReverseSpeed = 45; //The maximum speed that the car can reach while going on reverse in km/h.
+      public int maxReverseSpeed = 50; //The maximum speed that the car can reach while going on reverse in km/h.
       [Range(1, 10)]
-      public int accelerationMultiplier = 2; // How fast the car can accelerate. 1 is a slow acceleration and 10 is the fastest.
+      public int accelerationMultiplier = 8; // How fast the car can accelerate. 1 is a slow acceleration and 10 is the fastest.
       [Space(10)]
       [Range(10, 45)]
-      public int maxSteeringAngle = 27; // The maximum angle that the tires can reach while rotating the steering wheel.
+      public int maxSteeringAngle = 25; // The maximum angle that the tires can reach while rotating the steering wheel.
       [Range(0.1f, 1f)]
-      public float steeringSpeed = 0.5f; // How fast the steering wheel turns.
+      public float steeringSpeed = 0.7f; // How fast the steering wheel turns.
       [Space(10)]
       [Range(100, 600)]
-      public int brakeForce = 350; // The strength of the wheel brakes.
+      public int brakeForce = 400; // The strength of the wheel brakes.
       [Range(1, 10)]
-      public int decelerationMultiplier = 2; // How fast the car decelerates when the user is not using the throttle.
+      public int decelerationMultiplier = 6; // How fast the car decelerates when the user is not using the throttle.
       [Range(1, 10)]
       public int handbrakeDriftMultiplier = 5; // How much grip the car loses when the user hit the handbrake.
       [Space(10)]
@@ -139,12 +139,12 @@ public class PrometeoCarController : MonoBehaviour
       /*
       IMPORTANT: The following variables should not be modified manually since their values are automatically given via script.
       */
-      Rigidbody carRigidbody; // Stores the car's rigidbody.
+      public Rigidbody carRigidbody; // Stores the car's rigidbody.
       float steeringAxis; // Used to know whether the steering wheel has reached the maximum value. It goes from -1 to 1.
       float throttleAxis; // Used to know whether the throttle has reached the maximum value. It goes from -1 to 1.
       float driftingAxis;
       float localVelocityZ;
-      float localVelocityX;
+      public float localVelocityX;
       bool deceleratingCar;
       bool touchControlsSetup = false;
       /*
@@ -283,7 +283,7 @@ public class PrometeoCarController : MonoBehaviour
             GoForward();
         }
 
-        // Marcha atr�s
+        // Marcha atrás
         if (Input.GetKey(KeyCode.S))
         {
             GoReverse();
@@ -299,7 +299,7 @@ public class PrometeoCarController : MonoBehaviour
         {
             TurnRight();
         }
-        // Si no se pulsa A ni D, resetear direcci�n
+        // Si no se pulsa A ni D, resetear dirección
         else
         {
             ResetSteeringAngle();
@@ -536,37 +536,56 @@ public class PrometeoCarController : MonoBehaviour
     // The following method decelerates the speed of the car according to the decelerationMultiplier variable, where
     // 1 is the slowest and 10 is the fastest deceleration. This method is called by the function InvokeRepeating,
     // usually every 0.1f when the user is not pressing W (throttle), S (reverse) or Space bar (handbrake).
-    public void DecelerateCar(){
-      if(Mathf.Abs(localVelocityX) > 2.5f){
-        isDrifting = true;
+    public void DecelerateCar()
+    {
+        // 🔹 Detecta si el coche está derrapando lateralmente
+        bool drifting = Mathf.Abs(localVelocityX) > 2.5f;
+        isDrifting = drifting;
+
+        // 🔹 Actualiza partículas y efectos de drift
         DriftCarPS();
-      }else{
-        isDrifting = false;
-        DriftCarPS();
-      }
-      // The following part resets the throttle power to 0 smoothly.
-      if(throttleAxis != 0f){
-        if(throttleAxis > 0f){
-          throttleAxis = throttleAxis - (Time.deltaTime * 10f);
-        }else if(throttleAxis < 0f){
-            throttleAxis = throttleAxis + (Time.deltaTime * 10f);
+
+        // 🔹 Suaviza el throttle al soltar el acelerador
+        if (throttleAxis != 0f)
+        {
+            if (throttleAxis > 0f)
+                throttleAxis -= Time.deltaTime * 10f;
+            else if (throttleAxis < 0f)
+                throttleAxis += Time.deltaTime * 10f;
+
+            if (Mathf.Abs(throttleAxis) < 0.15f)
+                throttleAxis = 0f;
         }
-        if(Mathf.Abs(throttleAxis) < 0.15f){
-          throttleAxis = 0f;
+
+        // 🔹 Desaceleración básica (fricción de neumáticos)
+        float baseDeceleration = 0.02f * decelerationMultiplier; // ajustable
+                                                                 // 🔹 Si hay derrape, aumentamos la desaceleración lateral
+        if (drifting)
+        {
+            baseDeceleration *= 2f; // más fuerte al derrapar
         }
-      }
-      carRigidbody.linearVelocity = carRigidbody.linearVelocity * (1f / (1f + (0.025f * decelerationMultiplier)));
-      // Since we want to decelerate the car, we are going to remove the torque from the wheels of the car.
-      frontLeftCollider.motorTorque = 0;
-      frontRightCollider.motorTorque = 0;
-      rearLeftCollider.motorTorque = 0;
-      rearRightCollider.motorTorque = 0;
-      // If the magnitude of the car's velocity is less than 0.25f (very slow velocity), then stop the car completely and
-      // also cancel the invoke of this method.
-      if(carRigidbody.linearVelocity.magnitude < 0.25f){
-        carRigidbody.linearVelocity = Vector3.zero;
-        CancelInvoke("DecelerateCar");
-      }
+
+        float decelerationFactor = 1f - (baseDeceleration * Time.deltaTime);
+        decelerationFactor = Mathf.Clamp(decelerationFactor, 0f, 1f);
+        carRigidbody.linearVelocity = carRigidbody.linearVelocity * decelerationFactor;
+
+        // 🔹 Resistencia aerodinámica (drag)
+        float drag = 0.05f; // ajustable
+        Vector3 dragForce = -carRigidbody.linearVelocity * drag;
+        carRigidbody.AddForce(dragForce, ForceMode.Acceleration);
+
+        // 🔹 Reinicio motorTorque para que no haya propulsión
+        frontLeftCollider.motorTorque = 0;
+        frontRightCollider.motorTorque = 0;
+        rearLeftCollider.motorTorque = 0;
+        rearRightCollider.motorTorque = 0;
+
+        // 🔹 Detener por completo si va muy despacio
+        if (carRigidbody.linearVelocity.magnitude < 0.25f)
+        {
+            carRigidbody.linearVelocity = Vector3.zero;
+            CancelInvoke("DecelerateCar");
+        }
     }
 
     // This function applies brake torque to the wheels according to the brake force given by the user.
@@ -742,7 +761,7 @@ public class PrometeoCarController : MonoBehaviour
         // Si quiere ir hacia delante
         if (throttleAxis > 0f)
         {
-            // Evita acelerar si va marcha atr�s
+            // Evita acelerar si va marcha atrás
             if (localVelocityZ < -1f)
             {
                 Brakes();
@@ -768,7 +787,7 @@ public class PrometeoCarController : MonoBehaviour
                 ThrottleOff();
             }
         }
-        // Si quiere ir marcha atr�s
+        // Si quiere ir marcha atrás
         else
         {
             if (localVelocityZ > 1f)

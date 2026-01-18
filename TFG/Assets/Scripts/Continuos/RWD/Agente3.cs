@@ -2,11 +2,12 @@
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class Agente2 : Agent
+public class Agente3 : Agent
 {
-    [SerializeField] private PrometeoCarController _prometeoCarController;
-    [SerializeField] private CheckPointsManager _checkpointManager;
+    [SerializeField] private CarController _prometeoCarController;
+    [SerializeField] private CheckPointsManager2 _checkpointManager;
 
     [SerializeField] private GameObject obj;
     [SerializeField] private GameObject area;
@@ -151,7 +152,7 @@ public class Agente2 : Agent
         _checkpointManager.ResetCheckpoints();
 
         _prometeoCarController.carSpeed = 0;
-        _prometeoCarController.Start();
+        _prometeoCarController.ResetCarState();
     }
 
     public void HandleOffTrack()
@@ -167,7 +168,7 @@ public class Agente2 : Agent
         Debug.Log("Checkpoint superado, reward otorgada.");
     }
 
-    private void OnCheckpointReached(CheckPoint2 checkpoint)
+    private void OnCheckpointReached(CheckPoint3 checkpoint)
     {
         CheckpointReward();
     }
