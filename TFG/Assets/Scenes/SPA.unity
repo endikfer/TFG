@@ -27987,19 +27987,19 @@ PrefabInstance:
       addedObject: {fileID: 461721478}
     - targetCorrespondingSourceObject: {fileID: 3823410976557249788, guid: 98223966a3c0aae40bde62d38024702d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 461721477}
+      addedObject: {fileID: 2011140751}
     - targetCorrespondingSourceObject: {fileID: 3881765715130982932, guid: 98223966a3c0aae40bde62d38024702d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 461721476}
+      addedObject: {fileID: 1707789046}
     - targetCorrespondingSourceObject: {fileID: 2522989101211429134, guid: 98223966a3c0aae40bde62d38024702d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 461721475}
+      addedObject: {fileID: 461721484}
     - targetCorrespondingSourceObject: {fileID: 2073939877843280452, guid: 98223966a3c0aae40bde62d38024702d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 461721474}
+      addedObject: {fileID: 2141416234}
     - targetCorrespondingSourceObject: {fileID: 4765474548504231733, guid: 98223966a3c0aae40bde62d38024702d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1102923188}
+      addedObject: {fileID: 1102923193}
   m_SourcePrefab: {fileID: 100100000, guid: 98223966a3c0aae40bde62d38024702d, type: 3}
 --- !u!4 &461721467 stripped
 Transform:
@@ -28036,58 +28036,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4783618313735052593, guid: 98223966a3c0aae40bde62d38024702d, type: 3}
   m_PrefabInstance: {fileID: 461721466}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &461721474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 461721469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c31cda6bbbf80e4fbb156399ca35aff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto3
-  karAgent: {fileID: 0}
---- !u!114 &461721475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 461721470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c31cda6bbbf80e4fbb156399ca35aff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto3
-  karAgent: {fileID: 0}
---- !u!114 &461721476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 461721471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c31cda6bbbf80e4fbb156399ca35aff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto3
-  karAgent: {fileID: 0}
---- !u!114 &461721477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 461721472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c31cda6bbbf80e4fbb156399ca35aff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto3
-  karAgent: {fileID: 0}
 --- !u!23 &461721478
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -28136,6 +28084,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &461721484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461721470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfa3a8961b561242a62655f173e13b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto4
+  karAgent: {fileID: 1396012518}
 --- !u!1 &461793949
 GameObject:
   m_ObjectHideFlags: 0
@@ -64715,7 +64676,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1102249907}
   m_Mesh: {fileID: 5435517797404801300, guid: 451e63c0678d44f4d81c81f696065b1b, type: 3}
---- !u!114 &1102923188
+--- !u!114 &1102923193
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64724,10 +64685,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 461721468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c31cda6bbbf80e4fbb156399ca35aff, type: 3}
+  m_Script: {fileID: 11500000, guid: ccfa3a8961b561242a62655f173e13b4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto3
-  karAgent: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto4
+  karAgent: {fileID: 1396012518}
 --- !u!1 &1103761026
 GameObject:
   m_ObjectHideFlags: 0
@@ -67258,8 +67219,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8789d0d51538b6e448fc16868117dd2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheckPointsManager2
-  kartAgent: {fileID: 1396012518}
   checkpp: {fileID: 1450508480}
+  loopCircuit: 1
 --- !u!4 &1147483772
 Transform:
   m_ObjectHideFlags: 0
@@ -99489,6 +99450,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1704266644}
   m_Mesh: {fileID: 5435517797404801300, guid: 451e63c0678d44f4d81c81f696065b1b, type: 3}
+--- !u!114 &1707789046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461721471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfa3a8961b561242a62655f173e13b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto4
+  karAgent: {fileID: 1396012518}
 --- !u!1 &1707811867
 GameObject:
   m_ObjectHideFlags: 0
@@ -115383,6 +115357,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2009652916}
   m_Mesh: {fileID: -660108520769988688, guid: 451e63c0678d44f4d81c81f696065b1b, type: 3}
+--- !u!114 &2011140751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461721472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfa3a8961b561242a62655f173e13b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto4
+  karAgent: {fileID: 1396012518}
 --- !u!1 &2013051044
 GameObject:
   m_ObjectHideFlags: 0
@@ -122003,6 +121990,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2139768122}
   m_Mesh: {fileID: -2573501144246834820, guid: 451e63c0678d44f4d81c81f696065b1b, type: 3}
+--- !u!114 &2141416234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461721469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfa3a8961b561242a62655f173e13b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto4
+  karAgent: {fileID: 1396012518}
 --- !u!1 &2143754082
 GameObject:
   m_ObjectHideFlags: 0

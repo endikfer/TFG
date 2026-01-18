@@ -108,6 +108,8 @@ public class CheckPointsManager2 : MonoBehaviour
     [SerializeField] public CheckPoints3 checkpp;
     public event Action<CheckPoint3> reachedCheckpoint;
 
+    public bool loopCircuit = true;
+
     private int CurrentCheckpointIndex;
 
     private void Start()
@@ -150,6 +152,12 @@ public class CheckPointsManager2 : MonoBehaviour
         else
         {
             Debug.Log("¡Circuito completado!");
+
+            //if (loopCircuit)
+            //{
+            //    // Reinicia para siguiente vuelta
+            //    ResetCheckpoints();
+            //}
         }
     }
 
