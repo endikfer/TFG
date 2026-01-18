@@ -147,6 +147,7 @@ public class CarController : MonoBehaviour
     public float localVelocityX;
     bool deceleratingCar;
     bool touchControlsSetup = false;
+    private float currentBrakeInput = 0f;
     /*
     The following variables are used to store information about sideways friction of the wheels (such as
     extremumSlip,extremumValue, asymptoteSlip, asymptoteValue and stiffness). We change this values to
@@ -565,60 +566,36 @@ public class CarController : MonoBehaviour
 
     public void SetThrottle(float value)
     {
-        // Clamp del input
         throttleAxis = Mathf.Clamp(value, -1f, 1f);
 
-        // Velocidad en dirección local Z
         float localVelZ = transform.InverseTransformDirection(carRigidbody.linearVelocity).z;
 
-        // --- CASO 1: Acelerar hacia adelante ---
-        if (throttleAxis > 0.05f)
+        // Torque base
+        float torque = accelerationMultiplier * 50f * throttleAxis;
+
+        // Reducir torque según freno aplicado
+        float brakeFactor = 1f - Mathf.Clamp01(currentBrakeInput);
+        torque *= brakeFactor;
+
+        // Aplicar torque a ruedas traseras
+        rearLeftCollider.motorTorque = torque;
+        rearRightCollider.motorTorque = torque;
+
+        // Frenos traseros siguen aplicados
+        rearLeftCollider.brakeTorque = currentBrakeInput * brakeForce;
+        rearRightCollider.brakeTorque = currentBrakeInput * brakeForce;
+
+        // Delanteras sin torque ni freno
+        frontLeftCollider.motorTorque = 0;
+        frontRightCollider.motorTorque = 0;
+        frontLeftCollider.brakeTorque = currentBrakeInput * brakeForce;
+        frontRightCollider.brakeTorque = currentBrakeInput * brakeForce;
+
+        // Aplicar deceleración natural si no hay input
+        if (Mathf.Abs(throttleAxis) < 0.05f && currentBrakeInput < 0.05f)
         {
-            if (localVelZ >= -0.1f) // solo aplica si no estás yendo hacia atrás
-            {
-                float torque = (accelerationMultiplier * 50f) * throttleAxis;
-                rearLeftCollider.motorTorque = torque;
-                rearRightCollider.motorTorque = torque;
-
-                // Frenos traseros apagados
-                rearLeftCollider.brakeTorque = 0;
-                rearRightCollider.brakeTorque = 0;
-
-                // Delanteras sin torque ni freno
-                frontLeftCollider.motorTorque = 0;
-                frontRightCollider.motorTorque = 0;
-                frontLeftCollider.brakeTorque = 0;
-                frontRightCollider.brakeTorque = 0;
-
-                return; // no aplicamos deceleración mientras aceleramos
-            }
+            ApplyNaturalDeceleration();
         }
-
-        // --- CASO 2: Acelerar hacia atrás ---
-        if (throttleAxis < -0.05f)
-        {
-            if (localVelZ <= 0.1f) // solo aplica si no estás yendo hacia adelante
-            {
-                float torque = (accelerationMultiplier * 50f) * throttleAxis;
-                rearLeftCollider.motorTorque = torque;
-                rearRightCollider.motorTorque = torque;
-
-                // Frenos traseros apagados
-                rearLeftCollider.brakeTorque = 0;
-                rearRightCollider.brakeTorque = 0;
-
-                // Delanteras sin torque ni freno
-                frontLeftCollider.motorTorque = 0;
-                frontRightCollider.motorTorque = 0;
-                frontLeftCollider.brakeTorque = 0;
-                frontRightCollider.brakeTorque = 0;
-
-                return; // no aplicamos deceleración mientras aceleramos
-            }
-        }
-
-        // --- CASO 3: Sin input o intentando cambiar de sentido ---
-        ApplyNaturalDeceleration();
     }
 
 
@@ -671,16 +648,16 @@ public class CarController : MonoBehaviour
 
     public void SetBrake(float brakeInput)
     {
-        float brake = Mathf.Clamp01(brakeInput) * brakeForce;
+        currentBrakeInput = Mathf.Clamp01(brakeInput);
+
+        float brake = currentBrakeInput * brakeForce;
 
         frontLeftCollider.brakeTorque = brake;
         frontRightCollider.brakeTorque = brake;
         rearLeftCollider.brakeTorque = brake;
         rearRightCollider.brakeTorque = brake;
 
-        // Al frenar, el motor no aplica torque
-        rearLeftCollider.motorTorque = 0;
-        rearRightCollider.motorTorque = 0;
+        // Al frenar, reducir torque del motor según brake (ya aplicado en SetThrottle)
     }
 
 }

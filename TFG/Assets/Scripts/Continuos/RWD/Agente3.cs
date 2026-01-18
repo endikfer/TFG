@@ -43,51 +43,49 @@ public class Agente3 : Agent
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
-        float steering = actionBuffers.ContinuousActions[0];   // [-1, 1]
-        float throttle = actionBuffers.ContinuousActions[1];   // [-1, 1]
+        float steering = actionBuffers.ContinuousActions[0]; // [-1,1]
+        float throttle = actionBuffers.ContinuousActions[1]; // [-1,1]
+        float brake = actionBuffers.ContinuousActions[2];    // [0,1]
 
-        // Movimiento suave
+        // Dirección y aceleración
         _prometeoCarController.SetSteering(steering);
         _prometeoCarController.SetThrottle(throttle);
 
+        // Frenado
+        _prometeoCarController.SetBrake(brake);
+
         if (_checkpointManager.nextCheckPointToReach == null) return;
 
-        // ⭐ Dirección al checkpoint
-        Vector3 dirToCheckpoint =
-            (_checkpointManager.nextCheckPointToReach.transform.position - obj.transform.position).normalized;
+        // Dirección al checkpoint
+        Vector3 dirToCheckpoint = (_checkpointManager.nextCheckPointToReach.transform.position - obj.transform.position).normalized;
 
-        // ⭐ Alineación coche-checkpoint
+        // Alineación coche-checkpoint
         float alignment = Vector3.Dot(obj.transform.forward, dirToCheckpoint);
 
-        // ⭐ Penalización si mira hacia atrás
+        // Penalización o recompensa según alineación
         if (alignment < 0)
-        {
-            AddReward(alignment * 0.02f); // negativa, penaliza mirar hacia atrás
-        }
+            AddReward(alignment * 0.02f);
         else
         {
-            // ⭐ Recompensa por buena alineación
             AddReward(alignment * 0.01f);
-
-            // ⭐ Recompensa por velocidad proyectada hacia el checkpoint
             float projectedSpeed = Vector3.Dot(_prometeoCarController.carRigidbody.linearVelocity, dirToCheckpoint);
             AddReward(projectedSpeed * 0.001f);
         }
 
-        // ⭐ Penalización por derrape lateral excesivo
-        float slipPenalty = Mathf.Abs(_prometeoCarController.localVelocityX) * 0.01f;
-        AddReward(-slipPenalty);
+        // Penalización por derrape lateral
+        AddReward(-Mathf.Abs(_prometeoCarController.localVelocityX) * 0.01f);
 
-        // ⭐ Penalización por paso de tiempo
+        // Penalización por paso de tiempo
         AddReward(-0.0005f);
 
-        // ⭐ Reinicio si se alcanza el límite de pasos
+        // Reinicio si se alcanza el límite de pasos
         if (StepCount >= MaxStep)
         {
             ResetCar();
             EndEpisode();
         }
     }
+
 
 
     public override void CollectObservations(VectorSensor sensor)
@@ -135,6 +133,7 @@ public class Agente3 : Agent
 
         actions[0] = Input.GetAxis("Horizontal"); // A/D
         actions[1] = Input.GetAxis("Vertical");   // W/S
+        actions[2] = Input.GetKey(KeyCode.Space) ? 1f : 0f;
     }
 
     public void ScoredAGoal()
