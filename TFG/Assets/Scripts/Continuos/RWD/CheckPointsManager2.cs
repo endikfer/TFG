@@ -1,4 +1,4 @@
-using System;
+Ôªøusing System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -66,7 +66,7 @@ public class CheckPointsManager2 : MonoBehaviour
 
         lastCheckpoint = Checkpoints[CurrentCheckpointIndex];
 
-        reachedCheckpoint?.Invoke(checkpoint); // NotificaciÛn opcional
+        reachedCheckpoint?.Invoke(checkpoint); // Notificaci√≥n opcional
 
         CurrentCheckpointIndex++;
 
@@ -79,7 +79,7 @@ public class CheckPointsManager2 : MonoBehaviour
         }
         else
         {
-            // Si el circuito est· completo, nextCheckPointToReach = null
+            // Si el circuito est√° completo, nextCheckPointToReach = null
             nextCheckPointToReach = null;
         }
     }
@@ -92,7 +92,7 @@ public class CheckPointsManager2 : MonoBehaviour
         }
     }
 
-    // Para que el agente consulte el Ìndice actual si quiere
+    // Para que el agente consulte el √≠ndice actual si quiere
     public int GetCheckpointIndex()
     {
         return CurrentCheckpointIndex;
