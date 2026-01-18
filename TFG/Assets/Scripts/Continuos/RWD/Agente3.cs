@@ -35,10 +35,12 @@ public class Agente3 : Agent
     {
         ResetCar();
 
-        foreach (var checkpoint in _checkpointManager.checkpp.checkPoints)
-        {
-            checkpoint.ResetTrigger();
-        }
+        _checkpointManager.ResetCheckpoints();
+
+        //foreach (var checkpoint in _checkpointManager.checkpp.checkPoints)
+        //{
+        //    checkpoint.ResetTrigger();
+        //}
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
@@ -54,10 +56,14 @@ public class Agente3 : Agent
         // Frenado
         _prometeoCarController.SetBrake(brake);
 
-        if (_checkpointManager.nextCheckPointToReach == null) return;
+        //if (_checkpointManager.nextCheckPointToReach == null) return;
+
+        CheckPoint3 activeCheckpoint = _checkpointManager.GetActiveCheckpoint();
+        if (activeCheckpoint == null) return;
 
         // Dirección al checkpoint
-        Vector3 dirToCheckpoint = (_checkpointManager.nextCheckPointToReach.transform.position - obj.transform.position).normalized;
+        //Vector3 dirToCheckpoint = (_checkpointManager.nextCheckPointToReach.transform.position - obj.transform.position).normalized;
+        Vector3 dirToCheckpoint = (activeCheckpoint.transform.position - obj.transform.position).normalized;
 
         // Alineación coche-checkpoint
         float alignment = Vector3.Dot(obj.transform.forward, dirToCheckpoint);
@@ -90,11 +96,13 @@ public class Agente3 : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        if (_checkpointManager.nextCheckPointToReach == null) return;
+        //if (_checkpointManager.nextCheckPointToReach == null) return;
+        CheckPoint3 activeCheckpoint = _checkpointManager.GetActiveCheckpoint();
+        if (activeCheckpoint == null) return;
 
         // 1️⃣ Dirección al checkpoint
-        Vector3 dirToCheckpoint =
-            (_checkpointManager.nextCheckPointToReach.transform.position - obj.transform.position).normalized;
+        //Vector3 dirToCheckpoint = (_checkpointManager.nextCheckPointToReach.transform.position - obj.transform.position).normalized;
+        Vector3 dirToCheckpoint = (activeCheckpoint.transform.position - obj.transform.position).normalized;
         sensor.AddObservation(dirToCheckpoint); // 3
 
         // 2️⃣ Velocidad normalizada
@@ -148,7 +156,7 @@ public class Agente3 : Agent
         obj.transform.position = area.transform.position;
         obj.transform.rotation = Quaternion.Euler(0, -90, 0);
 
-        _checkpointManager.ResetCheckpoints();
+        //_checkpointManager.ResetCheckpoints();
 
         _prometeoCarController.carSpeed = 0;
         _prometeoCarController.ResetCarState();
