@@ -1,0 +1,16 @@
+    // ⭐ 4. Incentivo a mantener gas SOLO cuando alineado y sin frenar
+    if (alignment > 0.4f && throttle > 0.5f && brake < 0.1f)
+    {
+        AddReward(0.001f);
+    }
+
+    // ⭐ 5. Penalización por marcha atrás solo si persiste y va en dirección contraria
+    float forwardSpeed = Vector3.Dot(
+        _prometeoCarController.carRigidbody.linearVelocity,
+        obj.transform.forward
+    );
+
+    if (forwardSpeed < -1f && alignment < -0.5f)
+    {
+        AddReward(-0.02f);
+    }

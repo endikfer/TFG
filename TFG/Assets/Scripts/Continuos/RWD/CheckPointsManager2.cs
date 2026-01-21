@@ -134,11 +134,35 @@ public class CheckPointsManager2 : MonoBehaviour
         }
     }
 
+    //public void CheckPointReached(CheckPoint3 checkpoint)
+    //{
+    //    // Desactiva el checkpoint actual
+    //    checkpoint.gameObject.SetActive(false);
+
+    //    // ⚡ Llama al evento para notificar al agente
+    //    reachedCheckpoint?.Invoke(checkpoint);
+
+    //    CurrentCheckpointIndex++;
+
+    //    // Activar el siguiente checkpoint
+    //    if (CurrentCheckpointIndex < checkpp.checkPoints.Count)
+    //    {
+    //        checkpp.checkPoints[CurrentCheckpointIndex].gameObject.SetActive(true);
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("¡Circuito completado!");
+
+    //        //if (loopCircuit)
+    //        //{
+    //        //    // Reinicia para siguiente vuelta
+    //        //    ResetCheckpoints();
+    //        //}
+    //    }
+    //}
+
     public void CheckPointReached(CheckPoint3 checkpoint)
     {
-        // Desactiva el checkpoint actual
-        checkpoint.gameObject.SetActive(false);
-
         // ⚡ Llama al evento para notificar al agente
         reachedCheckpoint?.Invoke(checkpoint);
 
@@ -159,6 +183,9 @@ public class CheckPointsManager2 : MonoBehaviour
             //    ResetCheckpoints();
             //}
         }
+
+        // Ahora podemos desactivar el checkpoint actual
+        checkpoint.gameObject.SetActive(false);
     }
 
     public CheckPoint3 GetActiveCheckpoint()
@@ -168,6 +195,13 @@ public class CheckPointsManager2 : MonoBehaviour
                 ? checkpp.checkPoints[CurrentCheckpointIndex]
                 : null;
         return null;
+    }
+
+    // Devuelve la posición del próximo checkpoint (opcional, útil para comprobaciones)
+    public Vector3 GetNextCheckpointPosition()
+    {
+        CheckPoint3 cp = GetActiveCheckpoint();
+        return cp != null ? cp.transform.position : Vector3.zero;
     }
 }
 

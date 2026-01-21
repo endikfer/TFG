@@ -170,10 +170,10 @@ public class PrometeoCarController : MonoBehaviour
       carRigidbody = gameObject.GetComponent<Rigidbody>();
       carRigidbody.centerOfMass = bodyMassCenter;
 
-      //Initial setup to calculate the drift value of the car. This part could look a bit
-      //complicated, but do not be afraid, the only thing we're doing here is to save the default
-      //friction values of the car wheels so we can set an appropiate drifting value later.
-      FLwheelFriction = new WheelFrictionCurve ();
+        //Initial setup to calculate the drift value of the car. This part could look a bit
+        //complicated, but do not be afraid, the only thing we're doing here is to save the default
+        //friction values of the car wheels so we can set an appropiate drifting value later.
+        FLwheelFriction = new WheelFrictionCurve ();
         FLwheelFriction.extremumSlip = frontLeftCollider.sidewaysFriction.extremumSlip;
         FLWextremumSlip = frontLeftCollider.sidewaysFriction.extremumSlip;
         FLwheelFriction.extremumValue = frontLeftCollider.sidewaysFriction.extremumValue;
@@ -202,8 +202,10 @@ public class PrometeoCarController : MonoBehaviour
         RRwheelFriction.asymptoteValue = rearRightCollider.sidewaysFriction.asymptoteValue;
         RRwheelFriction.stiffness = rearRightCollider.sidewaysFriction.stiffness;
 
+        SetWheelFriction(2.3f, 2.1f);
+
         // We save the initial pitch of the car engine sound.
-        if(carEngineSound != null){
+        if (carEngineSound != null){
           initialCarEngineSoundPitch = carEngineSound.pitch;
         }
 
@@ -317,6 +319,24 @@ public class PrometeoCarController : MonoBehaviour
             DecelerateCar();
         }
 
+    }
+
+    private void SetWheelFriction(float lateralStiffness, float longitudinalStiffness)
+    {
+        WheelCollider[] wheels = { frontLeftCollider, frontRightCollider, rearLeftCollider, rearRightCollider };
+        foreach (var wheel in wheels)
+        {
+            if (wheel != null)
+            {
+                WheelFrictionCurve lat = wheel.sidewaysFriction;
+                lat.stiffness = lateralStiffness;
+                wheel.sidewaysFriction = lat;
+
+                WheelFrictionCurve lon = wheel.forwardFriction;
+                lon.stiffness = longitudinalStiffness;
+                wheel.forwardFriction = lon;
+            }
+        }
     }
 
     // This method converts the car speed data from float to string, and then set the text of the UI carSpeedText with this value.

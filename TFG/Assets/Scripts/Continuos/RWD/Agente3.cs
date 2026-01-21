@@ -68,21 +68,30 @@ public class Agente3 : Agent
         // Alineación coche-checkpoint
         float alignment = Vector3.Dot(obj.transform.forward, dirToCheckpoint);
 
-        // Penalización o recompensa según alineación
-        if (alignment < 0)
-            AddReward(alignment * 0.02f);
-        else
+        float carSpeed = _prometeoCarController.carSpeed;
+
+        //1. Recompensa por alineación SOLO si se mueve
+        if (carSpeed > 1f)
         {
-            AddReward(alignment * 0.01f);
-            float projectedSpeed = Vector3.Dot(_prometeoCarController.carRigidbody.linearVelocity, dirToCheckpoint);
-            AddReward(projectedSpeed * 0.001f);
+            if (alignment < 0f)
+                AddReward(alignment * 0.02f);   // castigo fuerte si va al revés //0.015f
+            else
+                AddReward(alignment * 0.01f);   // incentivo suave
         }
+
+        //2. Recompensa por velocidad proyectada (con suelo mínimo)
+        float projectedSpeed = Vector3.Dot(_prometeoCarController.carRigidbody.linearVelocity, dirToCheckpoint);
+
+        float speedReward = Mathf.Max(projectedSpeed, 1f); // evita castigo en subidas
+        AddReward(speedReward * 0.001f); //0.0005f
+
+
 
         // Penalización por derrape lateral
         AddReward(-Mathf.Abs(_prometeoCarController.localVelocityX) * 0.01f);
 
         // Penalización por paso de tiempo
-        AddReward(-0.0005f);
+        AddReward(-0.001f);
 
         // Reinicio si se alcanza el límite de pasos
         if (StepCount >= MaxStep)
