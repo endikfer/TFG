@@ -2,7 +2,8 @@
 
 public class CheckPoint2 : MonoBehaviour
 {
-    [SerializeField] private CheckPointsManager manager;
+    //[SerializeField] private CheckPointsManager manager;
+    [SerializeField] private CheckPointsManager3 manager;
 
     private bool atravesado = false; // 🔹 Evita que se llame más de una vez
 

@@ -1,0 +1,65 @@
+{
+    "AgentToDrive": {
+        "checkpoints": [
+            {
+                "steps": 6890842,
+                "file_path": "results\\V1D3_pruebacontinua_RWD_2\\AgentToDrive\\AgentToDrive-6890842.onnx",
+                "reward": null,
+                "creation_time": 1769032803.9464679,
+                "auxillary_file_paths": [
+                    "results\\V1D3_pruebacontinua_RWD_2\\AgentToDrive\\AgentToDrive-6890842.pt"
+                ]
+            },
+            {
+                "steps": 6999778,
+                "file_path": "results\\V1D3_pruebacontinua_RWD_2\\AgentToDrive\\AgentToDrive-6999778.onnx",
+                "reward": 134.9669688542684,
+                "creation_time": 1769073510.9085672,
+                "auxillary_file_paths": [
+                    "results\\V1D3_pruebacontinua_RWD_2\\AgentToDrive\\AgentToDrive-6999778.pt"
+                ]
+            },
+            {
+                "steps": 7499770,
+                "file_path": "results\\V1D3_pruebacontinua_RWD_2\\AgentToDrive\\AgentToDrive-7499770.onnx",
+                "reward": 62.13032138347626,
+                "creation_time": 1769074499.6877446,
+                "auxillary_file_paths": [
+                    "results\\V1D3_pruebacontinua_RWD_2\\AgentToDrive\\AgentToDrive-7499770.pt"
+                ]
+            },
+            {
+                "steps": 7999549,
+                "file_path": "results\\V1D3_pruebacontinua_RWD_2\\AgentToDrive\\AgentToDrive-7999549.onnx",
+                "reward": 37.47096221148968,
+                "creation_time": 1769075465.1293619,
+                "auxillary_file_paths": [
+                    "results\\V1D3_pruebacontinua_RWD_2\\AgentToDrive\\AgentToDrive-7999549.pt"
+                ]
+            },
+            {
+                "steps": 8319561,
+                "file_path": "results\\V1D3_pruebacontinua_RWD_2\\AgentToDrive\\AgentToDrive-8319561.onnx",
+                "reward": 53.652295160293576,
+                "creation_time": 1769076098.343838,
+                "auxillary_file_paths": [
+                    "results\\V1D3_pruebacontinua_RWD_2\\AgentToDrive\\AgentToDrive-8319561.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 8319561,
+            "file_path": "results\\V1D3_pruebacontinua_RWD_2\\AgentToDrive.onnx",
+            "reward": 53.652295160293576,
+            "creation_time": 1769076098.343838,
+            "auxillary_file_paths": [
+                "results\\V1D3_pruebacontinua_RWD_2\\AgentToDrive\\AgentToDrive-8319561.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.7.0+cpu"
+    }
+}

@@ -37,10 +37,10 @@ public class Agente3 : Agent
 
         _checkpointManager.ResetCheckpoints();
 
-        //foreach (var checkpoint in _checkpointManager.checkpp.checkPoints)
-        //{
-        //    checkpoint.ResetTrigger();
-        //}
+        foreach (var checkpoint in _checkpointManager.checkpp.checkPoints)
+        {
+            checkpoint.ResetTrigger();
+        }
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
