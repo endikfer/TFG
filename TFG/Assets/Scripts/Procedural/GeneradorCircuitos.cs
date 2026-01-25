@@ -35,21 +35,25 @@ public class GeneradorCircuitos : MonoBehaviour
             {
                 attempts++;
 
-                // Elegir prefab aleatorio
-                PiezaCircuito newPiece = Instantiate(trackPrefabs[Random.Range(0, trackPrefabs.Length)]);
+                PiezaCircuito prefab = trackPrefabs[Random.Range(0, trackPrefabs.Length)];
 
-                // Alinear con la pieza anterior
+                // 1️⃣ Instancia temporal (sin activar)
+                PiezaCircuito newPiece = Instantiate(prefab);
+                newPiece.gameObject.SetActive(false);
+
+                // 2️⃣ Alinear
                 AlignPiece(newPiece, lastPiece);
 
-                // Comprobar solapamiento
+                // 3️⃣ Comprobar solapamiento
                 if (CanPlacePiece(newPiece))
                 {
+                    newPiece.gameObject.SetActive(true); // activamos la pieza
                     lastPiece = newPiece;
                     placed = true;
                 }
                 else
                 {
-                    Destroy(newPiece); // descartar si colisiona
+                    Destroy(newPiece); // descartamos sin activar
                 }
             }
 
@@ -64,14 +68,29 @@ public class GeneradorCircuitos : MonoBehaviour
 
     void AlignPiece(PiezaCircuito newPiece, PiezaCircuito previousPiece)
     {
-        // Rotación
-        Quaternion rot = previousPiece.puntoSalida.rotation * Quaternion.Inverse(newPiece.puntoEntrada.rotation);
-        newPiece.transform.rotation = rot * newPiece.transform.rotation;
+        // 1️⃣ Dirección de salida y entrada (proyectadas en plano horizontal)
+        Vector3 prevDir = previousPiece.puntoSalida.right;
+        Vector3 newDir = newPiece.puntoEntrada.right;
 
-        // Posición
-        Vector3 offset = previousPiece.puntoSalida.position - newPiece.puntoEntrada.position;
+        prevDir.y = 0;
+        newDir.y = 0;
+
+        prevDir.Normalize();
+        newDir.Normalize();
+
+        // 2️⃣ Calcular SOLO el ángulo en Y
+        float angleY = Vector3.SignedAngle(newDir, prevDir, Vector3.up);
+
+        // 3️⃣ Aplicar SOLO rotación Y
+        newPiece.transform.Rotate(Vector3.up, angleY, Space.World);
+
+        // 4️⃣ Ajustar posición
+        Vector3 offset =
+            previousPiece.puntoSalida.position - newPiece.puntoEntrada.position;
+
         newPiece.transform.position += offset;
     }
+
 
     bool CanPlacePiece(PiezaCircuito newPiece)
     {

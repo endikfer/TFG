@@ -24,13 +24,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4543206566438820489}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
   m_LocalPosition: {x: -1.5, y: 0, z: -1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8139560662992090916}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
 --- !u!1 &6378906998207763966
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,6 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8139560662992090916}
   - component: {fileID: 234841587475101377}
+  - component: {fileID: 2427204806616623234}
   m_Layer: 0
   m_Name: Track_ Corner_R
   m_TagString: Untagged
@@ -221,5 +222,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52655c3d79d91a24980ba98cfe7ea605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PiezaCircuito
+  tipo: 2
   puntoEntrada: {fileID: 4627487951493491208}
   puntoSalida: {fileID: 4968025728100682804}
+--- !u!65 &2427204806616623234
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8139560662992251652}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 2.0425076, y: 0.0972462, z: 2.0310512}
+  m_Center: {x: -0.9768684, y: 0.0027356297, z: -0.5155256}
