@@ -13,6 +13,7 @@ public class CheckPoint2 : MonoBehaviour
     {
         if (!atravesado && manager != null)
         {
+            if (manager.nextCheckPointToReach != this) return;
             atravesado = true; // Marca como ya usado
             manager.CheckPointReached(this);
             Debug.Log($"Alcanzado el checkpoint {checkpointID}.");

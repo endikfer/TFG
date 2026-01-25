@@ -76,12 +76,38 @@ public class Agente4 : Agent
             AddReward(projectedSpeed * 0.001f);
         }
 
-        // --- Penalización por derrape lateral ---
-        float slipPenalty = Mathf.Abs(_prometeoCarController.localVelocityX) * 0.01f;
-        AddReward(-slipPenalty);
+        // --- DETECCIÓN DE SUBIDA ---
+        float uphill =
+            Vector3.Dot(_prometeoCarController.carRigidbody.linearVelocity.normalized, Vector3.up);
 
-        // --- Penalización por tiempo ---
-        AddReward(-0.0005f);
+        // --- Penalización lateral ADAPTATIVA ---
+        float slip = Mathf.Abs(_prometeoCarController.localVelocityX);
+        float slipFactor = uphill > 0.1f ? 0.3f : 1f;
+        AddReward(-slip * 0.01f * slipFactor);
+
+        // --- Recompensa por empujar en subida ---
+        if (uphill > 0.1f && throttle > 0.5f)
+        {
+            AddReward(0.002f);
+        }
+
+        // --- Castigo por quedarse sin velocidad en subida ---
+        if (uphill > 0.1f &&
+            _prometeoCarController.carSpeed < 0.3f * _prometeoCarController.maxSpeed)
+        {
+            AddReward(-0.005f);
+        }
+
+        // --- Penalización por tiempo (adaptada a chicanes) ---
+        float distToCheckpoint = Vector3.Distance(
+            obj.transform.position,
+            _checkpointManager.nextCheckPointToReach.transform.position
+        );
+
+        if (distToCheckpoint < 5f)
+            AddReward(-0.0001f);
+        else
+            AddReward(-0.0005f);
 
         // --- Fin por límite de pasos ---
         if (StepCount >= MaxStep)
@@ -99,6 +125,21 @@ public class Agente4 : Agent
         Vector3 dirToCheckpoint =
             (_checkpointManager.nextCheckPointToReach.transform.position - obj.transform.position).normalized;
         sensor.AddObservation(dirToCheckpoint); // 3
+
+        // --- Dirección al checkpoint siguiente (si existe) ---
+        int currentIndex = _checkpointManager.GetCheckpointIndex();
+        var checkpoints = _checkpointManager.checkpp.checkPoints;
+
+        if (currentIndex + 1 < checkpoints.Count)
+        {
+            Vector3 dirToNextNext =
+                (checkpoints[currentIndex + 1].transform.position - obj.transform.position).normalized;
+            sensor.AddObservation(dirToNextNext); // 3
+        }
+        else
+        {
+            sensor.AddObservation(Vector3.zero);
+        }
 
         // Velocidad normalizada
         sensor.AddObservation(
@@ -173,6 +214,7 @@ public class Agente4 : Agent
     private void OnCheckpointReached(CheckPoint2 checkpoint)
     {
         AddReward(1f);
+        AddReward(_prometeoCarController.carSpeed * 0.05f);
         Debug.Log("Checkpoint superado");
     }
 }
