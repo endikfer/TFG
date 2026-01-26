@@ -246,6 +246,37 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!1 &295824683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 295824684}
+  m_Layer: 0
+  m_Name: Circuito
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &295824684
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295824683}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2, y: 0, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &384799891
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,8 +310,14 @@ MonoBehaviour:
   - {fileID: 50269816503587801, guid: 9be89bb432b73674cb378c26e9508605, type: 3}
   - {fileID: 3779659893276070837, guid: 2ad6ed0d03e2f7d4ca3f0b9c1c4992be, type: 3}
   - {fileID: 234841587475101377, guid: c809c379351e49e4bb5c56f1f6d84c9a, type: 3}
-  numberOfPieces: 10
+  numberOfPieces: 20
   maxAttempts: 10
+  circuitoParent: {fileID: 295824684}
+  maxConsecutivas: 2
+  maxConCurvasIntercaladas: 4
+  baseRectaProb: 0.7
+  baseCurvaIzqProb: 0.15
+  baseCurvaDerProb: 0.15
 --- !u!4 &384799893
 Transform:
   m_ObjectHideFlags: 0
@@ -440,3 +477,4 @@ SceneRoots:
   - {fileID: 1404771891}
   - {fileID: 3165777}
   - {fileID: 384799893}
+  - {fileID: 295824684}
