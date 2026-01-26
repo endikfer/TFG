@@ -3,11 +3,14 @@
 public class GeneradorCircuitos : MonoBehaviour
 {
     [Header("Prefabs de pista")]
-    public PiezaCircuito[] trackPrefabs; // tus prefabs (recta, curva izquierda, curva derecha)
-    public int numberOfPieces = 10;   // número de piezas a generar
+    public PiezaCircuito[] trackPrefabs; // prefabs (recta, curvas, etc.)
+    public int numberOfPieces = 10;      // número de piezas a generar
 
     [Header("Opciones de colocación")]
-    public int maxAttempts = 10;      // intentos antes de rendirse si no se puede colocar
+    public int maxAttempts = 10;         // intentos antes de rendirse
+
+    [Header("Organización")]
+    public Transform circuitoParent;     // Empty "Circuito"
 
     private PiezaCircuito lastPiece;     // última pieza colocada
 
@@ -20,8 +23,14 @@ public class GeneradorCircuitos : MonoBehaviour
     {
         if (trackPrefabs.Length == 0) return;
 
-        // 1️⃣ Coloca la primera pieza en el origen
-        lastPiece = Instantiate(trackPrefabs[0]);
+        if (circuitoParent == null)
+        {
+            Debug.LogError("No se ha asignado el Circuito Parent.");
+            return;
+        }
+
+        // 1️⃣ Colocar la primera pieza en el origen
+        lastPiece = Instantiate(trackPrefabs[0], circuitoParent);
         lastPiece.transform.position = Vector3.zero;
         lastPiece.transform.rotation = Quaternion.identity;
 
@@ -35,40 +44,47 @@ public class GeneradorCircuitos : MonoBehaviour
             {
                 attempts++;
 
-                PiezaCircuito prefab = trackPrefabs[Random.Range(0, trackPrefabs.Length)];
+                PiezaCircuito prefab =
+                    trackPrefabs[Random.Range(0, trackPrefabs.Length)];
 
-                // 1️⃣ Instancia temporal (sin activar)
-                PiezaCircuito newPiece = Instantiate(prefab);
+                // 1️⃣ Instancia temporal (desactivada)
+                PiezaCircuito newPiece =
+                    Instantiate(prefab, circuitoParent);
+
                 newPiece.gameObject.SetActive(false);
 
-                // 2️⃣ Alinear
+                // 2️⃣ Alinear con la pieza anterior
                 AlignPiece(newPiece, lastPiece);
 
                 // 3️⃣ Comprobar solapamiento
                 if (CanPlacePiece(newPiece))
                 {
-                    newPiece.gameObject.SetActive(true); // activamos la pieza
+                    newPiece.gameObject.SetActive(true);
                     lastPiece = newPiece;
                     placed = true;
                 }
                 else
                 {
-                    Destroy(newPiece); // descartamos sin activar
+                    Destroy(newPiece);
                 }
             }
 
-            // Si tras varios intentos no se coloca, terminamos el circuito
+            // Si no se puede colocar tras varios intentos, se termina
             if (!placed)
             {
-                Debug.LogWarning("No se pudo colocar una nueva pieza. Circuito terminado antes de llegar al número deseado.");
+                Debug.LogWarning(
+                    "No se pudo colocar una nueva pieza. Circuito terminado antes de lo esperado."
+                );
                 break;
             }
         }
+
+        CleanDisabledPieces();
     }
 
     void AlignPiece(PiezaCircuito newPiece, PiezaCircuito previousPiece)
     {
-        // 1️⃣ Dirección de salida y entrada (proyectadas en plano horizontal)
+        // Dirección de salida y entrada (plano horizontal)
         Vector3 prevDir = previousPiece.puntoSalida.right;
         Vector3 newDir = newPiece.puntoEntrada.right;
 
@@ -78,40 +94,53 @@ public class GeneradorCircuitos : MonoBehaviour
         prevDir.Normalize();
         newDir.Normalize();
 
-        // 2️⃣ Calcular SOLO el ángulo en Y
+        // Calcular solo rotación en Y
         float angleY = Vector3.SignedAngle(newDir, prevDir, Vector3.up);
 
-        // 3️⃣ Aplicar SOLO rotación Y
+        // Aplicar rotación
         newPiece.transform.Rotate(Vector3.up, angleY, Space.World);
 
-        // 4️⃣ Ajustar posición
+        // Ajustar posición
         Vector3 offset =
-            previousPiece.puntoSalida.position - newPiece.puntoEntrada.position;
+            previousPiece.puntoSalida.position -
+            newPiece.puntoEntrada.position;
 
         newPiece.transform.position += offset;
     }
 
-
     bool CanPlacePiece(PiezaCircuito newPiece)
     {
         Collider newCollider = newPiece.GetComponent<Collider>();
-        if (newCollider == null) return true; // sin collider no hay solapamiento
+        if (newCollider == null) return true;
 
         Vector3 center = newCollider.bounds.center;
         Vector3 size = newCollider.bounds.size;
         Quaternion rot = newPiece.transform.rotation;
 
-        // Comprueba si hay colisión con cualquier otro collider en la escena
         Collider[] hits = Physics.OverlapBox(center, size / 2, rot);
+
         foreach (var hit in hits)
         {
             // Ignorar colisiones con la propia pieza
             if (!hit.transform.IsChildOf(newPiece.transform))
             {
-                return false; // hay solapamiento
+                return false;
             }
         }
 
-        return true; // espacio libre
+        return true;
+    }
+
+    void CleanDisabledPieces()
+    {
+        for (int i = circuitoParent.childCount - 1; i >= 0; i--)
+        {
+            Transform child = circuitoParent.GetChild(i);
+
+            if (!child.gameObject.activeSelf)
+            {
+                Destroy(child.gameObject);
+            }
+        }
     }
 }
