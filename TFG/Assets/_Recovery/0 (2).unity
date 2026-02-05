@@ -343,23 +343,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 384799891}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d94018bf7ef613c498e2628bf063cb96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GeneradorCircuitosCerrados
-  piezas:
+  trackPrefabs:
   - {fileID: 50269816503587801, guid: 9be89bb432b73674cb378c26e9508605, type: 3}
   - {fileID: 234841587475101377, guid: c809c379351e49e4bb5c56f1f6d84c9a, type: 3}
   - {fileID: 3779659893276070837, guid: 2ad6ed0d03e2f7d4ca3f0b9c1c4992be, type: 3}
-  parent: {fileID: 295824684}
-  distanciaObjetivo: 100
+  circuitoParent: {fileID: 295824684}
+  distanciaObjetivo: 200
   margenDistancia: 5
-  margenCierre: 1
+  margenCierre: 10
   margenAngulo: 10
-  maxIntentosPorPieza: 10
-  maxPiezas: 200
+  maxAttemptsPorPieza: 10
+  maxBacktracks: 50
   operacionesPorFrame: 25
+  maxOperacionesGlobal: 10000
 --- !u!1 &1404771888
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3012796711460648286}
   m_Layer: 0
-  m_Name: Punto_salida
+  m_Name: Punto_Salida
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,13 +24,46 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3801952210106689804}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.5, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: -0.50007, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8139560662992090916}
+  m_Father: {fileID: 5010983112976424286}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &7791348942157473285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5010983112976424286}
+  m_Layer: 0
+  m_Name: Puntos_Longitud
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5010983112976424286
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7791348942157473285}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.00007, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7674037794613849072}
+  - {fileID: 3012796711460648286}
+  m_Father: {fileID: 8139560662992090916}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8139560662992251652
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,8 +96,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8139560662992090932}
-  - {fileID: 7674037794613849072}
-  - {fileID: 3012796711460648286}
+  - {fileID: 5010983112976424286}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &50269816503587801
@@ -82,6 +114,10 @@ MonoBehaviour:
   tipo: 0
   puntoEntrada: {fileID: 7674037794613849072}
   puntoSalida: {fileID: 3012796711460648286}
+  puntosCurva:
+  - {fileID: 7674037794613849072}
+  - {fileID: 3012796711460648286}
+  longitud: 5
 --- !u!65 &3351817210485022137
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -216,10 +252,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8945376644593178929}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.500134, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: 0.500064, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8139560662992090916}
+  m_Father: {fileID: 5010983112976424286}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}

@@ -4,7 +4,7 @@ using UnityEngine;
 public class GeneradorCircuitos : MonoBehaviour
 {
     [Header("Prefabs de pista")]
-    public PiezaCircuito[] trackPrefabs; // prefabs (recta, curvas, etc.)
+    public PiezaCircuito[] trackPrefabs;
     public int numberOfPieces = 20;
 
     [Header("Opciones de colocación")]
@@ -14,14 +14,20 @@ public class GeneradorCircuitos : MonoBehaviour
     public Transform circuitoParent;
 
     [Header("Reglas de curvas")]
-    public int maxConsecutivas = 2;     // Máximo de curvas seguidas del mismo lado
-    public int maxConCurvasIntercaladas = 4; // Máximo de curvas hacia el mismo lado contando rectas
+    public int maxConsecutivas = 2;
+    public int maxConCurvasIntercaladas = 4;
 
     [Header("Probabilidades dinámicas")]
     [Range(0, 1)] public float baseRectaProb = 0.7f;
     [Range(0, 1)] public float baseCurvaIzqProb = 0.15f;
     [Range(0, 1)] public float baseCurvaDerProb = 0.15f;
-    //[Range(0, 1)] public float reduccionPorRepeticion = 0.5f; // factor de reducción
+
+    [Header("Cierre del circuito")]
+    public int piezasParaCerrar = 5;
+    public int maxRetriesCierre = 10;
+
+    private Vector3 startPos;
+    private Vector3 startDir;
 
     private List<PiezaCircuito> piezasAsignadas = new List<PiezaCircuito>();
 
@@ -30,6 +36,7 @@ public class GeneradorCircuitos : MonoBehaviour
         GenerateTrack();
     }
 
+    // =================== GENERACIÓN ===================
     void GenerateTrack()
     {
         if (trackPrefabs.Length == 0 || circuitoParent == null)
@@ -40,125 +47,119 @@ public class GeneradorCircuitos : MonoBehaviour
 
         // Primera pieza
         PiezaCircuito firstPiece = Instantiate(trackPrefabs[0], circuitoParent);
-        firstPiece.transform.position = Vector3.zero;
-        firstPiece.transform.rotation = Quaternion.identity;
+        firstPiece.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
         piezasAsignadas.Add(firstPiece);
+
+        startPos = firstPiece.puntoEntrada.position;
+        startDir = firstPiece.puntoEntrada.right;
+
+        bool circuitoCerrado = false; // ← Flag para mensajes
+        int retriesCierre = 0;
 
         for (int i = 1; i < numberOfPieces; i++)
         {
             bool placed = false;
             int attempts = 0;
 
+            bool estamosCerrando = i >= numberOfPieces - piezasParaCerrar;
+
             while (!placed && attempts < maxAttempts)
             {
                 attempts++;
 
-                PiezaCircuito prefab = ChooseNextPiece();
+                PiezaCircuito prefab = estamosCerrando
+                    ? ChooseClosingPiece()
+                    : ChooseNextPiece();
 
                 PiezaCircuito newPiece = Instantiate(prefab, circuitoParent);
                 newPiece.gameObject.SetActive(false);
 
-                AlignPiece(newPiece, piezasAsignadas[piezasAsignadas.Count - 1]);
+                AlignPiece(newPiece, piezasAsignadas[^1]);
 
                 if (CanPlacePiece(newPiece))
                 {
+                    if (i == numberOfPieces - 1)
+                    {
+                        // Comprobamos si la última pieza realmente cierra el circuito
+                        if (!CanCloseCircuit(newPiece))
+                        {
+                            Destroy(newPiece.gameObject);
+                            continue;
+                        }
+                        else
+                        {
+                            circuitoCerrado = true; // ✅ Marcamos que el circuito se cerró
+                        }
+                    }
+
                     newPiece.gameObject.SetActive(true);
                     piezasAsignadas.Add(newPiece);
                     placed = true;
                 }
                 else
                 {
-                    Destroy(newPiece);
+                    Destroy(newPiece.gameObject);
                 }
             }
 
             if (!placed)
             {
-                Debug.LogWarning("No se pudo colocar una nueva pieza. Circuito terminado antes de lo esperado.");
+                if (estamosCerrando && retriesCierre < maxRetriesCierre)
+                {
+                    retriesCierre++;
+                    BacktrackCierre();
+                    i = numberOfPieces - piezasParaCerrar - 1;
+                    break;
+                }
+
+                Debug.LogWarning("No se pudo cerrar el circuito.");
                 break;
             }
         }
 
         CleanDisabledPieces();
+
+        // 🔹 Mensaje final por consola
+        if (circuitoCerrado)
+            Debug.Log("✅ El circuito se cerró correctamente.");
+        else
+            Debug.LogWarning("❌ No se pudo cerrar el circuito.");
     }
 
-    // =================== ELECCIÓN DE PIEZA ===================
+
+    // =================== ELECCIÓN NORMAL ===================
     PiezaCircuito ChooseNextPiece()
     {
         float rectaProb = baseRectaProb;
         float curvaIzqProb = baseCurvaIzqProb;
         float curvaDerProb = baseCurvaDerProb;
 
-        // ==================================================
-        // 1. NO MÁS DE maxConsecutivas CURVAS SEGUIDAS MISMO LADO
-        // (bloque continuo FINAL, no acumulado)
-        // ==================================================
-        int consecIzq = 0;
-        int consecDer = 0;
+        int consecIzq = 0, consecDer = 0;
 
-        // Primero miramos la última pieza
         if (piezasAsignadas.Count > 0)
         {
-            var lastTipo = piezasAsignadas[piezasAsignadas.Count - 1].tipo;
+            var lastTipo = piezasAsignadas[^1].tipo;
 
-            if (lastTipo == PiezaCircuito.TipoPieza.CurvaIzquierda)
+            for (int i = piezasAsignadas.Count - 1; i >= 0; i--)
             {
-                consecIzq = 1;
-
-                for (int i = piezasAsignadas.Count - 2; i >= 0; i--)
+                if (piezasAsignadas[i].tipo == PiezaCircuito.TipoPieza.CurvaIzquierda)
                 {
-                    if (piezasAsignadas[i].tipo == PiezaCircuito.TipoPieza.CurvaIzquierda)
-                        consecIzq++;
-                    else
-                        break;
+                    if (lastTipo == PiezaCircuito.TipoPieza.CurvaIzquierda) consecIzq++;
+                    else break;
                 }
-            }
-            else if (lastTipo == PiezaCircuito.TipoPieza.CurvaDerecha)
-            {
-                consecDer = 1;
-
-                for (int i = piezasAsignadas.Count - 2; i >= 0; i--)
+                else if (piezasAsignadas[i].tipo == PiezaCircuito.TipoPieza.CurvaDerecha)
                 {
-                    if (piezasAsignadas[i].tipo == PiezaCircuito.TipoPieza.CurvaDerecha)
-                        consecDer++;
-                    else
-                        break;
+                    if (lastTipo == PiezaCircuito.TipoPieza.CurvaDerecha) consecDer++;
+                    else break;
                 }
+                else break;
             }
         }
 
-        if (consecIzq >= maxConsecutivas) curvaIzqProb = 0f;
-        if (consecDer >= maxConsecutivas) curvaDerProb = 0f;
+        if (consecIzq >= maxConsecutivas) curvaIzqProb = 0;
+        if (consecDer >= maxConsecutivas) curvaDerProb = 0;
 
-        // ==================================================
-        // 2. NO MÁS DE maxConCurvasIntercaladas CURVAS MISMO LADO
-        // (contando rectas intercaladas)
-        // ==================================================
-        int totalIzq = 0;
-        int totalDer = 0;
-
-        for (int i = piezasAsignadas.Count - 1; i >= 0; i--)
-        {
-            if (piezasAsignadas[i].tipo == PiezaCircuito.TipoPieza.CurvaIzquierda)
-                totalIzq++;
-            else if (piezasAsignadas[i].tipo == PiezaCircuito.TipoPieza.CurvaDerecha)
-                totalDer++;
-
-            if (totalIzq >= maxConCurvasIntercaladas ||
-                totalDer >= maxConCurvasIntercaladas)
-                break;
-        }
-
-        if (totalIzq >= maxConCurvasIntercaladas) curvaIzqProb = 0f;
-        if (totalDer >= maxConCurvasIntercaladas) curvaDerProb = 0f;
-
-        // ==================================================
-        // 3. PROBABILIDADES DINÁMICAS (histórico completo)
-        // ==================================================
-        int rectas = 0;
-        int izq = 0;
-        int der = 0;
-
+        int rectas = 0, izq = 0, der = 0;
         foreach (var p in piezasAsignadas)
         {
             if (p.tipo == PiezaCircuito.TipoPieza.Recta) rectas++;
@@ -166,39 +167,18 @@ public class GeneradorCircuitos : MonoBehaviour
             else if (p.tipo == PiezaCircuito.TipoPieza.CurvaDerecha) der++;
         }
 
-        // Bases para reducción exponencial (puedes ajustar)
-        float baseRectaFactor = 0.7f; // suave para rectas
-        float baseCurvaFactor = 0.4f;  // agresiva para curvas
+        rectaProb *= Mathf.Pow(0.7f, rectas);
+        curvaIzqProb *= Mathf.Pow(0.4f, izq);
+        curvaDerProb *= Mathf.Pow(0.4f, der);
 
-        if (rectaProb > 0f) rectaProb *= Mathf.Pow(baseRectaFactor, rectas);
-        if (curvaIzqProb > 0f) curvaIzqProb *= Mathf.Pow(baseCurvaFactor, izq);
-        if (curvaDerProb > 0f) curvaDerProb *= Mathf.Pow(baseCurvaFactor, der);
-
-        // ==================================================
-        // 4. NORMALIZACIÓN SEGURA
-        // ==================================================
         float total = rectaProb + curvaIzqProb + curvaDerProb;
+        if (total <= 0) return trackPrefabs[0];
 
-        if (total <= 0f)
-        {
-            rectaProb = 1f;
-            curvaIzqProb = curvaDerProb = 0f;
-            total = 1f;
-        }
-
-        rectaProb /= total;
-        curvaIzqProb /= total;
-        curvaDerProb /= total;
-
-        // ==================================================
-        // 5. ELECCIÓN FINAL
-        // ==================================================
-        float r = Random.value;
-        float acc = rectaProb;
+        float r = Random.value * total;
 
         PiezaCircuito.TipoPieza chosen =
-            r <= acc ? PiezaCircuito.TipoPieza.Recta :
-            r <= (acc += curvaIzqProb) ? PiezaCircuito.TipoPieza.CurvaIzquierda :
+            r < rectaProb ? PiezaCircuito.TipoPieza.Recta :
+            r < rectaProb + curvaIzqProb ? PiezaCircuito.TipoPieza.CurvaIzquierda :
             PiezaCircuito.TipoPieza.CurvaDerecha;
 
         foreach (var prefab in trackPrefabs)
@@ -208,50 +188,112 @@ public class GeneradorCircuitos : MonoBehaviour
         return trackPrefabs[0];
     }
 
+    // =================== ELECCIÓN DE CIERRE ===================
+    PiezaCircuito ChooseClosingPiece()
+    {
+        PiezaCircuito best = null;
+        float bestError = float.MaxValue;
+        float currentError = ComputeCurrentClosingError();
 
+        foreach (var prefab in trackPrefabs)
+        {
+            if (!IsPieceAllowed(prefab)) continue;
+
+            PiezaCircuito test = Instantiate(prefab);
+            test.gameObject.SetActive(false);
+
+            AlignPiece(test, piezasAsignadas[^1]);
+
+            if (!CanPlacePiece(test))
+            {
+                Destroy(test.gameObject);
+                continue;
+            }
+
+            float error = ComputeClosingError(test);
+            if (error > currentError) error += 5f;
+
+            if (error < bestError)
+            {
+                bestError = error;
+                best = prefab;
+            }
+
+            Destroy(test.gameObject);
+        }
+
+        return best ?? ChooseNextPiece();
+    }
+
+    bool IsPieceAllowed(PiezaCircuito prefab)
+    {
+        return true; // extensible más adelante
+    }
+
+    float ComputeClosingError(PiezaCircuito piece)
+    {
+        float dist = Vector3.Distance(piece.puntoSalida.position, startPos);
+        float angle = Vector3.Angle(piece.puntoSalida.right, startDir);
+        return dist + angle * 0.5f;
+    }
+
+    float ComputeCurrentClosingError()
+    {
+        PiezaCircuito last = piezasAsignadas[^1];
+        return ComputeClosingError(last);
+    }
+
+    bool CanCloseCircuit(PiezaCircuito last)
+    {
+        float dist = Vector3.Distance(last.puntoSalida.position, startPos);
+        float angle = Vector3.Angle(last.puntoSalida.right, startDir);
+        return dist < 0.5f && angle < 10f;
+    }
+
+    void BacktrackCierre()
+    {
+        int borrar = Mathf.Min(piezasParaCerrar, piezasAsignadas.Count - 1);
+
+        for (int i = 0; i < borrar; i++)
+        {
+            int idx = piezasAsignadas.Count - 1;
+            Destroy(piezasAsignadas[idx].gameObject);
+            piezasAsignadas.RemoveAt(idx);
+        }
+    }
 
     // =================== ALINEACIÓN ===================
-    void AlignPiece(PiezaCircuito newPiece, PiezaCircuito previousPiece)
+    void AlignPiece(PiezaCircuito newPiece, PiezaCircuito prev)
     {
-        Vector3 prevDir = previousPiece.puntoSalida.right;
+        Vector3 prevDir = prev.puntoSalida.right;
         Vector3 newDir = newPiece.puntoEntrada.right;
 
-        prevDir.y = 0;
-        newDir.y = 0;
+        prevDir.y = newDir.y = 0;
+        float angle = Vector3.SignedAngle(newDir, prevDir, Vector3.up);
+        newPiece.transform.Rotate(Vector3.up, angle, Space.World);
 
-        prevDir.Normalize();
-        newDir.Normalize();
-
-        float angleY = Vector3.SignedAngle(newDir, prevDir, Vector3.up);
-        newPiece.transform.Rotate(Vector3.up, angleY, Space.World);
-
-        Vector3 offset = previousPiece.puntoSalida.position - newPiece.puntoEntrada.position;
+        Vector3 offset = prev.puntoSalida.position - newPiece.puntoEntrada.position;
         newPiece.transform.position += offset;
     }
 
     // =================== SOLAPAMIENTO ===================
     bool CanPlacePiece(PiezaCircuito newPiece)
     {
-        BoxCollider[] newColliders = newPiece.GetComponents<BoxCollider>();
-        Collider[] placedColliders = circuitoParent.GetComponentsInChildren<Collider>();
+        var newCols = newPiece.GetComponents<BoxCollider>();
+        var placedCols = circuitoParent.GetComponentsInChildren<Collider>();
 
-        foreach (var colA in newColliders)
-        {
-            if (!colA.enabled) continue;
-
-            foreach (var colB in placedColliders)
+        foreach (var a in newCols)
+            foreach (var b in placedCols)
             {
-                if (colB.transform == newPiece.transform || !colB.enabled) continue;
+                if (!a.enabled || !b.enabled || b.transform == newPiece.transform)
+                    continue;
 
                 if (Physics.ComputePenetration(
-                    colA, colA.transform.position, colA.transform.rotation,
-                    colB, colB.transform.position, colB.transform.rotation,
-                    out Vector3 dir, out float dist))
-                {
+                    a, a.transform.position, a.transform.rotation,
+                    b, b.transform.position, b.transform.rotation,
+                    out _, out _))
                     return false;
-                }
             }
-        }
 
         return true;
     }
