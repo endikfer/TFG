@@ -121,6 +121,8 @@ public class Generador2 : MonoBehaviour
     /// </summary>
     IEnumerator GenerarFaseAleatoria()
     {
+        resultadoFase1 = false; // Inicializar resultado
+
         // Primera pieza (siempre recta si existe)
         PiezaCircuito primeraPieza = InstanciarPieza(ObtenerPiezaRecta() ?? piezas[0]);
         primeraPieza.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
@@ -183,7 +185,8 @@ public class Generador2 : MonoBehaviour
             {
                 Debug.LogWarning($"No se pudo colocar pieza después de {maxIntentosPorPieza} intentos. " +
                                 $"Distancia alcanzada: {distanciaAcumulada:F1}m");
-                yield return false;
+                resultadoFase1 = false;
+                yield break;
             }
 
             // Yield cada pocas operaciones para no bloquear
@@ -201,7 +204,7 @@ public class Generador2 : MonoBehaviour
             Debug.LogWarning($"Se alcanzó el límite de {maxPiezasTotal} piezas");
         }
 
-        yield return true;
+        resultadoFase1 = true;
     }
 
     /// <summary>
@@ -209,6 +212,8 @@ public class Generador2 : MonoBehaviour
     /// </summary>
     IEnumerator IntentarCerrarCircuito()
     {
+        resultadoFase2 = false; // Inicializar resultado
+
         float distanciaRestante = distanciaObjetivo - distanciaAcumulada;
         int piezasIntentadas = 0;
 
@@ -239,7 +244,8 @@ public class Generador2 : MonoBehaviour
                 if (prefab == null)
                 {
                     Debug.LogWarning("No hay piezas disponibles para cerrar");
-                    yield return false;
+                    resultadoFase2 = false;
+                    yield break;
                 }
 
                 PiezaCircuito nuevaPieza = InstanciarPieza(prefab);
@@ -265,7 +271,8 @@ public class Generador2 : MonoBehaviour
                     {
                         if (mostrarLogs)
                             Debug.Log($"¡Cierre detectado! Distancia final: {distanciaAcumulada:F1}m");
-                        yield return true;
+                        resultadoFase2 = true;
+                        yield break;
                     }
 
                     if (mostrarLogs)
@@ -284,14 +291,15 @@ public class Generador2 : MonoBehaviour
             if (!colocada)
             {
                 Debug.LogWarning($"No se pudo colocar pieza de cierre después de {maxIntentosPorPieza} intentos");
-                yield return false;
+                resultadoFase2 = false;
+                yield break;
             }
 
             yield return null;
         }
 
         // Si llegamos aquí, no cerramos
-        yield return false;
+        resultadoFase2 = false;
     }
 
     /// <summary>
