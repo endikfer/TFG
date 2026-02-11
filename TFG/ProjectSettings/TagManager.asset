@@ -5,6 +5,14 @@ TagManager:
   serializedVersion: 3
   tags:
   - Track
+  - Fuera
+  - Checkpoint
+  - Checkpoints
+  - Wall
+  - Agente
+  - Rueda
+  - Exterior
+  - Road
   layers:
   - Default
   - TransparentFX
@@ -12,7 +20,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Fuera
   - PiezaCircuito
   - 
   - 

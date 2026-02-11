@@ -256,10 +256,10 @@ public class CarController : MonoBehaviour
     void SetupWheelFriction()
     {
         // Lateral stiffness más baja en traseras para permitir derrape
-        SetWheelFriction(frontLeftCollider, 1.2f);
-        SetWheelFriction(frontRightCollider, 1.2f);
-        SetWheelFriction(rearLeftCollider, 0.8f);
-        SetWheelFriction(rearRightCollider, 0.8f);
+        SetWheelFriction(frontLeftCollider, 1.5f);
+        SetWheelFriction(frontRightCollider, 1.5f);
+        SetWheelFriction(rearLeftCollider, 1.2f);
+        SetWheelFriction(rearRightCollider, 1.2f);
     }
 
     void SetWheelFriction(WheelCollider wc, float stiffness)
