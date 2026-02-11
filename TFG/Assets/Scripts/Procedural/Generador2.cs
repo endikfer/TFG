@@ -10,7 +10,10 @@ public class Generador2 : MonoBehaviour
 
     [Header("Parámetros de generación por DISTANCIA")]
     public float distanciaObjetivo = 200f; // Distancia total del circuito
-    public float distanciaReservadaParaCierre = 30f; // Distancia que reservamos para cerrar
+    [Range(10f, 40f)]
+    public float porcentajeReservadoParaCierre = 20f; // Porcentaje de la distancia total reservado para cerrar
+
+    private float distanciaReservadaParaCierre; // Se calcula automáticamente
 
     [Header("Tolerancias de cierre")]
     public float toleranciaDistancia = 1.0f;
@@ -20,6 +23,7 @@ public class Generador2 : MonoBehaviour
     public int maxIntentosPorPieza = 15;
     public int maxReintentosCierre = 5;
     public int maxPiezasTotal = 200; // Límite de seguridad
+    public int maxReintentosGlobales = 5; // Reintentos completos desde cero
 
     [Header("Reglas de variedad")]
     public int maxCurvasConsecutivas = 3;
@@ -38,13 +42,81 @@ public class Generador2 : MonoBehaviour
     private bool resultadoFase1 = false;
     private bool resultadoFase2 = false;
 
+    // Sistema de memoria de intentos fallidos
+    private HashSet<string> combinacionesIntentadas = new HashSet<string>();
+    private int intentosCierreSinProgreso = 0;
+    private const int maxIntentosSinProgreso = 20;
+
     void Start()
     {
-        StartCoroutine(GenerarCircuito());
+        StartCoroutine(GenerarCircuitoConReintentos());
+    }
+
+    IEnumerator GenerarCircuitoConReintentos()
+    {
+        int intentoGlobal = 0;
+        bool exito = false;
+
+        while (!exito && intentoGlobal < maxReintentosGlobales)
+        {
+            intentoGlobal++;
+
+            if (intentoGlobal > 1)
+            {
+                Debug.Log($"\n{'=',-60}\nREINTENTO GLOBAL {intentoGlobal}/{maxReintentosGlobales}\n{'=',-60}");
+                LimpiarTodo();
+            }
+
+            yield return StartCoroutine(GenerarCircuito());
+
+            // Verificar si tuvo éxito
+            if (piezasColocadas.Count > 0 && CircuitoCierra(piezasColocadas[piezasColocadas.Count - 1]))
+            {
+                exito = true;
+                Debug.Log($"✅ ¡ÉXITO EN INTENTO GLOBAL {intentoGlobal}!");
+            }
+            else if (intentoGlobal < maxReintentosGlobales)
+            {
+                Debug.LogWarning($"❌ Intento global {intentoGlobal} falló. Reiniciando desde cero...");
+                yield return new WaitForSeconds(0.5f); // Pequeña pausa
+            }
+        }
+
+        if (!exito)
+        {
+            Debug.LogError($"❌❌❌ FALLO TOTAL después de {maxReintentosGlobales} intentos globales");
+        }
+    }
+
+    void LimpiarTodo()
+    {
+        // Destruir todas las piezas
+        foreach (var pieza in piezasColocadas)
+        {
+            if (pieza != null)
+                Destroy(pieza.gameObject);
+        }
+
+        // Limpiar cualquier pieza desactivada
+        for (int i = circuitoParent.childCount - 1; i >= 0; i--)
+        {
+            Destroy(circuitoParent.GetChild(i).gameObject);
+        }
+
+        // Resetear estado
+        piezasColocadas.Clear();
+        distanciaAcumulada = 0f;
+        combinacionesIntentadas.Clear();
+        intentosCierreSinProgreso = 0;
+
+        Debug.Log("🧹 Estado limpiado para nuevo intento");
     }
 
     IEnumerator GenerarCircuito()
     {
+        // Calcular distancia de cierre basada en el porcentaje
+        CalcularDistanciaDeCarrera();
+
         // Validación
         if (piezas == null || piezas.Length == 0)
         {
@@ -74,6 +146,27 @@ public class Generador2 : MonoBehaviour
             Debug.Log($"Fase 1 completada: {piezasColocadas.Count} piezas, " +
                      $"Distancia: {distanciaAcumulada:F1}m / {distanciaObjetivo:F1}m");
 
+        // ========== VALIDACIÓN DE VIABILIDAD ==========
+        float gapLineal = Vector3.Distance(piezasColocadas[^1].puntoSalida.position, posicionInicial);
+        float distanciaRestante = distanciaObjetivo - distanciaAcumulada;
+
+        if (mostrarLogs)
+        {
+            Debug.Log($"=== VALIDACIÓN DE VIABILIDAD ===");
+            Debug.Log($"Gap lineal al inicio: {gapLineal:F1}m");
+            Debug.Log($"Distancia restante por generar: {distanciaRestante:F1}m");
+        }
+
+        if (gapLineal > distanciaRestante)
+        {
+            Debug.LogWarning($"⚠️ CIRCUITO INVIABLE: Gap ({gapLineal:F1}m) > Distancia restante ({distanciaRestante:F1}m)");
+            Debug.LogWarning("No es posible cerrar el circuito con la distancia disponible. Reiniciando...");
+            yield break; // Salir y reintentar desde cero
+        }
+
+        if (mostrarLogs)
+            Debug.Log($"✅ Circuito viable. Gap/Distancia: {(gapLineal / distanciaRestante * 100f):F1}%");
+
         // ========== FASE 2: CIERRE DEL CIRCUITO ==========
         if (mostrarLogs)
             Debug.Log("=== FASE 2: Cierre del circuito ===");
@@ -83,6 +176,10 @@ public class Generador2 : MonoBehaviour
 
         while (!circuitoCerrado && intentosCierre < maxReintentosCierre)
         {
+            // Resetear memoria de combinaciones para cada intento de cierre
+            combinacionesIntentadas.Clear();
+            intentosCierreSinProgreso = 0;
+
             yield return StartCoroutine(IntentarCerrarCircuito());
             circuitoCerrado = resultadoFase2;
 
@@ -90,7 +187,7 @@ public class Generador2 : MonoBehaviour
             {
                 intentosCierre++;
                 if (mostrarLogs)
-                    Debug.LogWarning($"Intento de cierre {intentosCierre} falló. Haciendo backtracking...");
+                    Debug.LogWarning($"Intento de cierre {intentosCierre}/{maxReintentosCierre} falló. Haciendo backtracking...");
 
                 // Backtracking: elimina piezas hasta volver a la distancia de cierre
                 HacerBacktracking(distanciaReservadaParaCierre);
@@ -114,6 +211,23 @@ public class Generador2 : MonoBehaviour
         }
 
         LimpiarPiezasDesactivadas();
+    }
+
+    /// <summary>
+    /// Calcula la distancia reservada para el cierre basándose en el porcentaje configurado
+    /// </summary>
+    void CalcularDistanciaDeCarrera()
+    {
+        distanciaReservadaParaCierre = distanciaObjetivo * (porcentajeReservadoParaCierre / 100f);
+
+        if (mostrarLogs)
+        {
+            Debug.Log($"📊 Configuración de distancias:");
+            Debug.Log($"   Distancia total objetivo: {distanciaObjetivo:F1}m");
+            Debug.Log($"   Porcentaje para cierre: {porcentajeReservadoParaCierre:F1}%");
+            Debug.Log($"   Distancia reservada para cierre: {distanciaReservadaParaCierre:F1}m");
+            Debug.Log($"   Distancia fase aleatoria: {(distanciaObjetivo - distanciaReservadaParaCierre):F1}m");
+        }
     }
 
     /// <summary>
@@ -227,26 +341,59 @@ public class Generador2 : MonoBehaviour
         while (distanciaAcumulada < distanciaObjetivo && piezasIntentadas < maxPiezasTotal)
         {
             piezasIntentadas++;
+
+            // VALIDACIÓN CONTINUA: Verificar si todavía es posible cerrar
+            float gapActualTotal = Vector3.Distance(piezasColocadas[^1].puntoSalida.position, posicionInicial);
+            float distanciaRestanteActual = distanciaObjetivo - distanciaAcumulada;
+
+            if (gapActualTotal > distanciaRestanteActual * 1.5f) // Margen del 50%
+            {
+                if (mostrarLogs)
+                    Debug.LogWarning($"⚠️ Gap ({gapActualTotal:F1}m) demasiado grande para distancia restante ({distanciaRestanteActual:F1}m). Abortando cierre.");
+                resultadoFase2 = false;
+                yield break;
+            }
+
             bool colocada = false;
             int intentos = 0;
 
+            // Lista de piezas que ya probamos en ESTA posición específica
+            HashSet<int> piezasProbadasAqui = new HashSet<int>();
+
             // Calcular si estamos muy cerca del objetivo (últimas piezas)
-            float distanciaRestanteActual = distanciaObjetivo - distanciaAcumulada;
             bool estamosMuyCerca = distanciaRestanteActual < distanciaReservadaParaCierre * 0.3f;
 
             while (!colocada && intentos < maxIntentosPorPieza)
             {
                 intentos++;
 
-                // Elegir pieza que mejor se acerque al cierre
-                PiezaCircuito prefab = ElegirPiezaParaCierre(estamosMuyCerca);
+                // Elegir pieza que mejor se acerque al cierre, EVITANDO las ya probadas
+                PiezaCircuito prefab = ElegirPiezaParaCierre(estamosMuyCerca, piezasProbadasAqui);
 
                 if (prefab == null)
                 {
-                    Debug.LogWarning("No hay piezas disponibles para cerrar");
+                    if (mostrarLogs)
+                        Debug.LogWarning($"No hay más piezas disponibles para probar en esta posición (probadas: {piezasProbadasAqui.Count}/{piezas.Length})");
                     resultadoFase2 = false;
                     yield break;
                 }
+
+                // Marcar que probamos esta pieza en esta posición
+                int indicePrefab = System.Array.IndexOf(piezas, prefab);
+                piezasProbadasAqui.Add(indicePrefab);
+
+                // Generar clave única para esta combinación (últimas 3 piezas + nueva)
+                string claveCombinacion = GenerarClaveCombinacion(prefab);
+
+                // Si ya probamos esta combinación exacta antes, saltarla
+                if (combinacionesIntentadas.Contains(claveCombinacion))
+                {
+                    if (mostrarLogs)
+                        Debug.Log($"Combinación ya intentada, saltando...");
+                    continue;
+                }
+
+                combinacionesIntentadas.Add(claveCombinacion);
 
                 PiezaCircuito nuevaPieza = InstanciarPieza(prefab);
                 nuevaPieza.gameObject.SetActive(false);
@@ -265,6 +412,7 @@ public class Generador2 : MonoBehaviour
                     piezasColocadas.Add(nuevaPieza);
                     distanciaAcumulada += nuevaPieza.longitud;
                     colocada = true;
+                    intentosCierreSinProgreso = 0; // Resetear contador de sin progreso
 
                     // Si el circuito cerró, ¡éxito!
                     if (CircuitoCierra(nuevaPieza))
@@ -278,7 +426,7 @@ public class Generador2 : MonoBehaviour
                     if (mostrarLogs)
                     {
                         float gapActual = Vector3.Distance(nuevaPieza.puntoSalida.position, posicionInicial);
-                        Debug.Log($"Pieza de cierre añadida. Gap restante: {gapActual:F1}m, " +
+                        Debug.Log($"Pieza de cierre añadida: {nuevaPieza.tipo}. Gap: {gapActual:F1}m, " +
                                  $"Distancia: {distanciaAcumulada:F1}m / {distanciaObjetivo:F1}m");
                     }
                 }
@@ -290,7 +438,20 @@ public class Generador2 : MonoBehaviour
 
             if (!colocada)
             {
-                Debug.LogWarning($"No se pudo colocar pieza de cierre después de {maxIntentosPorPieza} intentos");
+                intentosCierreSinProgreso++;
+
+                if (mostrarLogs)
+                    Debug.LogWarning($"No se pudo colocar pieza de cierre después de {maxIntentosPorPieza} intentos. " +
+                                   $"Sin progreso: {intentosCierreSinProgreso}/{maxIntentosSinProgreso}");
+
+                // Si llevamos muchos intentos sin colocar ninguna pieza, abandonar este intento
+                if (intentosCierreSinProgreso >= maxIntentosSinProgreso)
+                {
+                    Debug.LogWarning("Demasiados intentos sin progreso, haciendo backtracking...");
+                    resultadoFase2 = false;
+                    yield break;
+                }
+
                 resultadoFase2 = false;
                 yield break;
             }
@@ -303,19 +464,27 @@ public class Generador2 : MonoBehaviour
     }
 
     /// <summary>
-    /// Elige una pieza que se acerque al punto inicial
+    /// Elige una pieza que se acerque al punto inicial, evitando las ya probadas
     /// </summary>
-    PiezaCircuito ElegirPiezaParaCierre(bool debeSerPerfecta)
+    PiezaCircuito ElegirPiezaParaCierre(bool debeSerPerfecta, HashSet<int> piezasYaProbadas)
     {
         PiezaCircuito ultimaColocada = piezasColocadas[piezasColocadas.Count - 1];
-        PiezaCircuito mejorPieza = null;
-        float mejorPuntuacion = float.MaxValue;
 
         // Calcular gap actual
         float gapActual = Vector3.Distance(ultimaColocada.puntoSalida.position, posicionInicial);
 
-        foreach (var prefab in piezas)
+        // Crear lista de candidatos con sus puntuaciones
+        List<(PiezaCircuito pieza, float puntuacion, int indice)> candidatos =
+            new List<(PiezaCircuito, float, int)>();
+
+        for (int i = 0; i < piezas.Length; i++)
         {
+            // Saltar piezas ya probadas en esta posición
+            if (piezasYaProbadas.Contains(i))
+                continue;
+
+            var prefab = piezas[i];
+
             // Crear instancia temporal para evaluar
             PiezaCircuito temp = InstanciarPieza(prefab);
             temp.gameObject.SetActive(false);
@@ -327,12 +496,25 @@ public class Generador2 : MonoBehaviour
             float angulo = Vector3.Angle(temp.puntoSalida.right, direccionInicial);
 
             // Puntuación: prioriza reducir distancia y alinear ángulo
-            // Penaliza piezas que nos alejan del objetivo
             float puntuacion = distancia + (angulo * 0.1f);
 
+            // Penaliza piezas que nos alejan del objetivo
             if (distancia > gapActual)
             {
-                puntuacion += 100f; // Gran penalización si nos alejamos
+                puntuacion += 50f;
+            }
+
+            // Bonificación por variedad: favorece piezas de tipo diferente a las últimas
+            if (piezasColocadas.Count >= 2)
+            {
+                var ultimoTipo = piezasColocadas[piezasColocadas.Count - 1].tipo;
+                var penultimoTipo = piezasColocadas[piezasColocadas.Count - 2].tipo;
+
+                if (prefab.tipo != ultimoTipo)
+                    puntuacion -= 5f; // Bonificación por variedad
+
+                if (prefab.tipo == ultimoTipo && prefab.tipo == penultimoTipo)
+                    puntuacion += 10f; // Penalización por repetición
             }
 
             // Si debe ser perfecta (última pieza), verificar tolerancias
@@ -345,22 +527,52 @@ public class Generador2 : MonoBehaviour
                 }
             }
 
-            if (puntuacion < mejorPuntuacion)
-            {
-                mejorPuntuacion = puntuacion;
-                mejorPieza = prefab;
-            }
-
+            candidatos.Add((prefab, puntuacion, i));
             Destroy(temp.gameObject);
         }
 
-        // Si no encontramos pieza perfecta cuando se requiere, intentar con una aleatoria
-        if (mejorPieza == null && !debeSerPerfecta)
+        if (candidatos.Count == 0)
         {
-            mejorPieza = ElegirPiezaAleatoria();
+            // No quedan piezas válidas
+            return null;
         }
 
-        return mejorPieza;
+        // Ordenar por puntuación (menor es mejor)
+        candidatos.Sort((a, b) => a.puntuacion.CompareTo(b.puntuacion));
+
+        // ESTRATEGIA MEJORADA: En vez de elegir siempre la mejor,
+        // elegimos aleatoriamente entre las top 3 mejores para añadir variedad
+        int topN = Mathf.Min(3, candidatos.Count);
+        int indiceAleatorio = Random.Range(0, topN);
+
+        var elegida = candidatos[indiceAleatorio];
+
+        if (mostrarLogs)
+        {
+            Debug.Log($"Elegida pieza {elegida.pieza.tipo} (puntuación: {elegida.puntuacion:F1}, " +
+                     $"ranking: {indiceAleatorio + 1}/{topN})");
+        }
+
+        return elegida.pieza;
+    }
+
+    /// <summary>
+    /// Genera una clave única basada en las últimas piezas colocadas + la nueva
+    /// </summary>
+    string GenerarClaveCombinacion(PiezaCircuito nuevaPieza)
+    {
+        // Usamos las últimas 3 piezas para generar la clave
+        int profundidad = Mathf.Min(3, piezasColocadas.Count);
+        string clave = "";
+
+        for (int i = piezasColocadas.Count - profundidad; i < piezasColocadas.Count; i++)
+        {
+            clave += piezasColocadas[i].tipo.ToString() + "-";
+        }
+
+        clave += nuevaPieza.tipo.ToString();
+
+        return clave;
     }
 
     /// <summary>

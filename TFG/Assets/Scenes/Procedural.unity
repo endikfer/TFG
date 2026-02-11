@@ -327,12 +327,13 @@ MonoBehaviour:
   - {fileID: 234841587475101377, guid: c809c379351e49e4bb5c56f1f6d84c9a, type: 3}
   circuitoParent: {fileID: 295824684}
   distanciaObjetivo: 50
-  distanciaReservadaParaCierre: 20
+  porcentajeReservadoParaCierre: 20
   toleranciaDistancia: 0
   toleranciaAngulo: 0
   maxIntentosPorPieza: 15
-  maxReintentosCierre: 25
+  maxReintentosCierre: 40
   maxPiezasTotal: 200
+  maxReintentosGlobales: 10
   maxCurvasConsecutivas: 3
   mostrarDebugGizmos: 1
   mostrarLogs: 1
