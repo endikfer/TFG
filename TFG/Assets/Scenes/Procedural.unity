@@ -286,7 +286,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 384799893}
-  - component: {fileID: 384799892}
   - component: {fileID: 384799894}
   m_Layer: 0
   m_Name: CircuitoManager
@@ -295,32 +294,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &384799892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 384799891}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5adec239d07725d45886636abdb45976, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GeneradorCircuitos
-  trackPrefabs:
-  - {fileID: 50269816503587801, guid: 9be89bb432b73674cb378c26e9508605, type: 3}
-  - {fileID: 3779659893276070837, guid: 2ad6ed0d03e2f7d4ca3f0b9c1c4992be, type: 3}
-  - {fileID: 234841587475101377, guid: c809c379351e49e4bb5c56f1f6d84c9a, type: 3}
-  numberOfPieces: 50
-  maxAttempts: 10
-  circuitoParent: {fileID: 295824684}
-  maxConsecutivas: 2
-  maxConCurvasIntercaladas: 4
-  baseRectaProb: 0.7
-  baseCurvaIzqProb: 0.15
-  baseCurvaDerProb: 0.15
-  piezasParaCerrar: 25
-  maxRetriesCierre: 30
 --- !u!4 &384799893
 Transform:
   m_ObjectHideFlags: 0
@@ -343,23 +316,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 384799891}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d94018bf7ef613c498e2628bf063cb96, type: 3}
+  m_Script: {fileID: 11500000, guid: fb3fbaa4f5a2c444b9fa4c8abbf3c505, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GeneradorCircuitosCerrados
+  m_EditorClassIdentifier: Assembly-CSharp::Generador2
   piezas:
   - {fileID: 50269816503587801, guid: 9be89bb432b73674cb378c26e9508605, type: 3}
-  - {fileID: 234841587475101377, guid: c809c379351e49e4bb5c56f1f6d84c9a, type: 3}
   - {fileID: 3779659893276070837, guid: 2ad6ed0d03e2f7d4ca3f0b9c1c4992be, type: 3}
-  parent: {fileID: 295824684}
-  distanciaObjetivo: 100
-  margenDistancia: 5
-  margenCierre: 1
-  margenAngulo: 10
-  maxIntentosPorPieza: 10
-  maxPiezas: 200
-  operacionesPorFrame: 25
+  - {fileID: 234841587475101377, guid: c809c379351e49e4bb5c56f1f6d84c9a, type: 3}
+  circuitoParent: {fileID: 295824684}
+  distanciaObjetivo: 50
+  distanciaReservadaParaCierre: 20
+  toleranciaDistancia: 0
+  toleranciaAngulo: 0
+  maxIntentosPorPieza: 15
+  maxReintentosCierre: 25
+  maxPiezasTotal: 200
+  maxCurvasConsecutivas: 3
+  mostrarDebugGizmos: 1
+  mostrarLogs: 1
 --- !u!1 &1404771888
 GameObject:
   m_ObjectHideFlags: 0
