@@ -47,6 +47,9 @@ public class Generador2 : MonoBehaviour
     private int intentosCierreSinProgreso = 0;
     private const int maxIntentosSinProgreso = 20;
 
+
+    private bool cierreAbortadoPorInviable = false;
+
     void Start()
     {
         StartCoroutine(GenerarCircuitoConReintentos());
@@ -185,13 +188,19 @@ public class Generador2 : MonoBehaviour
 
             if (!circuitoCerrado)
             {
-                intentosCierre++;
-                if (mostrarLogs)
-                    Debug.LogWarning($"Intento de cierre {intentosCierre}/{maxReintentosCierre} falló. Haciendo backtracking...");
+                if (!cierreAbortadoPorInviable)   // ← AÑADIR esta condición
+                {
+                    intentosCierre++;
+                    if (mostrarLogs)
+                        Debug.LogWarning($"Intento de cierre {intentosCierre}/{maxReintentosCierre} falló. Haciendo backtracking...");
+                }
+                else
+                {
+                    if (mostrarLogs)
+                        Debug.LogWarning("Cierre abortado por inviabilidad geométrica (no cuenta como intento). Haciendo backtracking...");
+                }
 
-                // Backtracking: elimina piezas hasta volver a la distancia de cierre
                 HacerBacktracking(distanciaReservadaParaCierre);
-
                 yield return null;
             }
         }
@@ -327,6 +336,7 @@ public class Generador2 : MonoBehaviour
     IEnumerator IntentarCerrarCircuito()
     {
         resultadoFase2 = false; // Inicializar resultado
+        cierreAbortadoPorInviable = false;
 
         float distanciaRestante = distanciaObjetivo - distanciaAcumulada;
         int piezasIntentadas = 0;
@@ -350,6 +360,7 @@ public class Generador2 : MonoBehaviour
             {
                 if (mostrarLogs)
                     Debug.LogWarning($"⚠️ Gap ({gapActualTotal:F1}m) demasiado grande para distancia restante ({distanciaRestanteActual:F1}m). Abortando cierre.");
+                cierreAbortadoPorInviable = true;
                 resultadoFase2 = false;
                 yield break;
             }
