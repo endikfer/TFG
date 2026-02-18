@@ -41,7 +41,6 @@ public class Generador2 : MonoBehaviour
     // Variables para comunicar resultados de corrutinas
     private bool resultadoFase1 = false;
     private bool resultadoFase2 = false;
-    private bool llegaFase2 = false; // Indica si realmente se llegó a la Fase 2
 
     // Sistema de memoria de intentos fallidos
     private HashSet<string> combinacionesIntentadas = new HashSet<string>();
@@ -60,9 +59,11 @@ public class Generador2 : MonoBehaviour
 
         while (!exito && intentoGlobal < maxReintentosGlobales)
         {
-            if (intentoGlobal > 0)
+            intentoGlobal++;
+
+            if (intentoGlobal > 1)
             {
-                Debug.Log($"\n{'=',-60}\nREINTENTO GLOBAL {intentoGlobal + 1}/{maxReintentosGlobales}\n{'=',-60}");
+                Debug.Log($"\n{'=',-60}\nREINTENTO GLOBAL {intentoGlobal}/{maxReintentosGlobales}\n{'=',-60}");
                 LimpiarTodo();
             }
 
@@ -71,24 +72,12 @@ public class Generador2 : MonoBehaviour
             // Verificar si tuvo éxito
             if (piezasColocadas.Count > 0 && CircuitoCierra(piezasColocadas[piezasColocadas.Count - 1]))
             {
-                intentoGlobal++;
                 exito = true;
                 Debug.Log($"✅ ¡ÉXITO EN INTENTO GLOBAL {intentoGlobal}!");
             }
-            else if (piezasColocadas.Count > 0 && llegaFase2)
+            else if (intentoGlobal < maxReintentosGlobales)
             {
-                // Solo cuenta como intento si llegó a la Fase 2
-                intentoGlobal++;
-                if (intentoGlobal < maxReintentosGlobales)
-                {
-                    Debug.LogWarning($"❌ Intento global {intentoGlobal} falló. Reiniciando desde cero...");
-                    yield return new WaitForSeconds(0.5f); // Pequeña pausa
-                }
-            }
-            else
-            {
-                // No llegó a Fase 2, no cuenta como intento
-                Debug.LogWarning("⚠️ No llegó a Fase 2 (circuito inviable desde Fase 1). Reintentando sin contar como intento...");
+                Debug.LogWarning($"❌ Intento global {intentoGlobal} falló. Reiniciando desde cero...");
                 LimpiarTodo();
                 yield return new WaitForSeconds(0.5f);
             }
@@ -96,7 +85,7 @@ public class Generador2 : MonoBehaviour
 
         if (!exito)
         {
-            Debug.LogError($"❌❌❌ FALLO TOTAL después de {intentoGlobal} intentos globales válidos");
+            Debug.LogError($"❌❌❌ FALLO TOTAL después de {maxReintentosGlobales} intentos globales");
         }
     }
 
@@ -120,16 +109,12 @@ public class Generador2 : MonoBehaviour
         distanciaAcumulada = 0f;
         combinacionesIntentadas.Clear();
         intentosCierreSinProgreso = 0;
-        llegaFase2 = false;
 
         Debug.Log("🧹 Estado limpiado para nuevo intento");
     }
 
     IEnumerator GenerarCircuito()
     {
-        // Resetear flag de Fase 2
-        llegaFase2 = false;
-
         // Calcular distancia de cierre basada en el porcentaje
         CalcularDistanciaDeCarrera();
 
@@ -188,8 +173,6 @@ public class Generador2 : MonoBehaviour
             Debug.Log($"✅ Circuito viable. Gap/Distancia: {(gapLineal / distanciaRestante * 100f):F1}%");
 
         // ========== FASE 2: CIERRE DEL CIRCUITO ==========
-        llegaFase2 = true; // Marcar que sí llegamos a Fase 2
-
         if (mostrarLogs)
             Debug.Log("=== FASE 2: Cierre del circuito ===");
 
