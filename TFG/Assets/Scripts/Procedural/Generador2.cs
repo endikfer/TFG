@@ -765,6 +765,14 @@ public class Generador2 : MonoBehaviour
         }
     }
 
+    public void Regenerar()
+    {
+        StopAllCoroutines();
+        LimpiarTodo();
+        Debug.Log($"🔄 Regenerando circuito...");
+        StartCoroutine(GenerarCircuitoConReintentos());
+    }
+
     // Gizmos para visualizar en editor
     void OnDrawGizmos()
     {

@@ -145,14 +145,14 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3165775}
   m_Enabled: 1
-  serializedVersion: 11
+  serializedVersion: 12
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
+  m_CookieSize2D: {x: 10, y: 10}
   m_Shadows:
     m_Type: 2
     m_Resolution: -1
@@ -287,6 +287,7 @@ GameObject:
   m_Component:
   - component: {fileID: 384799893}
   - component: {fileID: 384799894}
+  - component: {fileID: 384799895}
   m_Layer: 0
   m_Name: CircuitoManager
   m_TagString: Untagged
@@ -327,7 +328,7 @@ MonoBehaviour:
   - {fileID: 234841587475101377, guid: c809c379351e49e4bb5c56f1f6d84c9a, type: 3}
   circuitoParent: {fileID: 295824684}
   distanciaObjetivo: 50
-  porcentajeReservadoParaCierre: 20
+  porcentajeReservadoParaCierre: 35
   toleranciaDistancia: 0
   toleranciaAngulo: 0
   maxIntentosPorPieza: 15
@@ -336,7 +337,21 @@ MonoBehaviour:
   maxReintentosGlobales: 10
   maxCurvasConsecutivas: 3
   mostrarDebugGizmos: 1
-  mostrarLogs: 1
+  mostrarLogs: 0
+--- !u!114 &384799895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384799891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2fe210810b51bc40bb1b5891b5cc3aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputGeneracion
+  generador: {fileID: 384799894}
+  teclaRegenerar: 114
 --- !u!1 &1404771888
 GameObject:
   m_ObjectHideFlags: 0
