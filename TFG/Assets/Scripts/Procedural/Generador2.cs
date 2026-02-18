@@ -89,6 +89,7 @@ public class Generador2 : MonoBehaviour
             {
                 // No llegó a Fase 2, no cuenta como intento
                 Debug.LogWarning("⚠️ No llegó a Fase 2 (circuito inviable desde Fase 1). Reintentando sin contar como intento...");
+                LimpiarTodo();
                 yield return new WaitForSeconds(0.5f);
             }
         }
@@ -154,6 +155,8 @@ public class Generador2 : MonoBehaviour
         if (!resultadoFase1)
         {
             Debug.LogError("❌ Falló la fase 1 de generación");
+            yield return new WaitForSeconds(0.5f);
+            LimpiarTodo();
             yield break;
         }
 
@@ -176,6 +179,8 @@ public class Generador2 : MonoBehaviour
         {
             Debug.LogWarning($"⚠️ CIRCUITO INVIABLE: Gap ({gapLineal:F1}m) > Distancia restante ({distanciaRestante:F1}m)");
             Debug.LogWarning("No es posible cerrar el circuito con la distancia disponible. Reiniciando...");
+            yield return new WaitForSeconds(0.5f);
+            LimpiarTodo();
             yield break; // Salir y reintentar desde cero (no marca llegaFase2 = true)
         }
 
