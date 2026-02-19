@@ -13,11 +13,18 @@ public static class CircuitoEventos
     /// </summary>
     public static event Action<List<PiezaCircuito>, float> OnCircuitoCerrado;
 
+    public static event Action<List<PiezaCircuito>, float> OnCircuitoCargado;
+
     /// <summary>
     /// Llamado por el Generador2 al confirmar el cierre del circuito.
     /// </summary>
     public static void NotificarCircuitoCerrado(List<PiezaCircuito> piezas, float distanciaTotal)
     {
         OnCircuitoCerrado?.Invoke(piezas, distanciaTotal);
+    }
+
+    public static void NotificarCircuitoCargado(List<PiezaCircuito> piezas, float distanciaTotal)
+    {
+        OnCircuitoCargado?.Invoke(piezas, distanciaTotal);
     }
 }
