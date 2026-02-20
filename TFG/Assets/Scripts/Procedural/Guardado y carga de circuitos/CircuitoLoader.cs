@@ -54,7 +54,11 @@ public class CircuitoLoader : MonoBehaviour
     private void Start()
     {
         panelCarga.SetActive(false);
-        botonCerrarPanel.onClick.AddListener(() => panelCarga.SetActive(false));
+        botonCerrarPanel.onClick.AddListener(() =>
+        {
+            panelCarga.SetActive(false);
+            generador.Regenerar();
+        });
     }
 
     // ── API pública ───────────────────────────────────────────────────────
@@ -65,6 +69,7 @@ public class CircuitoLoader : MonoBehaviour
     /// </summary>
     public void AbrirPanelCarga()
     {
+        generador.StopAllCoroutines();
         RefrescarLista();
         panelCarga.SetActive(true);
     }
@@ -137,9 +142,9 @@ public class CircuitoLoader : MonoBehaviour
             return;
         }
 
-        // Detener generación en curso y limpiar escena
+        // Usar LimpiarTodo del generador en vez de limpieza propia
         generador.StopAllCoroutines();
-        LimpiarCircuitoActual();
+        generador.LimpiarTodo();
 
         StartCoroutine(ReconstruirCircuito(datos));
     }

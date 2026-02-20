@@ -12,11 +12,13 @@ public class InputGeneracion : MonoBehaviour
     [Tooltip("Mientras este panel esté activo, la tecla de regeneración se desactiva.")]
     public GameObject panelGuardado;
 
+    [Tooltip("Mientras este panel esté activo, la tecla de regeneración se desactiva.")]
+    public GameObject panelCarga;
+
     void Update()
     {
-        // Si el panel de guardado está visible, no procesar input
-        if (panelGuardado != null && panelGuardado.activeSelf)
-            return;
+        if (panelGuardado != null && panelGuardado.activeSelf) return;
+        if (panelCarga != null && panelCarga.activeSelf) return;
 
         if (Input.GetKeyDown(teclaRegenerar))
         {

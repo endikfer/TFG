@@ -89,7 +89,7 @@ public class Generador2 : MonoBehaviour
         }
     }
 
-    void LimpiarTodo()
+    public void LimpiarTodo()
     {
         // Destruir todas las piezas
         foreach (var pieza in piezasColocadas)
@@ -773,12 +773,15 @@ public class Generador2 : MonoBehaviour
         if (!mostrarDebugGizmos || piezasColocadas.Count == 0)
             return;
 
+        // Comprobar que las referencias siguen siendo válidas
+        if (piezasColocadas[piezasColocadas.Count - 1] == null)
+            return;
+
         // Dibujar punto inicial
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(posicionInicial, 0.5f);
         Gizmos.DrawRay(posicionInicial, direccionInicial * 2f);
 
-        // Dibujar última pieza y gap
         if (piezasColocadas.Count > 0)
         {
             PiezaCircuito ultima = piezasColocadas[piezasColocadas.Count - 1];
@@ -786,11 +789,9 @@ public class Generador2 : MonoBehaviour
             Gizmos.DrawWireSphere(ultima.puntoSalida.position, 0.5f);
             Gizmos.DrawRay(ultima.puntoSalida.position, ultima.puntoSalida.right * 2f);
 
-            // Línea entre salida y entrada (gap)
             Gizmos.color = Color.yellow;
             Gizmos.DrawLine(ultima.puntoSalida.position, posicionInicial);
 
-            // Texto con distancia
             float gap = Vector3.Distance(ultima.puntoSalida.position, posicionInicial);
             UnityEngine.GUIStyle style = new UnityEngine.GUIStyle();
             style.normal.textColor = Color.white;

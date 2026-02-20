@@ -43,6 +43,7 @@ public class CircuitoSaver : MonoBehaviour
     private class DatosPieza
     {
         public string tipo;
+        public string nombrePrefab;
         public float px, py, pz;   // posición world
         public float rx, ry, rz;   // rotación euler
     }
@@ -164,6 +165,7 @@ public class CircuitoSaver : MonoBehaviour
             datos.piezas.Add(new DatosPieza
             {
                 tipo = pieza.tipo.ToString(),
+                nombrePrefab = pieza.gameObject.name.Replace("(Clone)", "").Trim(),
                 px = pos.x,
                 py = pos.y,
                 pz = pos.z,
