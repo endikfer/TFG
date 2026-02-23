@@ -75,6 +75,8 @@ GameObject:
   - component: {fileID: 8139560662992090916}
   - component: {fileID: 50269816503587801}
   - component: {fileID: 3351817210485022137}
+  - component: {fileID: 8064690941911885559}
+  - component: {fileID: 5844497009919957958}
   m_Layer: 7
   m_Name: Track_ Straight
   m_TagString: Untagged
@@ -137,8 +139,50 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.014621, y: 0.31563097, z: 1.0044048}
-  m_Center: {x: -0.0019445717, y: 0.02256161, z: -0.0018156767}
+  m_Size: {x: 1.014621, y: 0.31563097, z: 0.9949132}
+  m_Center: {x: -0.0019445419, y: 0.02256161, z: -0.006561443}
+--- !u!65 &8064690941911885559
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8139560662992251652}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0863427, y: 0.53279054, z: 0.042226374}
+  m_Center: {x: -0.0022851825, y: 0.23360473, z: -0.4788868}
+--- !u!65 &5844497009919957958
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8139560662992251652}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0863427, y: 0.53279054, z: 0.050792426}
+  m_Center: {x: -0.0022851825, y: 0.23360473, z: 0.44696242}
 --- !u!1 &8139560662992251668
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,6 +271,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &8945376644593178929
 GameObject:
