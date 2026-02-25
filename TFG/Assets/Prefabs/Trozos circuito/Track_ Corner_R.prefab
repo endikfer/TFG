@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1016789704704499065}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Fuera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 7203630945976309840}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Fuera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 5641352209854918493}
   m_Layer: 0
   m_Name: Colliders
-  m_TagString: Untagged
+  m_TagString: Fuera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 537394125104249632}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Fuera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -365,7 +365,7 @@ GameObject:
   - component: {fileID: 7354702580467167728}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Fuera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -428,7 +428,7 @@ GameObject:
   - component: {fileID: 6608290524530083228}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Fuera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -491,7 +491,7 @@ GameObject:
   - component: {fileID: 9211238324868714837}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Fuera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -554,7 +554,7 @@ GameObject:
   - component: {fileID: 3814387253475019965}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Fuera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -648,7 +648,7 @@ GameObject:
   - component: {fileID: 8302239072250736866}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Fuera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -740,7 +740,7 @@ GameObject:
   - component: {fileID: 8184930631907258757}
   m_Layer: 0
   m_Name: Colliders_Externo
-  m_TagString: Untagged
+  m_TagString: Fuera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -778,7 +778,7 @@ GameObject:
   - component: {fileID: 7489168792283238376}
   m_Layer: 0
   m_Name: Colliders_Interno
-  m_TagString: Untagged
+  m_TagString: Fuera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -818,7 +818,7 @@ GameObject:
   - component: {fileID: 5617444065978154634}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Fuera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -881,7 +881,7 @@ GameObject:
   - component: {fileID: 8987533963297734948}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Fuera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -944,7 +944,7 @@ GameObject:
   - component: {fileID: 5864141139500477594}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Fuera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1074,7 +1074,7 @@ GameObject:
   - component: {fileID: 6130008617578577167}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Fuera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1351,7 +1351,7 @@ GameObject:
   - component: {fileID: 7898697488479025407}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Fuera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1414,7 +1414,7 @@ GameObject:
   - component: {fileID: 313915804377908943}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Fuera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
