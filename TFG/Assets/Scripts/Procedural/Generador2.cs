@@ -5,6 +5,8 @@ using UnityEngine;
 public class Generador2 : MonoBehaviour
 {
     [Header("Configuración de piezas")]
+    [Tooltip("Pieza especial de inicio/meta. Siempre será la primera del circuito.")]
+    public PiezaCircuito piezaInicio;
     public PiezaCircuito[] piezas;
     public Transform circuitoParent;
 
@@ -248,8 +250,20 @@ public class Generador2 : MonoBehaviour
     {
         resultadoFase1 = false; // Inicializar resultado
 
-        // Primera pieza (siempre recta si existe)
-        PiezaCircuito primeraPieza = InstanciarPieza(ObtenerPiezaRecta() ?? piezas[0]);
+        // Primera pieza: siempre la pieza de inicio si está asignada
+        PiezaCircuito primeraPieza;
+        if (piezaInicio != null)
+        {
+            primeraPieza = InstanciarPieza(piezaInicio);
+            if (mostrarLogs)
+                Debug.Log("🏁 Usando pieza de inicio asignada.");
+        }
+        else
+        {
+            primeraPieza = InstanciarPieza(ObtenerPiezaRecta() ?? piezas[0]);
+            if (mostrarLogs)
+                Debug.LogWarning("⚠️ No hay piezaInicio asignada. Usando pieza recta como fallback.");
+        }
         primeraPieza.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
         piezasColocadas.Add(primeraPieza);
 
@@ -677,11 +691,8 @@ public class Generador2 : MonoBehaviour
         {
             foreach (var colB in collidersExistentes)
             {
-                // Ignorar si es el mismo transform
-                if (colA.transform == colB.transform)
-                    continue;
+                if (colA.transform == colB.transform) continue;
 
-                // Comprobar penetración
                 if (Physics.ComputePenetration(
                     colA, colA.transform.position, colA.transform.rotation,
                     colB, colB.transform.position, colB.transform.rotation,
@@ -782,6 +793,7 @@ public class Generador2 : MonoBehaviour
         Gizmos.DrawWireSphere(posicionInicial, 0.5f);
         Gizmos.DrawRay(posicionInicial, direccionInicial * 2f);
 
+        // Dibujar última pieza y gap
         if (piezasColocadas.Count > 0)
         {
             PiezaCircuito ultima = piezasColocadas[piezasColocadas.Count - 1];
@@ -789,9 +801,11 @@ public class Generador2 : MonoBehaviour
             Gizmos.DrawWireSphere(ultima.puntoSalida.position, 0.5f);
             Gizmos.DrawRay(ultima.puntoSalida.position, ultima.puntoSalida.right * 2f);
 
+            // Línea entre salida y entrada (gap)
             Gizmos.color = Color.yellow;
             Gizmos.DrawLine(ultima.puntoSalida.position, posicionInicial);
 
+            // Texto con distancia
             float gap = Vector3.Distance(ultima.puntoSalida.position, posicionInicial);
             UnityEngine.GUIStyle style = new UnityEngine.GUIStyle();
             style.normal.textColor = Color.white;
