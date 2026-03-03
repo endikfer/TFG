@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8523348917942636706}
   - component: {fileID: 426155974563477820}
   - component: {fileID: 7212016443966709214}
+  - component: {fileID: 8280624734011669687}
   m_Layer: 0
   m_Name: Izq
   m_TagString: Fuera
@@ -113,6 +114,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &8280624734011669687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785640467078200632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7e618194ecfd34b854890384d81644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto1_0
 --- !u!1 &947218493629500373
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,6 +171,7 @@ GameObject:
   - component: {fileID: 2909105370485937024}
   - component: {fileID: 6078928194215367625}
   - component: {fileID: 9106799236378818360}
+  - component: {fileID: 1797757438944977871}
   m_Layer: 0
   m_Name: Dere
   m_TagString: Fuera
@@ -259,6 +273,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1797757438944977871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705199688996232661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7e618194ecfd34b854890384d81644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto1_0
 --- !u!1 &3034344093634229795
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2312205218326526308}
   - component: {fileID: 6086426118134934677}
-  - component: {fileID: 4068587088875074254}
+  - component: {fileID: 2587601919522140604}
   m_Layer: 0
   m_Name: CheckPoint
   m_TagString: Checkpoint
@@ -313,7 +339,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.04499662, y: 0.37266514, z: 0.9233209}
   m_Center: {x: -0.4775017, y: 0.19419996, z: 0.0025838017}
---- !u!114 &4068587088875074254
+--- !u!114 &2587601919522140604
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -322,10 +348,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3034344093634229795}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 696f7b399a10bb946b4b71a5a4ab4505, type: 3}
+  m_Script: {fileID: 11500000, guid: cec02bfbd57745149b93658f40814d0f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CheckPoint2
-  manager: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::CheckPoint1_0
   checkpointID: 0
 --- !u!1 &3801952210106689804
 GameObject:
@@ -383,7 +408,7 @@ Transform:
   m_GameObject: {fileID: 7791348942157473285}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00007, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

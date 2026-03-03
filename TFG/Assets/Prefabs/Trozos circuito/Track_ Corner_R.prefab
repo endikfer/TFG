@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5336663690787029216}
   - component: {fileID: 4423263985163970038}
   - component: {fileID: 1016789704704499065}
+  - component: {fileID: 8453817986715972143}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Fuera
@@ -63,6 +64,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &8453817986715972143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55524656163889093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7e618194ecfd34b854890384d81644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto1_0
 --- !u!1 &1240670012149548438
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,6 +87,7 @@ GameObject:
   - component: {fileID: 4460690566775094638}
   - component: {fileID: 7024968663844376971}
   - component: {fileID: 7203630945976309840}
+  - component: {fileID: 5904988238041602295}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Fuera
@@ -126,6 +140,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &5904988238041602295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240670012149548438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7e618194ecfd34b854890384d81644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto1_0
 --- !u!1 &1284766692075398917
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,6 +196,7 @@ GameObject:
   - component: {fileID: 5609671372174812886}
   - component: {fileID: 1899713023208056797}
   - component: {fileID: 537394125104249632}
+  - component: {fileID: 6817484276889519518}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Fuera
@@ -222,6 +249,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &6817484276889519518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628375038386548198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7e618194ecfd34b854890384d81644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto1_0
 --- !u!1 &1654171613341714947
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,7 +302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5458633463270976354}
   - component: {fileID: 4236796844413082305}
-  - component: {fileID: 9108700685389372784}
+  - component: {fileID: 704148302091198892}
   m_Layer: 0
   m_Name: CheckPoint
   m_TagString: Checkpoint
@@ -307,7 +346,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.022833943, y: 0.32977745, z: 0.926908}
   m_Center: {x: 0.73023707, y: 0.15275227, z: 0.8255111}
---- !u!114 &9108700685389372784
+--- !u!114 &704148302091198892
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -316,10 +355,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1758588486336407112}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 696f7b399a10bb946b4b71a5a4ab4505, type: 3}
+  m_Script: {fileID: 11500000, guid: cec02bfbd57745149b93658f40814d0f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CheckPoint2
-  manager: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::CheckPoint1_0
   checkpointID: 0
 --- !u!1 &1796696685170083702
 GameObject:
@@ -363,6 +401,7 @@ GameObject:
   - component: {fileID: 7353879192571974751}
   - component: {fileID: 2782029047702491213}
   - component: {fileID: 7354702580467167728}
+  - component: {fileID: 6840251663809374014}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Fuera
@@ -415,6 +454,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &6840251663809374014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846370769487783485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7e618194ecfd34b854890384d81644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto1_0
 --- !u!1 &1906613306828765328
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,6 +477,7 @@ GameObject:
   - component: {fileID: 8545758118598083393}
   - component: {fileID: 8359936148635584650}
   - component: {fileID: 6608290524530083228}
+  - component: {fileID: 5383618988726380807}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Fuera
@@ -478,6 +530,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &5383618988726380807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906613306828765328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7e618194ecfd34b854890384d81644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto1_0
 --- !u!1 &2755779519974556266
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,6 +553,7 @@ GameObject:
   - component: {fileID: 153882669284315596}
   - component: {fileID: 4240845405258376526}
   - component: {fileID: 9211238324868714837}
+  - component: {fileID: 9012125441975705755}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Fuera
@@ -541,6 +606,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &9012125441975705755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2755779519974556266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7e618194ecfd34b854890384d81644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto1_0
 --- !u!1 &2780148673600593904
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,6 +629,7 @@ GameObject:
   - component: {fileID: 439800158074950444}
   - component: {fileID: 7800010173312430725}
   - component: {fileID: 3814387253475019965}
+  - component: {fileID: 7544445568776248958}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Fuera
@@ -604,6 +682,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &7544445568776248958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2780148673600593904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7e618194ecfd34b854890384d81644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto1_0
 --- !u!1 &3043898598196832596
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,6 +736,7 @@ GameObject:
   - component: {fileID: 6311448591472490164}
   - component: {fileID: 387053303432239820}
   - component: {fileID: 8302239072250736866}
+  - component: {fileID: 8186774028736676351}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Fuera
@@ -698,6 +789,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &8186774028736676351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3335873531269737056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7e618194ecfd34b854890384d81644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto1_0
 --- !u!1 &4543206566438820489
 GameObject:
   m_ObjectHideFlags: 0
@@ -816,6 +919,7 @@ GameObject:
   - component: {fileID: 3847245752030471275}
   - component: {fileID: 279611410485239439}
   - component: {fileID: 5617444065978154634}
+  - component: {fileID: 1296991312208574354}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Fuera
@@ -868,6 +972,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1296991312208574354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5719075901029832213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7e618194ecfd34b854890384d81644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto1_0
 --- !u!1 &5953059866180493728
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,6 +995,7 @@ GameObject:
   - component: {fileID: 3596491875611670118}
   - component: {fileID: 8496328389957383451}
   - component: {fileID: 8987533963297734948}
+  - component: {fileID: 1974601741334633298}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Fuera
@@ -931,6 +1048,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1974601741334633298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5953059866180493728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7e618194ecfd34b854890384d81644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto1_0
 --- !u!1 &5964728451663641825
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,6 +1071,7 @@ GameObject:
   - component: {fileID: 1146632097125710905}
   - component: {fileID: 5789839022766418356}
   - component: {fileID: 5864141139500477594}
+  - component: {fileID: 3527309402372836109}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Fuera
@@ -994,6 +1124,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &3527309402372836109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5964728451663641825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7e618194ecfd34b854890384d81644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto1_0
 --- !u!1 &6378906998207763966
 GameObject:
   m_ObjectHideFlags: 0
@@ -1072,6 +1214,7 @@ GameObject:
   - component: {fileID: 4484400672558884528}
   - component: {fileID: 6773022167733027065}
   - component: {fileID: 6130008617578577167}
+  - component: {fileID: 8619832011045430632}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Fuera
@@ -1124,6 +1267,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &8619832011045430632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8064146073388317226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7e618194ecfd34b854890384d81644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto1_0
 --- !u!1 &8139560662992251648
 GameObject:
   m_ObjectHideFlags: 0
@@ -1349,6 +1504,7 @@ GameObject:
   - component: {fileID: 1138370790163717412}
   - component: {fileID: 7852744386390048840}
   - component: {fileID: 7898697488479025407}
+  - component: {fileID: 6925160343886327314}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Fuera
@@ -1401,6 +1557,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &6925160343886327314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8559670221605265582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7e618194ecfd34b854890384d81644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto1_0
 --- !u!1 &8862157339364907411
 GameObject:
   m_ObjectHideFlags: 0
@@ -1412,6 +1580,7 @@ GameObject:
   - component: {fileID: 2227873752894315142}
   - component: {fileID: 4820058362619702149}
   - component: {fileID: 313915804377908943}
+  - component: {fileID: 5828576046480873021}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Fuera
@@ -1464,3 +1633,15 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &5828576046480873021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8862157339364907411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7e618194ecfd34b854890384d81644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CocheContacto1_0

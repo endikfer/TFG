@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
@@ -37,48 +38,65 @@ public class Agente1_0 : Agent
 
     private void Start()
     {
-        // El circuito ya está cargado, así que el Manager existe
         _checkpointManager = CheckPointsManager1_0.Instance;
 
         if (_checkpointManager == null)
         {
-            Debug.LogError("[Agente4] CheckPointsManager3 no encontrado. ¿Se cargó el circuito antes que el agente?");
+            Debug.LogError("[Agente1_0] CheckPointsManager1_0 no encontrado.");
             return;
         }
 
-        // CarController está en este mismo GameObject o en sus hijos
         _prometeoCarController = GetComponentInChildren<CarController>();
 
         if (_prometeoCarController == null)
         {
-            Debug.LogError("[Agente4] CarController no encontrado en el coche.");
+            Debug.LogError("[Agente1_0] CarController no encontrado.");
             return;
         }
 
-        // Punto de spawn: busca un GameObject con Tag "SpawnPoint" en la escena
-        GameObject spawnObj = GameObject.FindWithTag("SpawnPoint");
-        if (spawnObj != null)
-            spawnPoint = spawnObj.transform;
-        else
-            Debug.LogWarning("[Agente4] No se encontró ningún GameObject con Tag 'SpawnPoint'. Se usará la posición inicial del agente.");
+        // Suscribirse al evento del circuito para buscar el spawnPoint
+        // cuando la pieza inicial ya esté instanciada
+        CircuitoEventos.OnCircuitoListoParaAgente += OnCircuitoListo;
 
-        // Suscribirse al evento de checkpoint
         _checkpointManager.reachedCheckpoint += OnCheckpointReached;
 
         _isInitialized = true;
-
-        // Avisar a CheckPoint2, Meta4, CocheContacto5 de que el agente ya existe
         OnAgentReady?.Invoke();
     }
 
     private void OnDestroy()
     {
-        // Limpiar suscripción y singleton al destruirse
+        CircuitoEventos.OnCircuitoListoParaAgente -= OnCircuitoListo;
+
         if (_checkpointManager != null)
             _checkpointManager.reachedCheckpoint -= OnCheckpointReached;
 
         if (Instance == this)
             Instance = null;
+    }
+
+    private void OnCircuitoListo(List<PiezaCircuito> piezasOrdenadas)
+    {
+        // La primera pieza es la de inicio, buscamos "Posiciones de salida/P1" dentro de ella
+        if (piezasOrdenadas.Count == 0) return;
+
+        Transform posicionesSalida = piezasOrdenadas[0].transform.Find("Posiciones de salida");
+
+        if (posicionesSalida == null)
+        {
+            Debug.LogError("[Agente1_0] No se encontró 'Posiciones de salida' en la pieza inicial.");
+            return;
+        }
+
+        spawnPoint = posicionesSalida.Find("P1");
+
+        if (spawnPoint == null)
+            Debug.LogError("[Agente1_0] No se encontró 'P1' dentro de 'Posiciones de salida'.");
+        else
+            Debug.Log($"[Agente1_0] SpawnPoint encontrado: {spawnPoint.position}");
+
+        // Desuscribirse, solo necesitamos esto una vez
+        CircuitoEventos.OnCircuitoListoParaAgente -= OnCircuitoListo;
     }
 
     private void Update()

@@ -716,7 +716,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb3fbaa4f5a2c444b9fa4c8abbf3c505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Generador2
-  piezaInicio: {fileID: 9157480982346368704, guid: 2fa141906fa0cbf42919c9f8dfeed4b3, type: 3}
   piezas:
   - {fileID: 50269816503587801, guid: 9be89bb432b73674cb378c26e9508605, type: 3}
   - {fileID: 3779659893276070837, guid: 2ad6ed0d03e2f7d4ca3f0b9c1c4992be, type: 3}
