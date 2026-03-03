@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class CheckPointsManager1_0 : MonoBehaviour
 {
-    // ─── SINGLETON: se registra solo al cargarse el circuito ───
+    // ─── SINGLETON ───
     public static CheckPointsManager1_0 Instance { get; private set; }
 
-    // El agente se busca dinámicamente cuando llega (NO desde el Inspector)
     private Agente1_0 kartAgent;
 
     public CheckPoint1_0 nextCheckPointToReach { get; private set; }
@@ -15,61 +14,89 @@ public class CheckPointsManager1_0 : MonoBehaviour
     public float distanceMaxToNext { get; private set; }
 
     private int CurrentCheckpointIndex;
-    private List<CheckPoint1_0> Checkpoints;
+    private List<CheckPoint1_0> Checkpoints = new List<CheckPoint1_0>();
 
-    // checkpp SÍ se puede asignar en el Inspector (es parte del circuito,
-    // carga al mismo tiempo que este script)
-    [SerializeField] public CheckPoints1_0 checkpp;
+    // checkpp sigue existiendo para que CheckPoint1_0 y Agente1_0 accedan a la lista
+    public CheckPoints1_0 checkpp;
 
     private CheckPoint1_0 lastCheckpoint;
     public event Action<CheckPoint1_0> reachedCheckpoint;
 
+    private bool _circuitoListo = false;
+
     private void Awake()
     {
-        // Registrarse como singleton en cuanto el circuito carga
         Instance = this;
-
-        for (int i = 0; i < checkpp.checkPoints.Count; i++)
-            checkpp.checkPoints[i].checkpointID = i;
     }
 
     private void Start()
     {
-        Checkpoints = checkpp.checkPoints;
-        ResetCheckpoints();
+        // Suscribirse al evento del generador
+        CircuitoEventos.OnCircuitoListoParaAgente += OnCircuitoListo;
 
-        // Si el agente ya existe (caso raro), enlazarlo directamente
+        // Suscribirse al agente cuando llegue
         if (Agente1_0.Instance != null)
             OnAgentReady();
         else
-            // Si el agente aún no ha cargado, esperar su evento
             Agente1_0.OnAgentReady += OnAgentReady;
     }
 
     private void OnDestroy()
     {
+        CircuitoEventos.OnCircuitoListoParaAgente -= OnCircuitoListo;
         Agente1_0.OnAgentReady -= OnAgentReady;
 
         if (Instance == this)
             Instance = null;
     }
 
-    // Llamado cuando el Agente ya está en escena y listo
+    // ─── Llamado cuando el generador termina el circuito ───
+    private void OnCircuitoListo(List<PiezaCircuito> piezasOrdenadas)
+    {
+        // Recorrer las piezas EN ORDEN y recoger sus checkpoints
+        List<CheckPoint1_0> checkpointsOrdenados = new List<CheckPoint1_0>();
+
+        foreach (PiezaCircuito pieza in piezasOrdenadas)
+        {
+            // GetComponentsInChildren respeta el orden de jerarquía del prefab
+            CheckPoint1_0[] checkpointsDePieza = pieza.GetComponentsInChildren<CheckPoint1_0>();
+            checkpointsOrdenados.AddRange(checkpointsDePieza);
+        }
+
+        // Asignar IDs en orden
+        for (int i = 0; i < checkpointsOrdenados.Count; i++)
+            checkpointsOrdenados[i].checkpointID = i;
+
+        // Guardar en checkpp para que el resto del sistema lo use igual que antes
+        checkpp.checkPoints = checkpointsOrdenados;
+
+        _circuitoListo = true;
+
+        Debug.Log($"[CheckPointsManager] Circuito listo: {checkpointsOrdenados.Count} checkpoints registrados.");
+
+        // Inicializar la carrera
+        Checkpoints = checkpp.checkPoints;
+        ResetCheckpoints();
+
+        // Si el agente ya estaba listo, calcular distancia inicial
+        if (kartAgent != null)
+            distanceMaxToNext = Vector3.Distance(kartAgent.transform.position, nextCheckPointToReach.transform.position);
+    }
+
     private void OnAgentReady()
     {
         kartAgent = Agente1_0.Instance;
-        Agente1_0.OnAgentReady -= OnAgentReady; // desuscribirse
+        Agente1_0.OnAgentReady -= OnAgentReady;
 
-        // Ahora sí podemos calcular la distancia inicial
-        distanceMaxToNext = Vector3.Distance(kartAgent.transform.position, nextCheckPointToReach.transform.position);
+        if (_circuitoListo && nextCheckPointToReach != null)
+            distanceMaxToNext = Vector3.Distance(kartAgent.transform.position, nextCheckPointToReach.transform.position);
     }
 
     private void Update()
     {
-        if (kartAgent == null || nextCheckPointToReach == null) return;
+        if (!_circuitoListo || kartAgent == null || nextCheckPointToReach == null) return;
 
         distance = Vector3.Distance(kartAgent.transform.position, nextCheckPointToReach.transform.position);
-        Debug.Log("Indice de checkpoint actual: " + CurrentCheckpointIndex);
     }
 
     public void ResetCheckpoints()

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PiezaCircuito : MonoBehaviour
 {
-    public enum TipoPieza { Recta, CurvaIzquierda, CurvaDerecha }
+    public enum TipoPieza { Recta, CurvaIzquierda, CurvaDerecha, Inicio }
     public TipoPieza tipo;
 
     [Header("Puntos de la pieza")]

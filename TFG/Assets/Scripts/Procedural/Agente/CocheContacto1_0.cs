@@ -2,24 +2,22 @@ using UnityEngine;
 
 public class CocheContacto1_0 : MonoBehaviour
 {
-    // Este script está en el coche, que carga después del circuito.
-    // El agente está en el mismo GameObject o en su padre → búsqueda local, coste cero.
     private Agente1_0 karAgent;
 
-    private void Awake()
+    private void OnEnable()
     {
-        // Primero intenta en el mismo GameObject y sus padres/hijos (coste mínimo)
-        karAgent = GetComponentInParent<Agente1_0>();
+        Agente1_0.OnAgentReady += OnAgentReady;
+    }
 
-        if (karAgent == null)
-            karAgent = GetComponentInChildren<Agente1_0>();
+    private void OnDestroy()
+    {
+        Agente1_0.OnAgentReady -= OnAgentReady;
+    }
 
-        // Si por alguna razón no está en la jerarquía local, usar el singleton
-        if (karAgent == null)
-            karAgent = Agente1_0.Instance;
-
-        if (karAgent == null)
-            Debug.LogError("[CocheContacto5] No se encontró Agente4.");
+    private void OnAgentReady()
+    {
+        karAgent = Agente1_0.Instance;
+        Agente1_0.OnAgentReady -= OnAgentReady;
     }
 
     private void OnCollisionEnter(Collision col)

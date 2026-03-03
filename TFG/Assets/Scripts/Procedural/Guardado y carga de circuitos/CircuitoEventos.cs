@@ -16,15 +16,29 @@ public static class CircuitoEventos
     public static event Action<List<PiezaCircuito>, float> OnCircuitoCargado;
 
     /// <summary>
-    /// Llamado por el Generador2 al confirmar el cierre del circuito.
+    /// Se dispara cuando el circuito está listo para el entrenamiento.
+    /// Devuelve la lista ordenada de piezas para que el Manager construya los checkpoints.
     /// </summary>
+    public static event Action<List<PiezaCircuito>> OnCircuitoListoParaAgente;
+
     public static void NotificarCircuitoCerrado(List<PiezaCircuito> piezas, float distanciaTotal)
     {
         OnCircuitoCerrado?.Invoke(piezas, distanciaTotal);
+
+        // Tras cerrar, avisar también al sistema de checkpoints/agente
+        NotificarCircuitoListoParaAgente(piezas);
     }
 
     public static void NotificarCircuitoCargado(List<PiezaCircuito> piezas, float distanciaTotal)
     {
         OnCircuitoCargado?.Invoke(piezas, distanciaTotal);
+    }
+
+    /// <summary>
+    /// Llamado por el Generador2 tras cerrar el circuito, para avisar al CheckPointsManager.
+    /// </summary>
+    public static void NotificarCircuitoListoParaAgente(List<PiezaCircuito> piezas)
+    {
+        OnCircuitoListoParaAgente?.Invoke(piezas);
     }
 }
