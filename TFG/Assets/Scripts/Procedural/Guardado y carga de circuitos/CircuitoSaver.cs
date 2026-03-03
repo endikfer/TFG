@@ -30,6 +30,8 @@ public class CircuitoSaver : MonoBehaviour
     [Tooltip("Texto que aparece cuando el nombre ya está en uso.")]
     public TMP_Text textoError;
 
+    public Button botonCerrarPanel;
+
     [Header("Debug")]
     public bool mostrarLogs = true;
 
@@ -67,6 +69,11 @@ public class CircuitoSaver : MonoBehaviour
 
         // Asegurarse de que el panel empieza oculto
         panelGuardado.SetActive(false);
+
+        botonCerrarPanel.onClick.AddListener(() =>
+        {
+            panelGuardado.SetActive(false);
+        });
 
         if (mostrarLogs)
             Debug.Log($"📁 Ruta de guardado activa:\n   {ObtenerDirectorioBase()}");
