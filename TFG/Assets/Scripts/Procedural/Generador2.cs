@@ -28,7 +28,22 @@ public class Generador2 : MonoBehaviour
     public int maxReintentosGlobales = 5; // Reintentos completos desde cero
 
     [Header("Reglas de variedad")]
-    public int maxCurvasConsecutivas = 3;
+    [Tooltip("Máximo de curvas del mismo tipo completamente seguidas (sin ninguna recta entre ellas).")]
+    public int maxCurvasConsecutivas = 2;
+
+    [Tooltip("Máximo de curvas del mismo tipo dentro de la racha activa (pueden tener rectas entre ellas). " +
+             "La racha se resetea cuando aparece una curva del tipo contrario.")]
+    public int maxCurvasIntercaladas = 3;
+
+    [Header("Probabilidades base")]
+    [Tooltip("Probabilidad base de elegir una pieza recta.")]
+    [Range(0f, 1f)] public float baseRectaProb = 0.6f;
+
+    [Tooltip("Probabilidad base de elegir una curva a la izquierda.")]
+    [Range(0f, 1f)] public float baseCurvaIzqProb = 0.2f;
+
+    [Tooltip("Probabilidad base de elegir una curva a la derecha.")]
+    [Range(0f, 1f)] public float baseCurvaDerProb = 0.2f;
 
     [Header("Debug")]
     public bool mostrarDebugGizmos = true;
@@ -266,6 +281,11 @@ public class Generador2 : MonoBehaviour
         }
         primeraPieza.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
         piezasColocadas.Add(primeraPieza);
+
+        Debug.Log($"puntoEntrada world pos: {primeraPieza.puntoEntrada.position}");
+        Debug.Log($"puntoEntrada world right: {primeraPieza.puntoEntrada.right}");
+        Debug.Log($"puntoSalida world pos: {primeraPieza.puntoSalida.position}");
+        Debug.Log($"puntoSalida world right: {primeraPieza.puntoSalida.right}");
 
         // Guardamos inicio para referencia en fase 2
         posicionInicial = primeraPieza.puntoEntrada.position;
@@ -620,46 +640,181 @@ public class Generador2 : MonoBehaviour
     }
 
     /// <summary>
-    /// Elige pieza aleatoria respetando reglas de variedad
+    /// Elige pieza aleatoria respetando tres reglas de variedad:
+    ///
+    /// REGLA 1 - CONSECUTIVAS (maxCurvasConsecutivas):
+    ///   Límite duro de curvas del mismo tipo completamente seguidas sin ninguna recta.
+    ///   Ejemplo con límite 2: IZQ-IZQ → bloquea IZQ.
+    ///
+    /// REGLA 2 - INTERCALADAS (maxCurvasIntercaladas):
+    ///   Límite duro dentro de la racha activa (rectas no la rompen, la curva contraria sí).
+    ///   Ejemplo con límite 3: IZQ-RECTA-IZQ-RECTA-IZQ → bloquea IZQ.
+    ///
+    /// REGLA 3 - PATRÓN 2+1 INTERCALADA:
+    ///   Si dentro de la racha activa hay 3 curvas del mismo tipo Y en algún momento
+    ///   hubo 2 seguidas (IZQ-IZQ-RECTA-IZQ o IZQ-RECTA-IZQ-IZQ), la siguiente pieza
+    ///   DEBE ser obligatoriamente la curva del lado contrario (ni recta ni mismo lado).
+    ///
+    /// PROBABILIDADES: base configurables por tipo, bloqueadas a 0 si aplica alguna regla.
     /// </summary>
     PiezaCircuito ElegirPiezaAleatoria()
     {
-        // Contar curvas consecutivas
-        int curvasConsecutivas = 0;
-        PiezaCircuito.TipoPieza ultimoTipo = PiezaCircuito.TipoPieza.Recta;
+        bool bloquearIzq = false;
+        bool bloquearDer = false;
+        bool bloquearRecta = false; // solo se activa con la Regla 3
 
         if (piezasColocadas.Count > 0)
         {
-            ultimoTipo = piezasColocadas[piezasColocadas.Count - 1].tipo;
+            // ── REGLA 1: CONSECUTIVAS ──────────────────────────────────────────────
+            // Recorre hacia atrás hasta encontrar algo que no sea curva del mismo tipo.
+            int consecIzq = 0;
+            int consecDer = 0;
 
-            if (ultimoTipo != PiezaCircuito.TipoPieza.Recta)
+            for (int i = piezasColocadas.Count - 1; i >= 0; i--)
             {
-                for (int i = piezasColocadas.Count - 1; i >= 0; i--)
+                var t = piezasColocadas[i].tipo;
+                if (t == PiezaCircuito.TipoPieza.CurvaIzquierda) consecIzq++;
+                else if (t == PiezaCircuito.TipoPieza.CurvaDerecha) consecDer++;
+                else break;
+            }
+
+            if (consecIzq >= maxCurvasConsecutivas) bloquearIzq = true;
+            if (consecDer >= maxCurvasConsecutivas) bloquearDer = true;
+
+            // ── REGLA 2 + REGLA 3: recorrer la racha activa ───────────────────────
+            // Recorremos hacia atrás reconstruyendo la secuencia de la racha activa
+            // (desde la última pieza hasta encontrar la curva del tipo contrario).
+            // De ese recorrido extraemos:
+            //   - intercaladasIzq / intercaladasDer  → para Regla 2
+            //   - maxConsecEnRachaIzq / Der           → para Regla 3 (máximo de consecutivas dentro de la racha)
+            int intercaladasIzq = 0;
+            int intercaladasDer = 0;
+            int maxConsecEnRachaIzq = 0; // mayor bloque de IZQ seguidas dentro de la racha
+            int maxConsecEnRachaDer = 0;
+            int bloqueActualIzq = 0; // contador del bloque consecutivo en curso
+            int bloqueActualDer = 0;
+            bool rachaCerradaIzq = false;
+            bool rachaCerradaDer = false;
+
+            for (int i = piezasColocadas.Count - 1; i >= 0; i--)
+            {
+                var t = piezasColocadas[i].tipo;
+
+                if (t == PiezaCircuito.TipoPieza.CurvaIzquierda)
                 {
-                    if (piezasColocadas[i].tipo == ultimoTipo)
-                        curvasConsecutivas++;
-                    else
-                        break;
+                    if (rachaCerradaIzq) break; // curva contraria encontrada antes → fin de racha
+
+                    intercaladasIzq++;
+                    bloqueActualIzq++;
+                    if (bloqueActualIzq > maxConsecEnRachaIzq)
+                        maxConsecEnRachaIzq = bloqueActualIzq;
+
+                    // Una izquierda cierra cualquier bloque consecutivo de derechas
+                    bloqueActualDer = 0;
+                    rachaCerradaDer = true;
                 }
+                else if (t == PiezaCircuito.TipoPieza.CurvaDerecha)
+                {
+                    if (rachaCerradaDer) break; // curva contraria encontrada antes → fin de racha
+
+                    intercaladasDer++;
+                    bloqueActualDer++;
+                    if (bloqueActualDer > maxConsecEnRachaDer)
+                        maxConsecEnRachaDer = bloqueActualDer;
+
+                    bloqueActualIzq = 0;
+                    rachaCerradaIzq = true;
+                }
+                else
+                {
+                    // Recta: rompe el bloque consecutivo en curso pero NO cierra la racha
+                    bloqueActualIzq = 0;
+                    bloqueActualDer = 0;
+                }
+            }
+
+            // Regla 2: límite de intercaladas
+            if (intercaladasIzq >= maxCurvasIntercaladas) bloquearIzq = true;
+            if (intercaladasDer >= maxCurvasIntercaladas) bloquearDer = true;
+
+            // Regla 3: patrón 2 consecutivas + 1 intercalada (total 3 en racha con bloque ≥ 2)
+            // Se activa cuando: intercaladas == 3 Y hubo algún bloque de 2 seguidas dentro de la racha.
+            // En ese caso la siguiente pieza DEBE ser la curva contraria (ni recta ni mismo lado).
+            bool patron2mas1Izq = (intercaladasIzq == 3 && maxConsecEnRachaIzq >= 2);
+            bool patron2mas1Der = (intercaladasDer == 3 && maxConsecEnRachaDer >= 2);
+
+            if (patron2mas1Izq)
+            {
+                bloquearIzq = true;
+                bloquearRecta = true; // solo se permite curva derecha
+                if (mostrarLogs)
+                    Debug.Log("🔒 Regla 3 activa (patrón IZQ): siguiente pieza debe ser DERE.");
+            }
+
+            if (patron2mas1Der)
+            {
+                bloquearDer = true;
+                bloquearRecta = true; // solo se permite curva izquierda
+                if (mostrarLogs)
+                    Debug.Log("🔒 Regla 3 activa (patrón DER): siguiente pieza debe ser IZQ.");
             }
         }
 
-        // Filtrar piezas disponibles
-        List<PiezaCircuito> disponibles = new List<PiezaCircuito>();
+        // ── PROBABILIDADES: aplicar bloqueos y normalizar ─────────────────────────
+        float probRecta = bloquearRecta ? 0f : baseRectaProb;
+        float probIzq = bloquearIzq ? 0f : baseCurvaIzqProb;
+        float probDer = bloquearDer ? 0f : baseCurvaDerProb;
 
-        foreach (var pieza in piezas)
+        float total = probRecta + probIzq + probDer;
+
+        // Fallback: si todo sigue bloqueado (no debería ocurrir), forzar recta
+        if (total <= 0f)
         {
-            // Si hay demasiadas curvas del mismo tipo, evitarlas
-            if (curvasConsecutivas >= maxCurvasConsecutivas && pieza.tipo == ultimoTipo)
-                continue;
+            if (mostrarLogs)
+                Debug.LogWarning("⚠️ ElegirPiezaAleatoria: todos los tipos bloqueados, forzando recta.");
 
-            disponibles.Add(pieza);
+            foreach (var p in piezas)
+                if (p.tipo == PiezaCircuito.TipoPieza.Recta) return p;
+
+            return piezas[0];
         }
 
-        if (disponibles.Count == 0)
-            disponibles.AddRange(piezas); // Fallback
+        // Ruleta de probabilidades normalizadas
+        float r = Random.value * total;
+        PiezaCircuito.TipoPieza tipoElegido;
 
-        return disponibles[Random.Range(0, disponibles.Count)];
+        if (r < probRecta) tipoElegido = PiezaCircuito.TipoPieza.Recta;
+        else if (r < probRecta + probIzq) tipoElegido = PiezaCircuito.TipoPieza.CurvaIzquierda;
+        else tipoElegido = PiezaCircuito.TipoPieza.CurvaDerecha;
+
+        // Buscar prefab del tipo elegido
+        List<PiezaCircuito> candidatos = new List<PiezaCircuito>();
+        foreach (var p in piezas)
+            if (p.tipo == tipoElegido) candidatos.Add(p);
+
+        if (candidatos.Count == 0)
+        {
+            // No hay prefab de ese tipo concreto, tomar cualquiera no bloqueado
+            foreach (var p in piezas)
+            {
+                if (bloquearRecta && p.tipo == PiezaCircuito.TipoPieza.Recta) continue;
+                if (bloquearIzq && p.tipo == PiezaCircuito.TipoPieza.CurvaIzquierda) continue;
+                if (bloquearDer && p.tipo == PiezaCircuito.TipoPieza.CurvaDerecha) continue;
+                candidatos.Add(p);
+            }
+        }
+
+        if (candidatos.Count == 0)
+            candidatos.AddRange(piezas); // Fallback absoluto
+
+        if (mostrarLogs)
+        {
+            Debug.Log($"ElegirPieza → tipo={tipoElegido} | " +
+                      $"bloqIzq={bloquearIzq} bloqDer={bloquearDer} bloqRecta={bloquearRecta} | " +
+                      $"probs=[R:{probRecta:F2} I:{probIzq:F2} D:{probDer:F2}]");
+        }
+
+        return candidatos[Random.Range(0, candidatos.Count)];
     }
 
     /// <summary>

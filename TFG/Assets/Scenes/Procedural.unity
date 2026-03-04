@@ -716,7 +716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb3fbaa4f5a2c444b9fa4c8abbf3c505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Generador2
-  piezaInicio: {fileID: 0}
+  piezaInicio: {fileID: 9157480982346368704, guid: 2fa141906fa0cbf42919c9f8dfeed4b3, type: 3}
   piezas:
   - {fileID: 50269816503587801, guid: 9be89bb432b73674cb378c26e9508605, type: 3}
   - {fileID: 3779659893276070837, guid: 2ad6ed0d03e2f7d4ca3f0b9c1c4992be, type: 3}
@@ -724,13 +724,17 @@ MonoBehaviour:
   circuitoParent: {fileID: 295824684}
   distanciaObjetivo: 50
   porcentajeReservadoParaCierre: 40
-  toleranciaDistancia: 0
+  toleranciaDistancia: 0.5
   toleranciaAngulo: 0
   maxIntentosPorPieza: 15
   maxReintentosCierre: 40
   maxPiezasTotal: 200
   maxReintentosGlobales: 20
-  maxCurvasConsecutivas: 3
+  maxCurvasConsecutivas: 2
+  maxCurvasIntercaladas: 3
+  baseRectaProb: 0.6
+  baseCurvaIzqProb: 0.2
+  baseCurvaDerProb: 0.2
   mostrarDebugGizmos: 1
   mostrarLogs: 0
 --- !u!114 &384799895
