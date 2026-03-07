@@ -24,7 +24,7 @@ public class AgenteSpawn : MonoBehaviour
         Vector3 pos = spawnPoint != null ? spawnPoint.position : Vector3.zero;
         Quaternion rot = spawnPoint != null ? spawnPoint.rotation : Quaternion.identity;
 
-        Instantiate(cochePrefab, pos, rot);
+        //Instantiate(cochePrefab, pos, rot);
 
         // Desuscribirse, solo instanciamos una vez
         CircuitoEventos.OnCircuitoListoParaAgente -= OnCircuitoListo;
