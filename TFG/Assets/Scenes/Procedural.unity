@@ -682,6 +682,7 @@ GameObject:
   - component: {fileID: 384799895}
   - component: {fileID: 384799896}
   - component: {fileID: 384799897}
+  - component: {fileID: 384799898}
   m_Layer: 0
   m_Name: CircuitoManager
   m_TagString: Untagged
@@ -797,6 +798,20 @@ MonoBehaviour:
   textoEstado: {fileID: 887595033}
   botonCerrarPanel: {fileID: 741420385}
   carpetaGuardado: Circuitos
+  mostrarLogs: 1
+--- !u!114 &384799898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384799891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792e2b8badc457a488c0d13f6cf67a86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CircuitoInicializador
+  cochePrefab: {fileID: 642287924342879162, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
   mostrarLogs: 1
 --- !u!1 &393895610
 GameObject:
@@ -2709,10 +2724,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f6d3ff905719c845a4a6404bc4d4162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  carTransform: {fileID: 0}
   followSpeed: 2
   lookSpeed: 5
-  offset: {x: 0, y: 5, z: -10}
+  offset: {x: 0, y: 0.5, z: -1}
 --- !u!1 &1417225910
 GameObject:
   m_ObjectHideFlags: 0

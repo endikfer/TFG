@@ -1,16 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CameraFollow : MonoBehaviour {
+public class CameraFollow : MonoBehaviour
+{
+    // Ya NO se asigna desde el Inspector: se carga dinámicamente cuando el agente está listo
+    private Transform carTransform;
 
-	public Transform carTransform;
-	[Range(1, 10)]
-	public float followSpeed = 2;
-	[Range(1, 10)]
-	public float lookSpeed = 5;
+    [Range(1, 10)]
+    public float followSpeed = 2;
+    [Range(1, 10)]
+    public float lookSpeed = 5;
 
     public Vector3 offset = new Vector3(0f, 5f, -10f);
+
+    private void Start()
+    {
+        // Si el agente ya existe en escena, enlazarlo directamente
+        if (Agente1_0.Instance != null)
+            OnAgentReady();
+        else
+            Agente1_0.OnAgentReady += OnAgentReady;
+    }
+
+    private void OnDestroy()
+    {
+        Agente1_0.OnAgentReady -= OnAgentReady;
+    }
+
+    private void OnAgentReady()
+    {
+        carTransform = Agente1_0.Instance.transform;
+        Agente1_0.OnAgentReady -= OnAgentReady;
+
+        Debug.Log("[CameraFollow] Transform del coche cargado dinámicamente.");
+    }
 
     void LateUpdate()
     {
@@ -26,5 +48,4 @@ public class CameraFollow : MonoBehaviour {
         Quaternion targetRotation = Quaternion.LookRotation(carTransform.position - transform.position);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, lookSpeed * Time.deltaTime);
     }
-
 }
