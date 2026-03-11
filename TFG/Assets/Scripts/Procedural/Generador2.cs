@@ -45,6 +45,15 @@ public class Generador2 : MonoBehaviour
     [Tooltip("Probabilidad base de elegir una curva a la derecha.")]
     [Range(0f, 1f)] public float baseCurvaDerProb = 0.2f;
 
+    [Header("Grid de ocupación espacial")]
+    [Tooltip("Referencia al componente GridOcupacion. Añadir en el mismo GameObject o asignar manualmente.")]
+    public GridOcupacion grid;
+
+    [Tooltip("Radio en unidades mundo alrededor del puntoEntrada de la pieza inicial " +
+             "que se deja sin marcar en el grid. Permite que la última pieza de cierre " +
+             "pueda conectar sin ser rechazada. Recomendado: ancho de pieza * 0.75")]
+    public float radioExclusionCierre = 1.5f;
+
     [Header("Debug")]
     public bool mostrarDebugGizmos = true;
     public bool mostrarLogs = true;
@@ -66,6 +75,13 @@ public class Generador2 : MonoBehaviour
 
     void Start()
     {
+        // Si no se asignó el grid en el Inspector, buscarlo en el mismo GameObject
+        if (grid == null)
+            grid = GetComponent<GridOcupacion>();
+
+        if (grid == null)
+            Debug.LogWarning("⚠️ Generador2: no se encontró GridOcupacion. El sistema de grid está desactivado.");
+
         StartCoroutine(GenerarCircuitoConReintentos());
     }
 
@@ -126,6 +142,10 @@ public class Generador2 : MonoBehaviour
         distanciaAcumulada = 0f;
         combinacionesIntentadas.Clear();
         intentosCierreSinProgreso = 0;
+
+        // Limpiar el grid de ocupación
+        if (grid != null)
+            grid.Limpiar();
 
         Debug.Log("🧹 Estado limpiado para nuevo intento");
     }
@@ -282,6 +302,10 @@ public class Generador2 : MonoBehaviour
         primeraPieza.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
         piezasColocadas.Add(primeraPieza);
 
+        // Marcar la pieza inicial en el grid con exclusión de zona de cierre
+        if (grid != null)
+            grid.MarcarPiezaInicial(primeraPieza, radioExclusionCierre);
+
         Debug.Log($"puntoEntrada world pos: {primeraPieza.puntoEntrada.position}");
         Debug.Log($"puntoEntrada world right: {primeraPieza.puntoEntrada.right}");
         Debug.Log($"puntoSalida world pos: {primeraPieza.puntoSalida.position}");
@@ -319,14 +343,23 @@ public class Generador2 : MonoBehaviour
                 // Alinear con la última pieza colocada
                 AlinearPieza(nuevaPieza, piezasColocadas[piezasColocadas.Count - 1]);
 
-                // Verificar si se puede colocar sin colisiones
-                if (PuedeColocar(nuevaPieza))
+                // Verificar colisiones físicas
+                bool puedeColocarFisica = PuedeColocar(nuevaPieza);
+
+                // Verificar grid de ocupación (filtro previo anti-solapamiento)
+                bool puedeColocarGrid = (grid == null) || grid.EstaLibre(nuevaPieza, piezasColocadas[piezasColocadas.Count - 1]);
+
+                if (puedeColocarFisica && puedeColocarGrid)
                 {
                     nuevaPieza.gameObject.SetActive(true);
                     piezasColocadas.Add(nuevaPieza);
                     distanciaAcumulada += nuevaPieza.longitud;
                     piezasGeneradas++;
                     colocada = true;
+
+                    // Marcar en el grid
+                    if (grid != null)
+                        grid.MarcarPieza(nuevaPieza);
 
                     if (mostrarLogs && piezasGeneradas % 10 == 0)
                     {
@@ -447,17 +480,24 @@ public class Generador2 : MonoBehaviour
 
                 bool puedeColocar = PuedeColocar(nuevaPieza);
 
+                // Verificar grid de ocupación (anti-solapamiento con todo el circuito)
+                bool puedeColocarGrid = (grid == null) || grid.EstaLibre(nuevaPieza, piezasColocadas[piezasColocadas.Count - 1]);
+
                 // Si vamos a pasarnos de distancia con esta pieza, comprobar si cierra
                 bool vamosAPasarnos = (distanciaAcumulada + nuevaPieza.longitud) > distanciaObjetivo;
                 bool cierra = vamosAPasarnos ? CircuitoCierra(nuevaPieza) : true;
 
-                if (puedeColocar && cierra)
+                if (puedeColocar && puedeColocarGrid && cierra)
                 {
                     nuevaPieza.gameObject.SetActive(true);
                     piezasColocadas.Add(nuevaPieza);
                     distanciaAcumulada += nuevaPieza.longitud;
                     colocada = true;
-                    intentosCierreSinProgreso = 0; // Resetear contador de sin progreso
+                    intentosCierreSinProgreso = 0;
+
+                    // Marcar en el grid
+                    if (grid != null)
+                        grid.MarcarPieza(nuevaPieza);
 
                     // Si el circuito cerró, ¡éxito!
                     if (CircuitoCierra(nuevaPieza))
@@ -877,6 +917,10 @@ public class Generador2 : MonoBehaviour
 
             distanciaEliminada += pieza.longitud;
             distanciaAcumulada -= pieza.longitud;
+
+            // Desmarcar del grid antes de destruir
+            if (grid != null)
+                grid.DesmarcarPieza(pieza);
 
             Destroy(pieza.gameObject);
             piezasColocadas.RemoveAt(idx);

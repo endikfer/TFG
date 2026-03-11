@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 2253488793268358447}
   - component: {fileID: 4594634550457901801}
   - component: {fileID: 1382046119429310496}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: start_line_spa (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -816,7 +816,7 @@ GameObject:
   - component: {fileID: 4313886743999871238}
   - component: {fileID: 7187853000016558398}
   - component: {fileID: 3506818063758839720}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: startlights_body001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -976,7 +976,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4668653994507302268}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Semaforo_de_salida
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1012,7 +1012,7 @@ GameObject:
   - component: {fileID: 1870578579957764798}
   - component: {fileID: 2503684055974005359}
   - component: {fileID: 8532329754078942053}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: startlight_pole_extention001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1102,7 +1102,7 @@ GameObject:
   - component: {fileID: 7116912601073319756}
   - component: {fileID: 1427219611456677250}
   - component: {fileID: 364397218653705508}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: start_line_spa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1192,7 +1192,7 @@ GameObject:
   - component: {fileID: 8994455002290770884}
   - component: {fileID: 6054965113540661249}
   - component: {fileID: 5047338037711346882}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: startlight_pole001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1344,7 +1344,7 @@ GameObject:
   - component: {fileID: 4347801962773535894}
   - component: {fileID: 2137193644126716996}
   - component: {fileID: 5317144667528890148}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: prop_banner_pole002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
