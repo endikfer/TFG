@@ -1,12 +1,12 @@
 {
-    "nombre": "circuito_20260303_121542",
-    "fecha": "2026-03-03 12:15:42",
-    "distanciaTotal": 31.784215927124025,
+    "nombre": "circuito_11",
+    "fecha": "2026-03-12 11:43:57",
+    "distanciaTotal": 37.77753448486328,
     "numeroPiezas": 16,
     "piezas": [
         {
-            "tipo": "Recta",
-            "nombrePrefab": "Track_ Straight",
+            "tipo": "Inicio",
+            "nombrePrefab": "Track_ Inicio",
             "px": 0.0,
             "py": 0.0,
             "pz": 0.0,
@@ -25,121 +25,21 @@
             "rz": 0.0
         },
         {
-            "tipo": "CurvaIzquierda",
-            "nombrePrefab": "Track_ Corner_L",
-            "px": -2.000000476837158,
+            "tipo": "CurvaDerecha",
+            "nombrePrefab": "Track_ Corner_R",
+            "px": -0.5000004768371582,
             "py": 0.0,
-            "pz": 1.5,
-            "rx": 0.0,
-            "ry": 90.0,
-            "rz": 0.0
-        },
-        {
-            "tipo": "CurvaIzquierda",
-            "nombrePrefab": "Track_ Corner_L",
-            "px": -3.500000476837158,
-            "py": 0.0,
-            "pz": 3.000000476837158,
+            "pz": 3.0,
             "rx": 0.0,
             "ry": 0.0,
             "rz": 0.0
         },
         {
-            "tipo": "Recta",
-            "nombrePrefab": "Track_ Straight",
-            "px": -5.000000476837158,
-            "py": 0.0,
-            "pz": 0.9998664855957031,
-            "rx": 0.0,
-            "ry": 270.0,
-            "rz": 0.0
-        },
-        {
             "tipo": "CurvaIzquierda",
             "nombrePrefab": "Track_ Corner_L",
-            "px": -5.000000476837158,
+            "px": -0.5000004768371582,
             "py": 0.0,
-            "pz": 0.4998664855957031,
-            "rx": 0.0,
-            "ry": 270.0,
-            "rz": 0.0
-        },
-        {
-            "tipo": "CurvaIzquierda",
-            "nombrePrefab": "Track_ Corner_L",
-            "px": -3.5,
-            "py": 0.0,
-            "pz": -1.0001335144042969,
-            "rx": 0.0,
-            "ry": 180.0,
-            "rz": 0.0
-        },
-        {
-            "tipo": "Recta",
-            "nombrePrefab": "Track_ Straight",
-            "px": -2.0,
-            "py": 0.0,
-            "pz": 1.0000004768371583,
-            "rx": 0.0,
-            "ry": 90.0,
-            "rz": 0.0
-        },
-        {
-            "tipo": "CurvaIzquierda",
-            "nombrePrefab": "Track_ Corner_L",
-            "px": -2.0,
-            "py": 0.0,
-            "pz": 1.5000004768371583,
-            "rx": 0.0,
-            "ry": 90.0,
-            "rz": 0.0
-        },
-        {
-            "tipo": "CurvaDerecha",
-            "nombrePrefab": "Track_ Corner_R",
-            "px": -5.000000476837158,
-            "py": 0.0,
-            "pz": 4.500000953674316,
-            "rx": 0.0,
-            "ry": 270.0,
-            "rz": 0.0
-        },
-        {
-            "tipo": "CurvaDerecha",
-            "nombrePrefab": "Track_ Corner_R",
-            "px": -3.500000476837158,
-            "py": 0.0,
-            "pz": 6.000000953674316,
-            "rx": 0.0,
-            "ry": 0.0,
-            "rz": 0.0
-        },
-        {
-            "tipo": "CurvaDerecha",
-            "nombrePrefab": "Track_ Corner_R",
-            "px": -2.000000476837158,
-            "py": 0.0,
-            "pz": 4.500000476837158,
-            "rx": 0.0,
-            "ry": 90.0,
-            "rz": 0.0
-        },
-        {
-            "tipo": "CurvaIzquierda",
-            "nombrePrefab": "Track_ Corner_L",
-            "px": -2.000000476837158,
-            "py": 0.0,
-            "pz": 4.500000476837158,
-            "rx": 0.0,
-            "ry": 270.0,
-            "rz": 0.0
-        },
-        {
-            "tipo": "Recta",
-            "nombrePrefab": "Track_ Straight",
-            "px": 0.00013399124145507813,
-            "py": 0.0,
-            "pz": 3.000000476837158,
+            "pz": 3.0,
             "rx": 0.0,
             "ry": 180.0,
             "rz": 0.0
@@ -147,9 +47,39 @@
         {
             "tipo": "CurvaDerecha",
             "nombrePrefab": "Track_ Corner_R",
-            "px": 2.000133991241455,
+            "px": 2.499999523162842,
             "py": 0.0,
-            "pz": 1.5,
+            "pz": 6.0,
+            "rx": 0.0,
+            "ry": 0.0,
+            "rz": 0.0
+        },
+        {
+            "tipo": "Recta",
+            "nombrePrefab": "Track_ Straight",
+            "px": 3.000063419342041,
+            "py": 0.0,
+            "pz": 6.0,
+            "rx": 0.0,
+            "ry": 180.0,
+            "rz": 0.0
+        },
+        {
+            "tipo": "CurvaIzquierda",
+            "nombrePrefab": "Track_ Corner_L",
+            "px": 3.500133514404297,
+            "py": 0.0,
+            "pz": 6.0,
+            "rx": 0.0,
+            "ry": 180.0,
+            "rz": 0.0
+        },
+        {
+            "tipo": "Recta",
+            "nombrePrefab": "Track_ Straight",
+            "px": 5.000133514404297,
+            "py": 0.0,
+            "pz": 8.0000638961792,
             "rx": 0.0,
             "ry": 90.0,
             "rz": 0.0
@@ -157,9 +87,79 @@
         {
             "tipo": "CurvaDerecha",
             "nombrePrefab": "Track_ Corner_R",
-            "px": 0.5001339912414551,
+            "px": 6.500133514404297,
             "py": 0.0,
-            "pz": 0.0,
+            "pz": 10.000133514404297,
+            "rx": 0.0,
+            "ry": 0.0,
+            "rz": 0.0
+        },
+        {
+            "tipo": "CurvaDerecha",
+            "nombrePrefab": "Track_ Corner_R",
+            "px": 8.000133514404297,
+            "py": 0.0,
+            "pz": 8.500133514404297,
+            "rx": 0.0,
+            "ry": 90.0,
+            "rz": 0.0
+        },
+        {
+            "tipo": "CurvaIzquierda",
+            "nombrePrefab": "Track_ Corner_L",
+            "px": 8.000133514404297,
+            "py": 0.0,
+            "pz": 8.500133514404297,
+            "rx": 0.0,
+            "ry": 270.0,
+            "rz": 0.0
+        },
+        {
+            "tipo": "CurvaDerecha",
+            "nombrePrefab": "Track_ Corner_R",
+            "px": 11.000133514404297,
+            "py": 0.0,
+            "pz": 5.500133037567139,
+            "rx": 0.0,
+            "ry": 90.0,
+            "rz": 0.0
+        },
+        {
+            "tipo": "CurvaDerecha",
+            "nombrePrefab": "Track_ Corner_R",
+            "px": 9.500133514404297,
+            "py": 0.0,
+            "pz": 4.000133037567139,
+            "rx": 0.0,
+            "ry": 180.0,
+            "rz": 0.0
+        },
+        {
+            "tipo": "CurvaIzquierda",
+            "nombrePrefab": "Track_ Corner_L",
+            "px": 9.500133514404297,
+            "py": 0.0,
+            "pz": 4.000133037567139,
+            "rx": 0.0,
+            "ry": 0.0,
+            "rz": 0.0
+        },
+        {
+            "tipo": "Recta",
+            "nombrePrefab": "Track_ Straight",
+            "px": 8.000133514404297,
+            "py": 0.0,
+            "pz": 2.0000689029693605,
+            "rx": 0.0,
+            "ry": 270.0,
+            "rz": 0.0
+        },
+        {
+            "tipo": "CurvaDerecha",
+            "nombrePrefab": "Track_ Corner_R",
+            "px": 6.500133514404297,
+            "py": 0.0,
+            "pz": -0.0000011920928955078126,
             "rx": 0.0,
             "ry": 180.0,
             "rz": 0.0

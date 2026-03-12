@@ -32,6 +32,11 @@ public class CircuitoSaver : MonoBehaviour
 
     public Button botonCerrarPanel;
 
+    [Header("Modo lote")]
+    [Tooltip("Cuando está activo, el circuito se guarda automáticamente sin mostrar el panel de nombre. " +
+             "Se activa automáticamente desde Generador2 al iniciar la generación en lote.")]
+    public bool modoLoteActivo = false;
+
     [Header("Debug")]
     public bool mostrarLogs = true;
 
@@ -93,14 +98,22 @@ public class CircuitoSaver : MonoBehaviour
 
     private void HandleCircuitoCerrado(List<PiezaCircuito> piezas, float distanciaTotal)
     {
-        // Guardamos los datos y mostramos el panel para pedir nombre
+        // En modo lote: guardar automáticamente sin mostrar panel
+        if (modoLoteActivo)
+        {
+            string nombreAuto = GenerarNombreAutomatico();
+            GuardarCircuito(piezas, distanciaTotal, nombreAuto);
+            return;
+        }
+
+        // Modo normal: mostrar panel para que el usuario asigne nombre
         piezasPendientes = piezas;
         distanciaPendiente = distanciaTotal;
 
-        inputNombre.text = "";  // Limpiar el campo por si había texto anterior
-        if (textoError != null) textoError.gameObject.SetActive(false); // Ocultar error previo
+        inputNombre.text = "";
+        if (textoError != null) textoError.gameObject.SetActive(false);
         panelGuardado.SetActive(true);
-        inputNombre.Select(); // Poner el foco en el campo de texto directamente
+        inputNombre.Select();
     }
 
     // ── Confirmación del usuario ────────────────────────────────────────────
@@ -132,6 +145,29 @@ public class CircuitoSaver : MonoBehaviour
         if (textoError != null) textoError.gameObject.SetActive(false);
         panelGuardado.SetActive(false);
         GuardarCircuito(piezasPendientes, distanciaPendiente, nombre);
+    }
+
+    // ── Guardado automático (modo lote) ────────────────────────────────────
+
+    /// <summary>
+    /// Genera el siguiente nombre disponible con formato "circuito_N",
+    /// buscando el primer número que no esté ya en uso en la carpeta de guardado.
+    /// </summary>
+    private string GenerarNombreAutomatico()
+    {
+        string directorio = ObtenerDirectorioBase();
+        int numero = 1;
+
+        while (true)
+        {
+            string nombre = $"circuito_{numero}";
+            string ruta = Path.Combine(directorio, $"{nombre}.json");
+
+            if (!File.Exists(ruta))
+                return nombre;
+
+            numero++;
+        }
     }
 
     // ── Ruta de guardado ────────────────────────────────────────────────────

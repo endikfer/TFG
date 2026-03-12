@@ -54,9 +54,22 @@ public class Generador2 : MonoBehaviour
              "pueda conectar sin ser rechazada. Recomendado: ancho de pieza * 0.75")]
     public float radioExclusionCierre = 1.5f;
 
+    [Header("Modo lote")]
+    [Tooltip("Activa la generación y guardado automático de múltiples circuitos en secuencia.")]
+    public bool modoLote = false;
+
+    [Tooltip("Número de circuitos a generar y guardar automáticamente.")]
+    public int circuitosObjetivo = 30;
+
+    [Tooltip("Referencia al CircuitoSaver para activar el guardado automático en modo lote.")]
+    public CircuitoSaver circuitoSaver;
+
     [Header("Debug")]
     public bool mostrarDebugGizmos = true;
     public bool mostrarLogs = true;
+
+    // Contador interno de circuitos generados en el lote actual
+    private int circuitosGenerados = 0;
 
     // Estado interno
     private List<PiezaCircuito> piezasColocadas = new List<PiezaCircuito>();
@@ -82,7 +95,79 @@ public class Generador2 : MonoBehaviour
         if (grid == null)
             Debug.LogWarning("⚠️ Generador2: no se encontró GridOcupacion. El sistema de grid está desactivado.");
 
-        StartCoroutine(GenerarCircuitoConReintentos());
+        if (modoLote)
+            StartCoroutine(GenerarLote());
+        else
+            StartCoroutine(GenerarCircuitoConReintentos());
+    }
+
+    /// <summary>
+    /// Modo lote: genera y guarda automáticamente N circuitos en secuencia.
+    /// Activa el guardado automático en CircuitoSaver y lo desactiva al terminar.
+    /// </summary>
+    IEnumerator GenerarLote()
+    {
+        // Validaciones previas
+        if (circuitoSaver == null)
+        {
+            Debug.LogError("❌ Modo lote: no hay CircuitoSaver asignado. Asígnalo en el Inspector.");
+            yield break;
+        }
+
+        circuitosGenerados = 0;
+        circuitoSaver.modoLoteActivo = true;
+
+        Debug.Log($"🏭 MODO LOTE INICIADO: generando {circuitosObjetivo} circuitos...");
+
+        while (circuitosGenerados < circuitosObjetivo)
+        {
+            Debug.Log($"\n{'=',-60}\n" +
+                      $"LOTE: circuito {circuitosGenerados + 1}/{circuitosObjetivo}\n" +
+                      $"{'=',-60}");
+
+            // Intentar generar un circuito válido
+            bool exito = false;
+            int intentoGlobal = 0;
+
+            while (!exito && intentoGlobal < maxReintentosGlobales)
+            {
+                intentoGlobal++;
+
+                if (intentoGlobal > 1)
+                    LimpiarTodo();
+
+                yield return StartCoroutine(GenerarCircuito());
+
+                if (piezasColocadas.Count > 0 &&
+                    CircuitoCierra(piezasColocadas[piezasColocadas.Count - 1]))
+                {
+                    exito = true;
+                    circuitosGenerados++;
+                    Debug.Log($"✅ Lote: circuito {circuitosGenerados}/{circuitosObjetivo} generado y guardado.");
+                }
+                else if (intentoGlobal < maxReintentosGlobales)
+                {
+                    Debug.LogWarning($"❌ Lote: intento {intentoGlobal} fallido. Reintentando...");
+                    LimpiarTodo();
+                    yield return new WaitForSeconds(0.2f);
+                }
+            }
+
+            if (!exito)
+            {
+                Debug.LogWarning($"⚠️ Lote: no se pudo generar el circuito {circuitosGenerados + 1} " +
+                                 $"después de {maxReintentosGlobales} intentos. Continuando con el siguiente...");
+            }
+
+            // Pequeña pausa entre circuitos para estabilizar la escena
+            LimpiarTodo();
+            yield return new WaitForSeconds(0.3f);
+        }
+
+        // Finalizar modo lote
+        circuitoSaver.modoLoteActivo = false;
+
+        Debug.Log($"🏁 MODO LOTE COMPLETADO: {circuitosGenerados}/{circuitosObjetivo} circuitos guardados.");
     }
 
     IEnumerator GenerarCircuitoConReintentos()
@@ -974,7 +1059,11 @@ public class Generador2 : MonoBehaviour
         StopAllCoroutines();
         LimpiarTodo();
         Debug.Log($"🔄 Regenerando circuito...");
-        StartCoroutine(GenerarCircuitoConReintentos());
+
+        if (modoLote)
+            StartCoroutine(GenerarLote());
+        else
+            StartCoroutine(GenerarCircuitoConReintentos());
     }
 
     // Gizmos para visualizar en editor

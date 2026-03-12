@@ -739,6 +739,9 @@ MonoBehaviour:
   baseCurvaDerProb: 0.2
   grid: {fileID: 384799899}
   radioExclusionCierre: 0.5
+  modoLote: 1
+  circuitosObjetivo: 10
+  circuitoSaver: {fileID: 384799896}
   mostrarDebugGizmos: 1
   mostrarLogs: 0
 --- !u!114 &384799895
@@ -775,6 +778,7 @@ MonoBehaviour:
   botonGuardar: {fileID: 1809780253}
   textoError: {fileID: 776907431}
   botonCerrarPanel: {fileID: 1092228947}
+  modoLoteActivo: 0
   mostrarLogs: 1
 --- !u!114 &384799897
 MonoBehaviour:
