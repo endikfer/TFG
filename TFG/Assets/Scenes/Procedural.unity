@@ -818,7 +818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 792e2b8badc457a488c0d13f6cf67a86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CircuitoInicializador
-  cochePrefab: {fileID: 642287924342879162, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
+  cochePrefab: {fileID: 642287924342879162, guid: 23b00314a76a4394e9e8429c890d303a, type: 3}
   mostrarLogs: 1
 --- !u!114 &384799899
 MonoBehaviour:
@@ -3260,7 +3260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d41c8580b3df6fb4eaaeaa9e0629be75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AgenteSpawn
-  cochePrefab: {fileID: 642287924342879162, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
+  cochePrefab: {fileID: 642287924342879162, guid: 23b00314a76a4394e9e8429c890d303a, type: 3}
 --- !u!4 &1756918709
 Transform:
   m_ObjectHideFlags: 0

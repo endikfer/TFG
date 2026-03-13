@@ -167,8 +167,8 @@ public class CarController : MonoBehaviour
         carRigidbody = GetComponent<Rigidbody>();
 
         // Centro de masa ligeramente hacia atrás y bajo para GT RWD
-        carRigidbody.centerOfMass = new Vector3(0f, -0.3f, -0.2f);
-        carRigidbody.mass = 1500f;
+        carRigidbody.centerOfMass = bodyMassCenter;
+        carRigidbody.mass = 150f;
         carRigidbody.linearDamping = 0.01f;
         carRigidbody.angularDamping = 0.05f;
 

@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1546067
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -645,11 +645,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   karAgent: {fileID: 0}
---- !u!146 &8463611 stripped
-WheelCollider:
-  m_CorrespondingSourceObject: {fileID: 2239677824950174677, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
-  m_PrefabInstance: {fileID: 251317392}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &10453309
 GameObject:
   m_ObjectHideFlags: 0
@@ -2005,7 +2000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &34852761
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3381,7 +3376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &56007084
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4289,7 +4284,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f6d3ff905719c845a4a6404bc4d4162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  carTransform: {fileID: 471640318}
   followSpeed: 2
   lookSpeed: 5
   offset: {x: 0, y: 5, z: -10}
@@ -6780,11 +6774,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   karAgent: {fileID: 0}
---- !u!198 &97653375 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 4402756320724654539, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
-  m_PrefabInstance: {fileID: 251317392}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &99531812
 GameObject:
   m_ObjectHideFlags: 0
@@ -9126,7 +9115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &136331413
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9580,7 +9569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &141952224
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9790,7 +9779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &143324059
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9917,7 +9906,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &143939745
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11329,11 +11318,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158835881}
   m_Mesh: {fileID: -2573501144246834820, guid: 451e63c0678d44f4d81c81f696065b1b, type: 3}
---- !u!198 &160240299 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 4402756320999286479, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
-  m_PrefabInstance: {fileID: 251317392}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &160838587
 GameObject:
   m_ObjectHideFlags: 0
@@ -13437,7 +13421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &184200135
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13676,7 +13660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &187005481
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14795,7 +14779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &199677458
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16094,7 +16078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &217036368
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16634,7 +16618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &224862079
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18602,6 +18586,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2801654385565169221, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
+      propertyPath: area
+      value: 
+      objectReference: {fileID: 1721550051}
+    - target: {fileID: 2801654385565169221, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2801654385565169221, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
+      propertyPath: _checkpointManager
+      value: 
+      objectReference: {fileID: 788541901}
     - target: {fileID: 3386343362015136015, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -18609,6 +18605,10 @@ PrefabInstance:
     - target: {fileID: 3433570107035258848, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3983884314959390030, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4402756320705968393, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
       propertyPath: m_Layer
@@ -18655,27 +18655,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 642287924342879162, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1179369165}
-    - targetCorrespondingSourceObject: {fileID: 642287924342879162, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1179369164}
-    - targetCorrespondingSourceObject: {fileID: 642287924342879162, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1179369163}
-    - targetCorrespondingSourceObject: {fileID: 642287924342879162, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1179369162}
-    - targetCorrespondingSourceObject: {fileID: 642287924342879162, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1179369161}
-    - targetCorrespondingSourceObject: {fileID: 642287924342879162, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1179369160}
-    - targetCorrespondingSourceObject: {fileID: 642287924342879162, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1179369159}
     - targetCorrespondingSourceObject: {fileID: 2077481708272809950, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
       insertIndex: -1
       addedObject: {fileID: 727705950}
@@ -18857,7 +18836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &259624004
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20200,7 +20179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &275815794
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20327,7 +20306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &276334613
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20663,7 +20642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!1 &286421056
 GameObject:
   m_ObjectHideFlags: 0
@@ -20838,7 +20817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &286506542
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -21092,7 +21071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &287591317
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -22362,7 +22341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &299515796
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -22616,7 +22595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &304783939
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -22997,7 +22976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &309198781
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -23077,11 +23056,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 309198778}
   m_Mesh: {fileID: -498707359658157928, guid: 451e63c0678d44f4d81c81f696065b1b, type: 3}
---- !u!96 &309824869 stripped
-TrailRenderer:
-  m_CorrespondingSourceObject: {fileID: 7045468751210077382, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
-  m_PrefabInstance: {fileID: 251317392}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &313222778
 GameObject:
   m_ObjectHideFlags: 0
@@ -23397,7 +23371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &315261880
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -26739,7 +26713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 314ea9bf79611f74d931279c1fbd5cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextoVelocidad
-  carController: {fileID: 1179369164}
+  carController: {fileID: 0}
   speedText: {fileID: 737886755}
   prefix: Velocidad
   unit: km/h
@@ -28630,7 +28604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &383795645
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -28997,7 +28971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &388525418
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -29378,7 +29352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &392021527
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -29505,7 +29479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &392100164
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -31029,7 +31003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &413103198
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -31195,7 +31169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &417027402
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -32122,7 +32096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &432575944
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -33176,7 +33150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f6d3ff905719c845a4a6404bc4d4162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  carTransform: {fileID: 1179369158}
   followSpeed: 2
   lookSpeed: 5
   offset: {x: 0, y: 5, z: -10}
@@ -33275,11 +33248,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!96 &457007862 stripped
-TrailRenderer:
-  m_CorrespondingSourceObject: {fileID: 7045468751846977024, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
-  m_PrefabInstance: {fileID: 251317392}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &457576746
 GameObject:
   m_ObjectHideFlags: 0
@@ -33454,7 +33422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &460642795
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -34335,7 +34303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &471037300
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -34979,7 +34947,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 10000
-  _prometeoCarController: {fileID: 471640333}
+  _prometeoCarController: {fileID: 0}
   _checkpointManager: {fileID: 666124857}
   obj: {fileID: 471640321}
   area: {fileID: 1105643133}
@@ -34989,17 +34957,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   salidaDePista: 0
---- !u!114 &471640333 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000935321167041810, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
-  m_PrefabInstance: {fileID: 471640317}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 471640321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0fefceefe666bb4682b272ec8c5bdd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PrometeoCarController
 --- !u!1 &472286744
 GameObject:
   m_ObjectHideFlags: 0
@@ -35209,7 +35166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &473396387
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -35717,7 +35674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &478744700
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -36338,7 +36295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &487940243
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -40040,7 +39997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &534396065
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -40332,7 +40289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f6d3ff905719c845a4a6404bc4d4162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  carTransform: {fileID: 1153460805}
   followSpeed: 2
   lookSpeed: 5
   offset: {x: 0, y: 5, z: -10}
@@ -40486,7 +40442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &541899431
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -40613,7 +40569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &542131129
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -42277,7 +42233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &565515589
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -45102,7 +45058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &616306670
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -45394,7 +45350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &621806275
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -46181,7 +46137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &635872743
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -48460,7 +48416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &670333953
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -49777,7 +49733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &688911906
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -50452,7 +50408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!1 &698265453
 GameObject:
   m_ObjectHideFlags: 0
@@ -50500,7 +50456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &698265456
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -50754,7 +50710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &701119079
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -51837,7 +51793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &713154776
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -52593,7 +52549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &719913834
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -52720,7 +52676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &722864043
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -53824,7 +53780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &736681101
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -55323,7 +55279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &761448996
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -57003,7 +56959,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &784166195
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -57239,7 +57195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcf07f726f510ba4084fad9409f02485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheckPointsManager3
-  kartAgent: {fileID: 1179369159}
+  kartAgent: {fileID: 1179369167}
   checkpp: {fileID: 826546109}
 --- !u!4 &788541902
 Transform:
@@ -57430,7 +57386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &792792099
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -57684,7 +57640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &794118728
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -58221,11 +58177,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheckPoints2
   checkPoints: []
---- !u!146 &798458659 stripped
-WheelCollider:
-  m_CorrespondingSourceObject: {fileID: 7877667524431639919, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
-  m_PrefabInstance: {fileID: 251317392}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &801462351
 GameObject:
   m_ObjectHideFlags: 0
@@ -58908,7 +58859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &809710183
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -60353,12 +60304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
---- !u!1 &829275273 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3386343362015136015, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
-  m_PrefabInstance: {fileID: 251317392}
-  m_PrefabAsset: {fileID: 0}
+  karAgent: {fileID: 0}
 --- !u!1 &839138100
 GameObject:
   m_ObjectHideFlags: 0
@@ -60444,7 +60390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &839164059
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -60637,7 +60583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &839303878
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -61145,7 +61091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &848187943
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -61311,7 +61257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &850601878
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -61819,7 +61765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &855174503
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -62073,7 +62019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &864960263
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -62239,7 +62185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &865136135
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -63537,7 +63483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48911b7681998db42bf73f919eb535a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Meta4
-  kartAgent: {fileID: 1179369159}
+  kartAgent: {fileID: 0}
   manager: {fileID: 788541901}
 --- !u!114 &883302274
 MonoBehaviour:
@@ -65067,7 +65013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &910035185
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -67004,7 +66950,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &939001750
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -67954,11 +67900,6 @@ Transform:
   - {fileID: 986929450}
   m_Father: {fileID: 109043246}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &943913373 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6204759407096980703, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
-  m_PrefabInstance: {fileID: 251317392}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &948242850
 GameObject:
   m_ObjectHideFlags: 0
@@ -69673,7 +69614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &969224327
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -70835,11 +70776,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 977398390}
   m_Mesh: {fileID: -2467424227013118721, guid: 451e63c0678d44f4d81c81f696065b1b, type: 3}
---- !u!146 &977479657 stripped
-WheelCollider:
-  m_CorrespondingSourceObject: {fileID: 8615825633152659129, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
-  m_PrefabInstance: {fileID: 251317392}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &978553115
 GameObject:
   m_ObjectHideFlags: 0
@@ -74130,7 +74066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1017274603
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -74257,7 +74193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1019695774
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -74613,7 +74549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1025458351
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -75077,7 +75013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1031969333
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -75204,7 +75140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1034159814
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -75538,11 +75474,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1035383298}
   m_Mesh: {fileID: -498707359658157928, guid: 451e63c0678d44f4d81c81f696065b1b, type: 3}
---- !u!1 &1035754555 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8649133034589738184, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
-  m_PrefabInstance: {fileID: 251317392}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1035864382
 GameObject:
   m_ObjectHideFlags: 0
@@ -75590,7 +75521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1035864385
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -76244,7 +76175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1042042379
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -76371,7 +76302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1050229188
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -77754,7 +77685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1076720598
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -78135,7 +78066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1082129402
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -78554,7 +78485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1089654460
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -79861,7 +79792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1107183435
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -80506,7 +80437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!1 &1119015716
 GameObject:
   m_ObjectHideFlags: 0
@@ -82113,7 +82044,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1143714538
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -84647,7 +84578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1169685001
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -84984,7 +84915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1175378629
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -85443,208 +85374,22 @@ Transform:
   - {fileID: 759734682}
   m_Father: {fileID: 1711392679}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1179369157 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 642287924342879162, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
-  m_PrefabInstance: {fileID: 251317392}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1179369158 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 261786959625234688, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
   m_PrefabInstance: {fileID: 251317392}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1179369159
+--- !u!114 &1179369167 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 2801654385565169221, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
+  m_PrefabInstance: {fileID: 251317392}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179369157}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b105505f5923b5f40b963eb9a0c67fda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Agente4
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 12000
-  _prometeoCarController: {fileID: 1179369164}
-  _checkpointManager: {fileID: 788541901}
-  obj: {fileID: 1179369157}
-  area: {fileID: 1721550051}
-  numRays: 15
-  maxRayDistance: 15
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 64
-  checkpointReward: 10
-  progressRewardScale: 0.02
-  speedRewardScale: 0.005
-  timePenaltyScale: 0.0001
-  offTrackPenalty: -5
-  showDebugInfo: 0
-  salidaDePista: 0
---- !u!114 &1179369160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179369157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bb6b867a41448888c1cd4f99643ad71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SensorName: RayPerceptionSensor1
-  m_DetectableTags:
-  - Fuera
-  m_RaysPerDirection: 15
-  m_MaxRayDegrees: 180
-  m_SphereCastRadius: 1.37
-  m_RayLength: 15
-  m_RayLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294965768
-  m_ObservationStacks: 1
-  rayHitColor: {r: 0, g: 0.20979404, b: 1, a: 1}
-  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
-  m_StartVerticalOffset: 1
-  m_EndVerticalOffset: 0
---- !u!114 &1179369161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179369157}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 573baf6b65bc7634d86054b652865dbc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  karAgent: {fileID: 0}
-  karAgentControll: {fileID: 0}
-  myVariable: 0
-  speed: 0
---- !u!114 &1179369162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179369157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DecisionPeriod: 5
-  TakeActionsBetweenDecisions: 1
---- !u!114 &1179369163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179369157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_BrainParameters:
-    VectorObservationSize: 29
-    NumStackedVectorObservations: 4
-    m_ActionSpec:
-      m_NumContinuousActions: 3
-      BranchSizes: 
-    VectorActionSize: 03000000
-    VectorActionDescriptions: []
-    VectorActionSpaceType: 1
-    hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
-  m_InferenceDevice: 0
-  m_BehaviorType: 0
-  m_BehaviorName: AgentToDrive
-  TeamId: 0
-  m_UseChildSensors: 1
-  m_UseChildActuators: 1
-  m_ObservableAttributeHandling: 2
---- !u!114 &1179369164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179369157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd403bb07b46b3f4d80bbd2fdc3a2cf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarController
-  maxSpeed: 250
-  maxReverseSpeed: 50
-  accelerationMultiplier: 8
-  maxSteeringAngle: 25
-  steeringSpeed: 0.7
-  brakeForce: 400
-  decelerationMultiplier: 3
-  handbrakeDriftMultiplier: 5
-  bodyMassCenter: {x: 0, y: -0.3, z: -0.2}
-  frontLeftMesh: {fileID: 1035754555}
-  frontLeftCollider: {fileID: 8463611}
-  frontRightMesh: {fileID: 829275273}
-  frontRightCollider: {fileID: 798458659}
-  rearLeftMesh: {fileID: 943913373}
-  rearLeftCollider: {fileID: 977479657}
-  rearRightMesh: {fileID: 727705948}
-  rearRightCollider: {fileID: 1538942572}
-  useEffects: 1
-  RLWParticleSystem: {fileID: 97653375}
-  RRWParticleSystem: {fileID: 160240299}
-  RLWTireSkid: {fileID: 457007862}
-  RRWTireSkid: {fileID: 309824869}
-  useUI: 0
-  carSpeedText: {fileID: 0}
-  useSounds: 0
-  carEngineSound: {fileID: 0}
-  tireScreechSound: {fileID: 0}
-  useTouchControls: 0
-  throttleButton: {fileID: 0}
-  reverseButton: {fileID: 0}
-  turnRightButton: {fileID: 0}
-  turnLeftButton: {fileID: 0}
-  handbrakeButton: {fileID: 0}
-  carSpeed: 0
-  isDrifting: 0
-  isTractionLocked: 0
-  carRigidbody: {fileID: 0}
-  localVelocityX: 0
---- !u!136 &1179369165
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179369157}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.22
-  m_Height: 6.34
-  m_Direction: 2
-  m_Center: {x: 0, y: 1.26, z: 0.03}
 --- !u!1 &1181314892
 GameObject:
   m_ObjectHideFlags: 0
@@ -87399,7 +87144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1206584844
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -87526,7 +87271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1209334464
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -88735,7 +88480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1218575968
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -89116,7 +88861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1221219092
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -90649,7 +90394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1238145768
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -90776,7 +90521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1239968229
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -91477,7 +91222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1248423073
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -91797,7 +91542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1252256138
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -92178,7 +91923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1257120534
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -92594,7 +92339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1259524310
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -94411,7 +94156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1287741682
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -97535,7 +97280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1317126168
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -97958,7 +97703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1320549339
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -98085,7 +97830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1321151431
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -98495,7 +98240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1334899766
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -98930,7 +98675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1340838729
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -99311,7 +99056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1344183596
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -99603,7 +99348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1348045997
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -100527,7 +100272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1366497891
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -100654,7 +100399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1370431206
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -102059,7 +101804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!1 &1395047342
 GameObject:
   m_ObjectHideFlags: 0
@@ -103328,7 +103073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1407514696
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -103542,7 +103287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1408700855
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -103922,7 +103667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1412906693
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -104049,7 +103794,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1413770596
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -105718,7 +105463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1432757613
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -106150,7 +105895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1437705807
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -106277,7 +106022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1438591189
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -107264,7 +107009,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f6d3ff905719c845a4a6404bc4d4162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  carTransform: {fileID: 1396012502}
   followSpeed: 2
   lookSpeed: 5
   offset: {x: 0, y: 5, z: -10}
@@ -107537,7 +107281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1450237929
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -109462,7 +109206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1474499145
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -109589,7 +109333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1474745309
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -109716,7 +109460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1474987806
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -109970,7 +109714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1476054474
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -110423,7 +110167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1482549569
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -110890,7 +110634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1485228356
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -113345,7 +113089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1532642329
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -113637,7 +113381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1533971359
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -114010,11 +113754,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538931078}
   m_Mesh: {fileID: -2573501144246834820, guid: 451e63c0678d44f4d81c81f696065b1b, type: 3}
---- !u!146 &1538942572 stripped
-WheelCollider:
-  m_CorrespondingSourceObject: {fileID: 8706808774334851022, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
-  m_PrefabInstance: {fileID: 251317392}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1539038207
 GameObject:
   m_ObjectHideFlags: 0
@@ -115140,7 +114879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1558161090
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -115267,7 +115006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1558818202
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -116090,7 +115829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1572539267
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -116471,7 +116210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1579650729
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -116598,7 +116337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1583436999
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -118109,7 +117848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1598812512
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -118467,7 +118206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1614021906
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -119827,7 +119566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1629856822
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -120335,7 +120074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1646304951
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -120527,7 +120266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1652349410
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -120654,7 +120393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1658902038
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -121073,7 +120812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1666528358
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -122925,7 +122664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1697081902
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -124743,7 +124482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1724550041
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -125872,7 +125611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1738658670
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -126796,7 +126535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1754227933
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -127431,7 +127170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1758738491
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -127685,7 +127424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1761863931
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -128687,7 +128426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1771900667
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -129505,7 +129244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1782827543
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -130013,7 +129752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1793109900
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -130306,7 +130045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1801544549
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -131271,7 +131010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1811621796
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -131398,7 +131137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1815607328
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -132133,7 +131872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1830978732
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -133243,7 +132982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1848448337
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -134335,7 +134074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1864818584
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -134716,7 +134455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1866009008
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -135210,7 +134949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1868586500
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -135464,7 +135203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1870721208
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -135657,7 +135396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1871528263
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -136797,7 +136536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1889993924
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -138000,7 +137739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1907214803
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -139937,7 +139676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1951903185
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -140469,7 +140208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1957133184
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -141163,7 +140902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1968941649
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -141290,7 +141029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1970700542
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -141627,7 +141366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1979168856
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -141754,7 +141493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &1982952412
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -144103,7 +143842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &2013879388
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -144610,7 +144349,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f6d3ff905719c845a4a6404bc4d4162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  carTransform: {fileID: 327125185}
   followSpeed: 2
   lookSpeed: 5
   offset: {x: 0, y: 5, z: -10}
@@ -145010,7 +144748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &2021997140
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -146236,7 +145974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &2040422478
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -146363,7 +146101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &2042719167
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -148240,7 +147978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &2074446392
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -148367,7 +148105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &2076207204
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -149596,7 +149334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &2085007750
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -150555,7 +150293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &2105136684
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -150682,7 +150420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &2105157834
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -150809,7 +150547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &2108559567
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -151063,7 +150801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &2109584802
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -151317,7 +151055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &2110050919
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -151444,7 +151182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &2112099410
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -151571,7 +151309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &2115344805
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -152791,7 +152529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bad861d98199d4eb86f1e8ea1c047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CocheContacto5
-  karAgent: {fileID: 1179369159}
+  karAgent: {fileID: 0}
 --- !u!64 &2139764023
 MeshCollider:
   m_ObjectHideFlags: 0
