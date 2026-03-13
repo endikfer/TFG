@@ -14,6 +14,9 @@ public class Agente1_0 : Agent
     // area = punto de spawn, búscalo por Tag "SpawnPoint"
     private GameObject obj;
     private Transform spawnPoint;
+    private Vector3 _spawnPos;
+    private Quaternion _spawnRot;
+    private bool _spawnValido = false;
 
     // ─── Estos SÍ se pueden dejar en el Inspector (son datos, no referencias a objetos que cargan tarde) ───
     [SerializeField] private int numRays = 11;
@@ -22,6 +25,7 @@ public class Agente1_0 : Agent
 
     public bool salidaDePista = false;
     private bool _isInitialized = false;
+    private bool _reseteando = false; // Evita que HandleOffTrack se llame varias veces seguidas
 
     // ──────────────────────────────────────────────
     // EVENTO ESTÁTICO: el Agente avisa cuando está listo
@@ -77,7 +81,6 @@ public class Agente1_0 : Agent
 
     private void OnCircuitoListo(List<PiezaCircuito> piezasOrdenadas)
     {
-        // La primera pieza es la de inicio, buscamos "Posiciones de salida/P1" dentro de ella
         if (piezasOrdenadas.Count == 0) return;
 
         Transform posicionesSalida = piezasOrdenadas[0].transform.Find("Posiciones de salida");
@@ -91,19 +94,29 @@ public class Agente1_0 : Agent
         spawnPoint = posicionesSalida.Find("P1");
 
         if (spawnPoint == null)
+        {
             Debug.LogError("[Agente1_0] No se encontró 'P1' dentro de 'Posiciones de salida'.");
+            _spawnValido = false;
+        }
         else
-            Debug.Log($"[Agente1_0] SpawnPoint encontrado: {spawnPoint.position}");
+        {
+            // Guardamos posición y rotación como VALORES, no como referencia.
+            // Así si el circuito se regenera y destruye la pieza, los valores siguen siendo válidos
+            // hasta que llegue el próximo OnCircuitoListo con los nuevos.
+            _spawnPos = spawnPoint.position;
+            _spawnRot = spawnPoint.rotation;
+            _spawnValido = true;
+            Debug.Log($"[Agente1_0] SpawnPoint actualizado: {_spawnPos}");
+        }
 
-        // Desuscribirse, solo necesitamos esto una vez
-        CircuitoEventos.OnCircuitoListoParaAgente -= OnCircuitoListo;
+        // NO nos desuscribimos: si el circuito se regenera necesitamos actualizar el spawn
     }
 
     private void Update()
     {
         if (!_isInitialized) return;
 
-        if (salidaDePista)
+        if (salidaDePista && !_reseteando)
             HandleOffTrack();
     }
 
@@ -121,8 +134,8 @@ public class Agente1_0 : Agent
         if (!_isInitialized) return;
 
         float steering = actionBuffers.ContinuousActions[0];
-        float throttle  = actionBuffers.ContinuousActions[1];
-        float brake     = actionBuffers.ContinuousActions[2];
+        float throttle = actionBuffers.ContinuousActions[1];
+        float brake = actionBuffers.ContinuousActions[2];
 
         _prometeoCarController.SetSteering(steering);
         _prometeoCarController.SetThrottle(throttle);
@@ -181,7 +194,7 @@ public class Agente1_0 : Agent
         sensor.AddObservation(dirToCheckpoint);
 
         int currentIndex = _checkpointManager.GetCheckpointIndex();
-        var checkpoints  = _checkpointManager.checkpp.checkPoints;
+        var checkpoints = _checkpointManager.checkpp.checkPoints;
 
         if (currentIndex + 1 < checkpoints.Count)
         {
@@ -227,14 +240,40 @@ public class Agente1_0 : Agent
         Debug.Log("META COMPLETADA");
     }
 
-    public void ResetCar()
+    public void EstablecerSpawnPoint(Transform spawn)
     {
-        if (spawnPoint != null)
+        if (spawn == null)
         {
-            obj.transform.position = spawnPoint.position;
-            obj.transform.rotation = spawnPoint.rotation;
+            Debug.LogError("[Agente1_0] EstablecerSpawnPoint recibió null.");
+            _spawnValido = false;
+            return;
         }
 
+        _spawnPos = spawn.position;
+        _spawnRot = spawn.rotation * Quaternion.Euler(0f, -90f, 0f);
+        _spawnValido = true;
+        Debug.Log($"[Agente1_0] SpawnPoint recibido desde CircuitoInicializador: {_spawnPos}");
+    }
+
+    public void ResetCar()
+    {
+        if (!_spawnValido)
+        {
+            Debug.LogError("[Agente1_0] No se puede resetear el coche porque el spawnPoint no es válido.");
+        }
+        else
+        {
+            var rb = _prometeoCarController.carRigidbody;
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.position = _spawnPos;
+            rb.rotation = _spawnRot;
+
+            obj.transform.position = _spawnPos;
+            obj.transform.rotation = _spawnRot;
+        }
+
+        salidaDePista = false;
         _checkpointManager.ResetCheckpoints();
         _prometeoCarController.carSpeed = 0;
         _prometeoCarController.ResetCarState();
@@ -242,9 +281,11 @@ public class Agente1_0 : Agent
 
     public void HandleOffTrack()
     {
+        _reseteando = true;
         AddReward(-0.2f);
         ResetCar();
         EndEpisode();
+        _reseteando = false;
     }
 
     private void OnCheckpointReached(CheckPoint1_0 checkpoint)

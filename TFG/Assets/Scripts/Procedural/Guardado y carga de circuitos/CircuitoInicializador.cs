@@ -110,6 +110,13 @@ public class CircuitoInicializador : MonoBehaviour
         // ── Paso 3: Reconstruir CheckPoints en el manager ─────────────────
         yield return null; // Dejar que el Agente1_0 recién instanciado ejecute su Awake/Start
 
+        // Pasar el spawnPoint al agente directamente, ya que él mismo no puede buscarlo
+        // de forma fiable (problemas de orden de eventos y referencias destruidas)
+        if (Agente1_0.Instance != null)
+            Agente1_0.Instance.EstablecerSpawnPoint(spawnPoint);
+        else
+            Debug.LogWarning("[CircuitoInicializador] Agente1_0.Instance es null al intentar pasar el SpawnPoint.");
+
         ReconfigurarCheckpointManager(piezas);
 
         // ── Paso 4: Forzar reinicio del episodio del agente ───────────────

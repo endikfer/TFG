@@ -631,7 +631,6 @@ GameObject:
   - component: {fileID: 4812030013655222554}
   - component: {fileID: 2343567548068327129}
   - component: {fileID: 2766498649012138664}
-  - component: {fileID: 7698874366600661353}
   m_Layer: 0
   m_Name: CheckPoint
   m_TagString: Checkpoint
@@ -687,19 +686,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 754c73dedf12d3f49bf86dffe9264841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Meta1_0
---- !u!114 &7698874366600661353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4573544365789535696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cec02bfbd57745149b93658f40814d0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CheckPoint1_0
-  checkpointID: 0
 --- !u!1 &5570121099246357193
 GameObject:
   m_ObjectHideFlags: 0
