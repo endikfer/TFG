@@ -32,7 +32,19 @@ public class Meta1_0 : MonoBehaviour
     {
         if (kartAgent == null || manager == null) return;
 
-        if (manager.GetCheckpointIndex() == manager.checkpp.checkPoints.Count)
+        // Verificar que se han pasado TODOS los checkpoints de esta vuelta
+        if (manager.GetCheckpointIndex() != manager.checkpp.checkPoints.Count) return;
+
+        // Delegar en el RaceManager: él decide si es vuelta intermedia o fin de carrera
+        if (RaceManager.Instance != null)
+        {
+            RaceManager.Instance.VueltaCompletada();
+        }
+        else
+        {
+            // Fallback por si el RaceManager no está en escena: comportamiento original
+            Debug.LogWarning("[Meta1_0] RaceManager no encontrado. Terminando episodio directamente.");
             kartAgent.ScoredAGoal();
+        }
     }
 }

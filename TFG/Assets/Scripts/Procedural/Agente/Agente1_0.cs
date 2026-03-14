@@ -127,6 +127,9 @@ public class Agente1_0 : Agent
 
         foreach (var checkpoint in _checkpointManager.checkpp.checkPoints)
             checkpoint.ResetTrigger();
+
+        // Reiniciar contador de vueltas de la carrera
+        RaceManager.Instance?.ResetCarrera();
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)

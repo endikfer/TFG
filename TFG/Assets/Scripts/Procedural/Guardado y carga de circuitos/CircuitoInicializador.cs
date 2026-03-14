@@ -18,6 +18,13 @@ using UnityEngine;
 /// </summary>
 public class CircuitoInicializador : MonoBehaviour
 {
+    /// <summary>
+    /// Se dispara cuando circuito + coche + checkpoints están completamente listos
+    /// y el agente puede empezar a correr. El RaceHUD escucha este evento para
+    /// mostrarse por primera vez.
+    /// </summary>
+    public static event System.Action OnTodoListo;
+
     [Header("Prefab del coche / agente")]
     [Tooltip("Prefab que contiene el coche + Agente1_0. Se instancia en el SpawnPoint del circuito.")]
     public GameObject cochePrefab;
@@ -124,6 +131,9 @@ public class CircuitoInicializador : MonoBehaviour
 
         if (mostrarLogs)
             Debug.Log("[CircuitoInicializador] ✅ Inicialización completa.");
+
+        // ── Paso 5: Avisar a la UI de que todo está listo ─────────────────
+        OnTodoListo?.Invoke();
     }
 
     // ── Pasos individuales ────────────────────────────────────────────────
