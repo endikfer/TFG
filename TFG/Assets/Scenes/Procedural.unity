@@ -1652,7 +1652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0283608f9ced5449a52d5404f16e04c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RaceManager
-  modoCarrera: 1
+  modoCarrera: 0
   vueltasObjetivo: 3
   distanciaObjetivoCarrera: 1000
   recompensaPorVuelta: 10
@@ -3435,6 +3435,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1671831639}
   m_CullTransparentMesh: 1
+--- !u!1 &1701516255
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1701516257}
+  - component: {fileID: 1701516256}
+  m_Layer: 0
+  m_Name: EntrenamientoManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1701516256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701516255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32b568013d7c7f449c16cf0d13f753e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EntrenamientoManager
+  soloEntrenamiento: 1
+  carpetaGuardado: Circuitos
+  episodiosPorCircuito: 10
+  circuitoLoader: {fileID: 384799897}
+  mostrarLogs: 1
+--- !u!4 &1701516257
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701516255}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1756918707
 GameObject:
   m_ObjectHideFlags: 0
@@ -3936,3 +3985,4 @@ SceneRoots:
   - {fileID: 1345860821}
   - {fileID: 1756918709}
   - {fileID: 812843792}
+  - {fileID: 1701516257}

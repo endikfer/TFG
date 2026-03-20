@@ -81,7 +81,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2257746103600146357}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Colliders
   m_TagString: Fuera
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 8153713971977316142}
   - component: {fileID: 785348683863648658}
   - component: {fileID: 1496375572065802873}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Izq
   m_TagString: Fuera
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 6201613784852938759}
   - component: {fileID: 3315605673444793204}
   - component: {fileID: 2337887216038635211}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dere
   m_TagString: Fuera
   m_Icon: {fileID: 0}

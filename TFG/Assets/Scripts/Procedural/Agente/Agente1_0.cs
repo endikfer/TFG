@@ -27,12 +27,20 @@ public class Agente1_0 : Agent
     private bool _isInitialized = false;
     private bool _reseteando = false; // Evita que HandleOffTrack se llame varias veces seguidas
 
-    // ──────────────────────────────────────────────
-    // EVENTO ESTÁTICO: el Agente avisa cuando está listo
-    // CheckPoint2, Meta4 y CocheContacto5 escuchan esto
-    // ──────────────────────────────────────────────
+    // ──────────────────────────────────────────────────────────────────────
+    // EVENTOS ESTÁTICOS
+    //
+    // OnAgentReady    → se dispara cuando el agente termina su Start() y está
+    //                   listo para recibir referencias. Lo escuchan: Meta1_0,
+    //                   CocheContacto1_0, CheckPointsManager1_0.
+    //
+    // OnNuevoEpisodio → se dispara al inicio de cada episodio ML, ANTES de
+    //                   ResetCar(). Lo escucha TrainingManager para contar
+    //                   episodios, resetear RaceManager y rotar circuitos.
+    // ──────────────────────────────────────────────────────────────────────
     public static Agente1_0 Instance { get; private set; }
     public static event System.Action OnAgentReady;
+    public static event System.Action OnNuevoEpisodio;
 
     private void Awake()
     {
@@ -122,14 +130,15 @@ public class Agente1_0 : Agent
 
     public override void OnEpisodeBegin()
     {
+        // Notificar ANTES de cualquier reset para que TrainingManager pueda
+        // actuar (resetear RaceManager, contar episodios) en el momento correcto.
+        OnNuevoEpisodio?.Invoke();
+
         if (!_isInitialized) return;
         ResetCar();
 
         foreach (var checkpoint in _checkpointManager.checkpp.checkPoints)
             checkpoint.ResetTrigger();
-
-        // Reiniciar contador de vueltas de la carrera
-        RaceManager.Instance?.ResetCarrera();
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)

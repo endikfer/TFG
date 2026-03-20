@@ -242,7 +242,7 @@ MonoBehaviour:
   m_RayLength: 15
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294965768
+    m_Bits: 4294965824
   m_ObservationStacks: 1
   rayHitColor: {r: 0, g: 0.20979404, b: 1, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}

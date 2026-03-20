@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Meta1_0 : MonoBehaviour
 {
-    // Ambos son parte del circuito → singleton disponible en Start
     private Agente1_0 kartAgent;
     private CheckPointsManager1_0 manager;
 
@@ -10,11 +9,14 @@ public class Meta1_0 : MonoBehaviour
     {
         manager = CheckPointsManager1_0.Instance;
 
-        // El agente puede no estar aún → esperamos su evento
+        // Suscribirse al evento y NO desuscribirse nunca: así cada vez que
+        // CircuitoInicializador instancia un coche nuevo, Meta1_0 actualiza
+        // su referencia automáticamente sin necesidad de reiniciar.
+        Agente1_0.OnAgentReady += OnAgentReady;
+
+        // Si el agente ya existe en este momento, actualizamos ya.
         if (Agente1_0.Instance != null)
-            kartAgent = Agente1_0.Instance;
-        else
-            Agente1_0.OnAgentReady += OnAgentReady;
+            OnAgentReady();
     }
 
     private void OnDestroy()
@@ -25,7 +27,6 @@ public class Meta1_0 : MonoBehaviour
     private void OnAgentReady()
     {
         kartAgent = Agente1_0.Instance;
-        Agente1_0.OnAgentReady -= OnAgentReady;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,7 +43,6 @@ public class Meta1_0 : MonoBehaviour
         }
         else
         {
-            // Fallback por si el RaceManager no está en escena: comportamiento original
             Debug.LogWarning("[Meta1_0] RaceManager no encontrado. Terminando episodio directamente.");
             kartAgent.ScoredAGoal();
         }

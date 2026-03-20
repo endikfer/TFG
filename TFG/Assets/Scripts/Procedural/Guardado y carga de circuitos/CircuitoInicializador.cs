@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,22 +16,23 @@ using UnityEngine;
 ///   2. Reconstruye la lista de CheckPoints del manager a partir de las piezas.
 ///   3. Reinicia el CheckPointsManager.
 ///   4. Reinicia el agente ML.
+///   5. Dispara OnTodoListo → RaceHUD muestra el panel.
 /// </summary>
 public class CircuitoInicializador : MonoBehaviour
 {
-    /// <summary>
-    /// Se dispara cuando circuito + coche + checkpoints están completamente listos
-    /// y el agente puede empezar a correr. El RaceHUD escucha este evento para
-    /// mostrarse por primera vez.
-    /// </summary>
-    public static event System.Action OnTodoListo;
-
     [Header("Prefab del coche / agente")]
     [Tooltip("Prefab que contiene el coche + Agente1_0. Se instancia en el SpawnPoint del circuito.")]
     public GameObject cochePrefab;
 
     [Header("Debug")]
     public bool mostrarLogs = true;
+
+    // ── Evento estático ───────────────────────────────────────────────────
+    /// <summary>
+    /// Se dispara cuando circuito + coche + checkpoints están completamente listos.
+    /// RaceHUD lo escucha para mostrar el panel de vueltas.
+    /// </summary>
+    public static event Action OnTodoListo;
 
     // Referencia a la instancia actual del coche (se destruye y recrea en cada circuito)
     private GameObject cocheInstancia;
@@ -129,11 +131,14 @@ public class CircuitoInicializador : MonoBehaviour
         // ── Paso 4: Forzar reinicio del episodio del agente ───────────────
         ReiniciarAgente();
 
+        // ── Paso 5: Notificar que todo está listo ─────────────────────────
+        // RaceHUD escucha este evento para mostrar el panel de vueltas.
+        // Se dispara al final para garantizar que RaceManager ya ha calculado
+        // VueltasNecesarias antes de que el HUD intente leerlo.
+        OnTodoListo?.Invoke();
+
         if (mostrarLogs)
             Debug.Log("[CircuitoInicializador] ✅ Inicialización completa.");
-
-        // ── Paso 5: Avisar a la UI de que todo está listo ─────────────────
-        OnTodoListo?.Invoke();
     }
 
     // ── Pasos individuales ────────────────────────────────────────────────

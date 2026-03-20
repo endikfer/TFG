@@ -74,6 +74,17 @@ public class CircuitoLoader : MonoBehaviour
         panelCarga.SetActive(true);
     }
 
+    /// <summary>
+    /// Carga un circuito desde una ruta de archivo directamente, sin pasar
+    /// por el panel de UI. Usado por TrainingManager durante el entrenamiento.
+    /// No interactúa con el panel ni con el generador más allá de limpiar
+    /// el circuito anterior, igual que haría una carga manual.
+    /// </summary>
+    public void CargarCircuitoParaEntrenamiento(string rutaArchivo)
+    {
+        CargarCircuito(rutaArchivo);
+    }
+
     // ── Lista de circuitos ────────────────────────────────────────────────
 
     private void RefrescarLista()

@@ -95,6 +95,14 @@ public class Generador2 : MonoBehaviour
         if (grid == null)
             Debug.LogWarning("⚠️ Generador2: no se encontró GridOcupacion. El sistema de grid está desactivado.");
 
+        // Si el TrainingManager está activo y en modo entrenamiento, él se encarga
+        // de cargar los circuitos desde archivo. El generador no debe arrancar.
+        if (EntrenamientoManager.Instance != null && EntrenamientoManager.Instance.soloEntrenamiento)
+        {
+            Debug.Log("🏋️ Generador2: modo entrenamiento activo. Generación automática desactivada.");
+            return;
+        }
+
         if (modoLote)
             StartCoroutine(GenerarLote());
         else
@@ -288,7 +296,7 @@ public class Generador2 : MonoBehaviour
             Debug.LogWarning("No es posible cerrar el circuito con la distancia disponible. Reiniciando...");
             yield return new WaitForSeconds(0.5f);
             LimpiarTodo();
-            yield break; // Salir y reintentar desde cero (no marca llegaFase2 = true)
+            yield break;
         }
 
         if (mostrarLogs)
@@ -807,16 +815,11 @@ public class Generador2 : MonoBehaviour
             if (consecDer >= maxCurvasConsecutivas) bloquearDer = true;
 
             // ── REGLA 2 + REGLA 3: recorrer la racha activa ───────────────────────
-            // Recorremos hacia atrás reconstruyendo la secuencia de la racha activa
-            // (desde la última pieza hasta encontrar la curva del tipo contrario).
-            // De ese recorrido extraemos:
-            //   - intercaladasIzq / intercaladasDer  → para Regla 2
-            //   - maxConsecEnRachaIzq / Der           → para Regla 3 (máximo de consecutivas dentro de la racha)
             int intercaladasIzq = 0;
             int intercaladasDer = 0;
-            int maxConsecEnRachaIzq = 0; // mayor bloque de IZQ seguidas dentro de la racha
+            int maxConsecEnRachaIzq = 0;
             int maxConsecEnRachaDer = 0;
-            int bloqueActualIzq = 0; // contador del bloque consecutivo en curso
+            int bloqueActualIzq = 0;
             int bloqueActualDer = 0;
             bool rachaCerradaIzq = false;
             bool rachaCerradaDer = false;
@@ -827,20 +830,19 @@ public class Generador2 : MonoBehaviour
 
                 if (t == PiezaCircuito.TipoPieza.CurvaIzquierda)
                 {
-                    if (rachaCerradaIzq) break; // curva contraria encontrada antes → fin de racha
+                    if (rachaCerradaIzq) break;
 
                     intercaladasIzq++;
                     bloqueActualIzq++;
                     if (bloqueActualIzq > maxConsecEnRachaIzq)
                         maxConsecEnRachaIzq = bloqueActualIzq;
 
-                    // Una izquierda cierra cualquier bloque consecutivo de derechas
                     bloqueActualDer = 0;
                     rachaCerradaDer = true;
                 }
                 else if (t == PiezaCircuito.TipoPieza.CurvaDerecha)
                 {
-                    if (rachaCerradaDer) break; // curva contraria encontrada antes → fin de racha
+                    if (rachaCerradaDer) break;
 
                     intercaladasDer++;
                     bloqueActualDer++;
@@ -862,16 +864,14 @@ public class Generador2 : MonoBehaviour
             if (intercaladasIzq >= maxCurvasIntercaladas) bloquearIzq = true;
             if (intercaladasDer >= maxCurvasIntercaladas) bloquearDer = true;
 
-            // Regla 3: patrón 2 consecutivas + 1 intercalada (total 3 en racha con bloque ≥ 2)
-            // Se activa cuando: intercaladas == 3 Y hubo algún bloque de 2 seguidas dentro de la racha.
-            // En ese caso la siguiente pieza DEBE ser la curva contraria (ni recta ni mismo lado).
+            // Regla 3: patrón 2 consecutivas + 1 intercalada
             bool patron2mas1Izq = (intercaladasIzq == 3 && maxConsecEnRachaIzq >= 2);
             bool patron2mas1Der = (intercaladasDer == 3 && maxConsecEnRachaDer >= 2);
 
             if (patron2mas1Izq)
             {
                 bloquearIzq = true;
-                bloquearRecta = true; // solo se permite curva derecha
+                bloquearRecta = true;
                 if (mostrarLogs)
                     Debug.Log("🔒 Regla 3 activa (patrón IZQ): siguiente pieza debe ser DERE.");
             }
@@ -879,7 +879,7 @@ public class Generador2 : MonoBehaviour
             if (patron2mas1Der)
             {
                 bloquearDer = true;
-                bloquearRecta = true; // solo se permite curva izquierda
+                bloquearRecta = true;
                 if (mostrarLogs)
                     Debug.Log("🔒 Regla 3 activa (patrón DER): siguiente pieza debe ser IZQ.");
             }
