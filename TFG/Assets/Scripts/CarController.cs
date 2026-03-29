@@ -660,4 +660,155 @@ public class CarController : MonoBehaviour
         // Al frenar, reducir torque del motor según brake (ya aplicado en SetThrottle)
     }
 
+
+
+
+    //Prueba
+
+    public void TurnLeft()
+    {
+        steeringAxis = steeringAxis - (Time.deltaTime * 10f * steeringSpeed);
+        if (steeringAxis < -1f)
+        {
+            steeringAxis = -1f;
+        }
+        var steeringAngle = steeringAxis * maxSteeringAngle;
+        frontLeftCollider.steerAngle = Mathf.Lerp(frontLeftCollider.steerAngle, steeringAngle, steeringSpeed);
+        frontRightCollider.steerAngle = Mathf.Lerp(frontRightCollider.steerAngle, steeringAngle, steeringSpeed);
+    }
+
+    //The following method turns the front car wheels to the right. The speed of this movement will depend on the steeringSpeed variable.
+    public void TurnRight()
+    {
+        steeringAxis = steeringAxis + (Time.deltaTime * 10f * steeringSpeed);
+        if (steeringAxis > 1f)
+        {
+            steeringAxis = 1f;
+        }
+        var steeringAngle = steeringAxis * maxSteeringAngle;
+        frontLeftCollider.steerAngle = Mathf.Lerp(frontLeftCollider.steerAngle, steeringAngle, steeringSpeed);
+        frontRightCollider.steerAngle = Mathf.Lerp(frontRightCollider.steerAngle, steeringAngle, steeringSpeed);
+    }
+
+    //The following method takes the front car wheels to their default position (rotation = 0). The speed of this movement will depend
+    // on the steeringSpeed variable.
+    public void ResetSteeringAngle()
+    {
+        if (steeringAxis < 0f)
+        {
+            steeringAxis = steeringAxis + (Time.deltaTime * 10f * steeringSpeed);
+        }
+        else if (steeringAxis > 0f)
+        {
+            steeringAxis = steeringAxis - (Time.deltaTime * 10f * steeringSpeed);
+        }
+        if (Mathf.Abs(frontLeftCollider.steerAngle) < 1f)
+        {
+            steeringAxis = 0f;
+        }
+        var steeringAngle = steeringAxis * maxSteeringAngle;
+        frontLeftCollider.steerAngle = Mathf.Lerp(frontLeftCollider.steerAngle, steeringAngle, steeringSpeed);
+        frontRightCollider.steerAngle = Mathf.Lerp(frontRightCollider.steerAngle, steeringAngle, steeringSpeed);
+    }
+
+
+    public void GoForward()
+    {
+        //If the forces aplied to the rigidbody in the 'x' asis are greater than
+        //3f, it means that the car is losing traction, then the car will start emitting particle systems.
+
+        // The following part sets the throttle power to 1 smoothly.
+        throttleAxis = throttleAxis + (Time.deltaTime * 3f);
+        if (throttleAxis > 1f)
+        {
+            throttleAxis = 1f;
+        }
+        //If the car is going backwards, then apply brakes in order to avoid strange
+        //behaviours. If the local velocity in the 'z' axis is less than -1f, then it
+        //is safe to apply positive torque to go forward.
+        if (localVelocityZ < -1f)
+        {
+            Brakes();
+        }
+        else
+        {
+            if (Mathf.RoundToInt(carSpeed) < maxSpeed)
+            {
+                //Apply positive torque in all wheels to go forward if maxSpeed has not been reached.
+                frontLeftCollider.brakeTorque = 0;
+                frontLeftCollider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
+                frontRightCollider.brakeTorque = 0;
+                frontRightCollider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
+                rearLeftCollider.brakeTorque = 0;
+                rearLeftCollider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
+                rearRightCollider.brakeTorque = 0;
+                rearRightCollider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
+            }
+            else
+            {
+                // If the maxSpeed has been reached, then stop applying torque to the wheels.
+                // IMPORTANT: The maxSpeed variable should be considered as an approximation; the speed of the car
+                // could be a bit higher than expected.
+                frontLeftCollider.motorTorque = 0;
+                frontRightCollider.motorTorque = 0;
+                rearLeftCollider.motorTorque = 0;
+                rearRightCollider.motorTorque = 0;
+            }
+        }
+    }
+
+    // This method apply negative torque to the wheels in order to go backwards.
+    public void GoReverse()
+    {
+        //If the forces aplied to the rigidbody in the 'x' asis are greater than
+        //3f, it means that the car is losing traction, then the car will start emitting particle systems.
+        if (Mathf.Abs(localVelocityX) > 2.5f)
+        {
+            isDrifting = false;
+            DriftCarPS();
+        }
+        else
+        {
+            isDrifting = false;
+            DriftCarPS();
+        }
+        // The following part sets the throttle power to -1 smoothly.
+        throttleAxis = throttleAxis - (Time.deltaTime * 3f);
+        if (throttleAxis < -1f)
+        {
+            throttleAxis = -1f;
+        }
+        //If the car is still going forward, then apply brakes in order to avoid strange
+        //behaviours. If the local velocity in the 'z' axis is greater than 1f, then it
+        //is safe to apply negative torque to go reverse.
+        if (localVelocityZ > 1f)
+        {
+            Brakes();
+        }
+        else
+        {
+            if (Mathf.Abs(Mathf.RoundToInt(carSpeed)) < maxReverseSpeed)
+            {
+                //Apply negative torque in all wheels to go in reverse if maxReverseSpeed has not been reached.
+                frontLeftCollider.brakeTorque = 0;
+                frontLeftCollider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
+                frontRightCollider.brakeTorque = 0;
+                frontRightCollider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
+                rearLeftCollider.brakeTorque = 0;
+                rearLeftCollider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
+                rearRightCollider.brakeTorque = 0;
+                rearRightCollider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
+            }
+            else
+            {
+                //If the maxReverseSpeed has been reached, then stop applying torque to the wheels.
+                // IMPORTANT: The maxReverseSpeed variable should be considered as an approximation; the speed of the car
+                // could be a bit higher than expected.
+                frontLeftCollider.motorTorque = 0;
+                frontRightCollider.motorTorque = 0;
+                rearLeftCollider.motorTorque = 0;
+                rearRightCollider.motorTorque = 0;
+            }
+        }
+    }
 }

@@ -180,14 +180,18 @@ public class RaceManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Reinicia el contador de vueltas. Llamar desde Agente1_0.OnEpisodeBegin.
+    /// Reinicia el contador de vueltas. Llamado por TrainingManager en cada nuevo episodio.
+    /// Solo actualiza el HUD si VueltasNecesarias ya está calculado (> 0), para evitar
+    /// mostrar "1/0" durante el arranque inicial antes de que llegue el primer circuito.
     /// </summary>
     public void ResetCarrera()
     {
         VueltasCompletadas = 0;
 
-        // Mostrar "Vuelta 1 / N" al reiniciar episodio
-        raceHUD?.ActualizarVueltas(VueltasCompletadas + 1, VueltasNecesarias);
+        // Guardia: si VueltasNecesarias es 0 el circuito aún no se ha cargado,
+        // no actualizamos el HUD para evitar mostrar "Vuelta 1/0".
+        if (VueltasNecesarias > 0)
+            raceHUD?.ActualizarVueltas(VueltasCompletadas + 1, VueltasNecesarias);
 
         if (mostrarLogs)
             Debug.Log("[RaceManager] Carrera reiniciada.");

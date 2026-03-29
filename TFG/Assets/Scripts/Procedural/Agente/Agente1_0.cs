@@ -10,33 +10,29 @@ public class Agente1_0 : Agent
     private CarController _prometeoCarController;
     private CheckPointsManager1_0 _checkpointManager;
 
-    // obj = el propio coche (este GameObject)
-    // area = punto de spawn, búscalo por Tag "SpawnPoint"
     private GameObject obj;
-    private Transform spawnPoint;
     private Vector3 _spawnPos;
     private Quaternion _spawnRot;
     private bool _spawnValido = false;
 
-    // ─── Estos SÍ se pueden dejar en el Inspector (son datos, no referencias a objetos que cargan tarde) ───
+    // ─── Estos SÍ se pueden dejar en el Inspector ───
     [SerializeField] private int numRays = 11;
     [SerializeField] private float maxRayDistance = 10f;
     [SerializeField] private LayerMask obstacleMask;
 
     public bool salidaDePista = false;
     private bool _isInitialized = false;
-    private bool _reseteando = false; // Evita que HandleOffTrack se llame varias veces seguidas
+    private bool _reseteando = false;
+    private bool _circuitoListo = false;
 
     // ──────────────────────────────────────────────────────────────────────
     // EVENTOS ESTÁTICOS
     //
     // OnAgentReady    → se dispara cuando el agente termina su Start() y está
-    //                   listo para recibir referencias. Lo escuchan: Meta1_0,
-    //                   CocheContacto1_0, CheckPointsManager1_0.
+    //                   listo para recibir referencias.
     //
     // OnNuevoEpisodio → se dispara al inicio de cada episodio ML, ANTES de
-    //                   ResetCar(). Lo escucha TrainingManager para contar
-    //                   episodios, resetear RaceManager y rotar circuitos.
+    //                   ResetCar(). Lo escucha EntrenamientoManager.
     // ──────────────────────────────────────────────────────────────────────
     public static Agente1_0 Instance { get; private set; }
     public static event System.Action OnAgentReady;
@@ -66,10 +62,6 @@ public class Agente1_0 : Agent
             return;
         }
 
-        // Suscribirse al evento del circuito para buscar el spawnPoint
-        // cuando la pieza inicial ya esté instanciada
-        CircuitoEventos.OnCircuitoListoParaAgente += OnCircuitoListo;
-
         _checkpointManager.reachedCheckpoint += OnCheckpointReached;
 
         _isInitialized = true;
@@ -78,46 +70,11 @@ public class Agente1_0 : Agent
 
     private void OnDestroy()
     {
-        CircuitoEventos.OnCircuitoListoParaAgente -= OnCircuitoListo;
-
         if (_checkpointManager != null)
             _checkpointManager.reachedCheckpoint -= OnCheckpointReached;
 
         if (Instance == this)
             Instance = null;
-    }
-
-    private void OnCircuitoListo(List<PiezaCircuito> piezasOrdenadas)
-    {
-        if (piezasOrdenadas.Count == 0) return;
-
-        Transform posicionesSalida = piezasOrdenadas[0].transform.Find("Posiciones de salida");
-
-        if (posicionesSalida == null)
-        {
-            Debug.LogError("[Agente1_0] No se encontró 'Posiciones de salida' en la pieza inicial.");
-            return;
-        }
-
-        spawnPoint = posicionesSalida.Find("P1");
-
-        if (spawnPoint == null)
-        {
-            Debug.LogError("[Agente1_0] No se encontró 'P1' dentro de 'Posiciones de salida'.");
-            _spawnValido = false;
-        }
-        else
-        {
-            // Guardamos posición y rotación como VALORES, no como referencia.
-            // Así si el circuito se regenera y destruye la pieza, los valores siguen siendo válidos
-            // hasta que llegue el próximo OnCircuitoListo con los nuevos.
-            _spawnPos = spawnPoint.position;
-            _spawnRot = spawnPoint.rotation;
-            _spawnValido = true;
-            Debug.Log($"[Agente1_0] SpawnPoint actualizado: {_spawnPos}");
-        }
-
-        // NO nos desuscribimos: si el circuito se regenera necesitamos actualizar el spawn
     }
 
     private void Update()
@@ -130,11 +87,16 @@ public class Agente1_0 : Agent
 
     public override void OnEpisodeBegin()
     {
-        // Notificar ANTES de cualquier reset para que TrainingManager pueda
-        // actuar (resetear RaceManager, contar episodios) en el momento correcto.
+        Debug.LogWarning("[Agente1_0] OnEpisodeBegin.");
         OnNuevoEpisodio?.Invoke();
 
-        if (!_isInitialized) return;
+        if (!_isInitialized || !_circuitoListo) return;
+
+        // Si el spawn aún no es válido (circuito todavía cargando),
+        // no hacemos nada: el CircuitoInicializador llamará a ResetCar
+        // cuando termine de inicializar.
+        if (!_spawnValido) return;
+
         ResetCar();
 
         foreach (var checkpoint in _checkpointManager.checkpp.checkPoints)
@@ -143,15 +105,18 @@ public class Agente1_0 : Agent
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
+        Debug.LogWarning("[Agente1_0] OnActionReceived se está llamando. Asegúrate de que esto es intencional para tu caso de uso.");
         if (!_isInitialized) return;
 
-        float steering = actionBuffers.ContinuousActions[0];
-        float throttle = actionBuffers.ContinuousActions[1];
-        float brake = actionBuffers.ContinuousActions[2];
+        //float steering = actionBuffers.ContinuousActions[0];
+        //float throttle = actionBuffers.ContinuousActions[1];
+        //float brake = actionBuffers.ContinuousActions[2];
 
-        _prometeoCarController.SetSteering(steering);
-        _prometeoCarController.SetThrottle(throttle);
-        _prometeoCarController.SetBrake(brake);
+        //_prometeoCarController.SetSteering(steering);
+        //_prometeoCarController.SetThrottle(throttle);
+        //_prometeoCarController.SetBrake(brake);
+
+        MoveAgent(actionBuffers.DiscreteActions);
 
         if (_checkpointManager.nextCheckPointToReach == null) return;
 
@@ -177,8 +142,8 @@ public class Agente1_0 : Agent
         float slipFactor = uphill > 0.1f ? 0.3f : 1f;
         AddReward(-slip * 0.01f * slipFactor);
 
-        if (uphill > 0.1f && throttle > 0.5f)
-            AddReward(0.002f);
+        //if (uphill > 0.1f && throttle > 0.5f)
+        //    AddReward(0.002f);
 
         if (uphill > 0.1f && _prometeoCarController.carSpeed < 0.3f * _prometeoCarController.maxSpeed)
             AddReward(-0.005f);
@@ -199,7 +164,14 @@ public class Agente1_0 : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        if (!_isInitialized || _checkpointManager.nextCheckPointToReach == null) return;
+        Debug.LogWarning("[Agente1_0] CollectObservations se está llamando. Asegúrate de que esto es intencional para tu caso de uso.");
+        if (!_isInitialized || _checkpointManager.nextCheckPointToReach == null)
+        {
+            Debug.LogWarning("[Agente1_0] CollectObservations: agente no inicializado o checkpoint nulo. Agregando observaciones vacías.");
+            return;
+        }
+
+        Debug.LogWarning("[Agente1_0] CollectObservations: Listo.");
 
         Vector3 dirToCheckpoint =
             (_checkpointManager.nextCheckPointToReach.transform.position - obj.transform.position).normalized;
@@ -237,12 +209,40 @@ public class Agente1_0 : Agent
         }
     }
 
+    //public override void Heuristic(in ActionBuffers actionsOut)
+    //{
+    //    var actions = actionsOut.ContinuousActions;
+    //    actions[0] = Input.GetAxis("Horizontal");
+    //    actions[1] = Input.GetAxis("Vertical");
+    //    actions[2] = Input.GetKey(KeyCode.Space) ? 1f : 0f;
+    //}
+
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-        var actions = actionsOut.ContinuousActions;
-        actions[0] = Input.GetAxis("Horizontal");
-        actions[1] = Input.GetAxis("Vertical");
-        actions[2] = Input.GetKey(KeyCode.Space) ? 1f : 0f;
+        var actions = actionsOut.DiscreteActions;
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            actions[1] = 0;
+        }
+        if (!Input.GetKey(KeyCode.W))
+        {
+            actions[1] = 1;
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            actions[0] = 0;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            actions[0] = 1;
+        }
+
+        if ((!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)))
+        {
+            actions[0] = 2;
+        }
     }
 
     public void ScoredAGoal()
@@ -252,6 +252,10 @@ public class Agente1_0 : Agent
         Debug.Log("META COMPLETADA");
     }
 
+    /// <summary>
+    /// Llamado por CircuitoInicializador cada vez que hay un circuito nuevo.
+    /// Actualiza las coordenadas de spawn. El -90° se aplica aquí, una sola vez.
+    /// </summary>
     public void EstablecerSpawnPoint(Transform spawn)
     {
         if (spawn == null)
@@ -264,26 +268,21 @@ public class Agente1_0 : Agent
         _spawnPos = spawn.position;
         _spawnRot = spawn.rotation * Quaternion.Euler(0f, -90f, 0f);
         _spawnValido = true;
-        Debug.Log($"[Agente1_0] SpawnPoint recibido desde CircuitoInicializador: {_spawnPos}");
+        Debug.Log($"[Agente1_0] SpawnPoint actualizado: {_spawnPos}");
     }
 
     public void ResetCar()
     {
-        if (!_spawnValido)
-        {
-            Debug.LogError("[Agente1_0] No se puede resetear el coche porque el spawnPoint no es válido.");
-        }
-        else
-        {
-            var rb = _prometeoCarController.carRigidbody;
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            rb.position = _spawnPos;
-            rb.rotation = _spawnRot;
+        if (!_spawnValido) return;
 
-            obj.transform.position = _spawnPos;
-            obj.transform.rotation = _spawnRot;
-        }
+        var rb = _prometeoCarController.carRigidbody;
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.position = _spawnPos;
+        rb.rotation = _spawnRot;
+
+        obj.transform.position = _spawnPos;
+        obj.transform.rotation = _spawnRot;
 
         salidaDePista = false;
         _checkpointManager.ResetCheckpoints();
@@ -293,6 +292,7 @@ public class Agente1_0 : Agent
 
     public void HandleOffTrack()
     {
+        Debug.LogWarning("[Agente1_0] HandleOffTrack disparado.");
         _reseteando = true;
         AddReward(-0.2f);
         ResetCar();
@@ -305,5 +305,50 @@ public class Agente1_0 : Agent
         AddReward(1f);
         AddReward(_prometeoCarController.carSpeed * 0.05f);
         Debug.Log("Checkpoint superado");
+    }
+
+    public void NotificarCircuitoListo()
+    {
+        _circuitoListo = true;
+    }
+
+    public void BloquearHastaCircuito()
+    {
+        _circuitoListo = false;
+    }
+
+    public void MoveAgent(ActionSegment<int> vectorAction)
+    {
+
+        //HACEMOS AQUI TODO EL TEMA DE GIROS Y DEMAS NUMERO 0 <-----
+
+        int direction = (int)vectorAction[0];
+        if (direction == 0)
+        {
+            _prometeoCarController.TurnLeft();
+        }
+        else if (direction == 1)
+        {
+            _prometeoCarController.TurnRight();
+        }
+        else if (direction == 2)
+        {
+            _prometeoCarController.ResetSteeringAngle();
+        }
+
+        // HACEMOS AQUI TODO EL TEMA DE ACELERACION MOVIMIENTO Y DEMAS NUMERO 1 <----- 
+        int velcotiyCar = (int)vectorAction[1];
+        if (velcotiyCar == 0)
+        {
+            _prometeoCarController.GoForward();
+        }
+        else if (velcotiyCar == 1)
+        {
+            _prometeoCarController.GoReverse();
+        }
+        else if (velcotiyCar == 2)
+        {
+            _prometeoCarController.Brakes();
+        }
     }
 }
