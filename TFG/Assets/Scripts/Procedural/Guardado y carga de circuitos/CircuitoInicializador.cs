@@ -79,37 +79,49 @@ public class CircuitoInicializador : MonoBehaviour
 
         if (spawnPoint == null)
         {
-            Debug.LogError("[CircuitoInicializador] No se encontró ningún SpawnPoint en el circuito. " +
-                           "Asegúrate de que la pieza de inicio tiene 'Posiciones de salida/P1'.");
-            yield break;
+            Debug.LogWarning("[CircuitoInicializador] SpawnPoint no encontrado en jerarquía, " +
+                     "asumiendo que ya fue asignado directamente al agente.");
+        }
+        else
+        {
+            if (mostrarLogs)
+                Debug.Log($"[CircuitoInicializador] SpawnPoint encontrado: {spawnPoint.position}");
         }
 
-        if (mostrarLogs)
-            Debug.Log($"[CircuitoInicializador] SpawnPoint encontrado: {spawnPoint.position}");
-
         // ── Paso 2: Primera carga → instanciar coche. Resto → nada aquí ──
-        if (!cocheYaInstanciado)
+        //if (!cocheYaInstanciado)
+        //{
+        //    if (cochePrefab != null)
+        //    {
+        //        // La rotación final la calcula EstablecerSpawnPoint internamente,
+        //        // pero necesitamos una rotación inicial coherente para el Instantiate.
+        //        Quaternion rotacionInicial = spawnPoint.rotation * Quaternion.Euler(0f, -90f, 0f);
+        //        cocheInstancia = Instantiate(cochePrefab, spawnPoint.position, rotacionInicial);
+        //        cocheYaInstanciado = true;
+
+        //        if (mostrarLogs)
+        //            Debug.Log("[CircuitoInicializador] Coche instanciado por primera vez.");
+
+        //        // Esperar a que Awake/Start del coche corran antes de continuar
+        //        yield return null;
+        //    }
+        //    else
+        //    {
+        //        Debug.LogError("[CircuitoInicializador] cochePrefab no asignado. " +
+        //                       "Asígnalo en el Inspector.");
+        //        yield break;
+        //    }
+        //}
+
+        // ── Paso 2: Si hay prefab de coche, instanciarlo (solo primera vez) ──
+        if (!cocheYaInstanciado && cochePrefab != null && spawnPoint != null)
         {
-            if (cochePrefab != null)
-            {
-                // La rotación final la calcula EstablecerSpawnPoint internamente,
-                // pero necesitamos una rotación inicial coherente para el Instantiate.
-                Quaternion rotacionInicial = spawnPoint.rotation * Quaternion.Euler(0f, -90f, 0f);
-                cocheInstancia = Instantiate(cochePrefab, spawnPoint.position, rotacionInicial);
-                cocheYaInstanciado = true;
-
-                if (mostrarLogs)
-                    Debug.Log("[CircuitoInicializador] Coche instanciado por primera vez.");
-
-                // Esperar a que Awake/Start del coche corran antes de continuar
-                yield return null;
-            }
-            else
-            {
-                Debug.LogError("[CircuitoInicializador] cochePrefab no asignado. " +
-                               "Asígnalo en el Inspector.");
-                yield break;
-            }
+            Quaternion rotacionInicial = spawnPoint.rotation * Quaternion.Euler(0f, -90f, 0f);
+            cocheInstancia = Instantiate(cochePrefab, spawnPoint.position, rotacionInicial);
+            cocheYaInstanciado = true;
+            if (mostrarLogs)
+                Debug.Log("[CircuitoInicializador] Coche instanciado por primera vez.");
+            yield return null;
         }
 
         // ── Paso 3: Reconstruir CheckPoints en el manager ─────────────────
@@ -121,7 +133,8 @@ public class CircuitoInicializador : MonoBehaviour
         // Nunca se destruye ni se reinstancia el coche.
         if (Agente1_0.Instance != null)
         {
-            Agente1_0.Instance.EstablecerSpawnPoint(spawnPoint);
+            if (spawnPoint != null)
+                Agente1_0.Instance.EstablecerSpawnPoint(spawnPoint);
             Agente1_0.Instance.NotificarCircuitoListo();
             Agente1_0.Instance.ResetCar();
 

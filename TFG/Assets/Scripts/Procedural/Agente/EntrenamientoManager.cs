@@ -53,6 +53,9 @@ public class EntrenamientoManager : MonoBehaviour
     [Header("Debug")]
     public bool mostrarLogs = true;
 
+
+    public bool usarCircuitoInicialDeEscena = true;
+
     // ─── ESTADO INTERNO ───────────────────────────────────────────────────
 
     private List<string> rutasCircuitos = new List<string>();
@@ -100,7 +103,8 @@ public class EntrenamientoManager : MonoBehaviour
         Agente1_0.OnNuevoEpisodio += OnEpisodioIniciado;
 
         // Cargar el primer circuito
-        StartCoroutine(CargarCircuitoAleatorio(primeraCarga: true));
+        if (!usarCircuitoInicialDeEscena)
+            StartCoroutine(CargarCircuitoAleatorio(primeraCarga: true));
     }
 
     private void OnDestroy()
