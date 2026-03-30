@@ -4,7 +4,7 @@ public class CameraFollow : MonoBehaviour
 {
     // Ya NO se asigna desde el Inspector: se carga dinámicamente cuando el agente está listo.
     // Se actualiza automáticamente cada vez que se instancia un coche nuevo (cambio de circuito).
-    private Transform carTransform;
+    [SerializeField] private Transform carTransform;
 
     [Range(1, 10)]
     public float followSpeed = 2;
@@ -18,10 +18,10 @@ public class CameraFollow : MonoBehaviour
         // Suscribirse al evento. NO nos desuscribimos nunca: así cada vez que
         // CircuitoInicializador destruye el coche viejo e instancia uno nuevo,
         // el nuevo Agente1_0 dispara OnAgentReady y la cámara se actualiza.
-        Agente1_0.OnAgentReady += OnAgentReady;
+        //Agente1_0.OnAgentReady += OnAgentReady;
 
         // Si el agente ya existe en escena en este momento, actualizamos ya.
-        if (Agente1_0.Instance != null)
+        //if (Agente1_0.Instance != null)
             OnAgentReady();
     }
 

@@ -48,9 +48,7 @@ GameObject:
   - component: {fileID: 4373293038523499678}
   - component: {fileID: 2236184377562762009}
   - component: {fileID: 4655337296933678370}
-  - component: {fileID: 2172703574262451837}
   - component: {fileID: 131034715913101376}
-  - component: {fileID: 2801654385565169221}
   - component: {fileID: 3983884314959390030}
   m_Layer: 8
   m_Name: Prometheus 1
@@ -207,20 +205,6 @@ MonoBehaviour:
   m_UseChildSensors: 1
   m_UseChildActuators: 1
   m_ObservableAttributeHandling: 2
---- !u!114 &2172703574262451837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642287924342879162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DecisionPeriod: 5
-  TakeActionsBetweenDecisions: 1
 --- !u!114 &131034715913101376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,38 +232,6 @@ MonoBehaviour:
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 1
   m_EndVerticalOffset: 0
---- !u!114 &2801654385565169221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642287924342879162}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b105505f5923b5f40b963eb9a0c67fda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Agente4
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 12000
-  _prometeoCarController: {fileID: 2236184377562762009}
-  _checkpointManager: {fileID: 0}
-  obj: {fileID: 642287924342879162}
-  area: {fileID: 0}
-  numRays: 15
-  maxRayDistance: 15
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 64
-  checkpointReward: 10
-  progressRewardScale: 0.02
-  speedRewardScale: 0.005
-  timePenaltyScale: 0.0001
-  offTrackPenalty: -5
-  showDebugInfo: 0
-  salidaDePista: 0
 --- !u!114 &3983884314959390030
 MonoBehaviour:
   m_ObjectHideFlags: 0

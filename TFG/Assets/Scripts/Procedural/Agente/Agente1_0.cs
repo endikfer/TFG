@@ -7,10 +7,10 @@ using UnityEngine;
 public class Agente1_0 : Agent
 {
     // ─── Referencias dinámicas (ya NO se asignan desde el Inspector) ───
-    private CarController _prometeoCarController;
+    [SerializeField] private CarController _prometeoCarController;
     private CheckPointsManager1_0 _checkpointManager;
 
-    private GameObject obj;
+    [SerializeField] private GameObject obj;
     private Vector3 _spawnPos;
     private Quaternion _spawnRot;
     private bool _spawnValido = false;
@@ -38,128 +38,137 @@ public class Agente1_0 : Agent
     public static event System.Action OnAgentReady;
     public static event System.Action OnNuevoEpisodio;
 
-    private void Awake()
-    {
-        Instance = this;
-        obj = this.gameObject;
-    }
+    //private void Awake()
+    //{
+    //    Instance = this;
+    //    obj = this.gameObject;
+    //}
 
-    private void Start()
-    {
-        _checkpointManager = CheckPointsManager1_0.Instance;
+    //private void Start()
+    //{
+    //    _checkpointManager = CheckPointsManager1_0.Instance;
 
-        if (_checkpointManager == null)
-        {
-            Debug.LogError("[Agente1_0] CheckPointsManager1_0 no encontrado.");
-            return;
-        }
+    //    if (_checkpointManager == null)
+    //    {
+    //        Debug.LogError("[Agente1_0] CheckPointsManager1_0 no encontrado.");
+    //        return;
+    //    }
 
-        _prometeoCarController = GetComponentInChildren<CarController>();
+    //    _prometeoCarController = GetComponentInChildren<CarController>();
 
-        if (_prometeoCarController == null)
-        {
-            Debug.LogError("[Agente1_0] CarController no encontrado.");
-            return;
-        }
+    //    if (_prometeoCarController == null)
+    //    {
+    //        Debug.LogError("[Agente1_0] CarController no encontrado.");
+    //        return;
+    //    }
 
-        _checkpointManager.reachedCheckpoint += OnCheckpointReached;
+    //    _checkpointManager.reachedCheckpoint += OnCheckpointReached;
 
-        _isInitialized = true;
-        OnAgentReady?.Invoke();
-    }
+    //    _isInitialized = true;
+    //    OnAgentReady?.Invoke();
+    //}
 
-    private void OnDestroy()
-    {
-        if (_checkpointManager != null)
-            _checkpointManager.reachedCheckpoint -= OnCheckpointReached;
+    //private void OnDestroy()
+    //{
+    //    if (_checkpointManager != null)
+    //        _checkpointManager.reachedCheckpoint -= OnCheckpointReached;
 
-        if (Instance == this)
-            Instance = null;
-    }
+    //    if (Instance == this)
+    //        Instance = null;
+    //}
 
     private void Update()
     {
-        if (!_isInitialized) return;
+        //if (!_isInitialized) return;
 
-        if (salidaDePista && !_reseteando)
-            HandleOffTrack();
+        //if (salidaDePista && !_reseteando)
+        //    HandleOffTrack();
     }
 
     public override void OnEpisodeBegin()
     {
         Debug.LogWarning("[Agente1_0] OnEpisodeBegin.");
-        OnNuevoEpisodio?.Invoke();
+        //OnNuevoEpisodio?.Invoke();
 
-        if (!_isInitialized || !_circuitoListo) return;
+        //if (!_isInitialized || !_circuitoListo) return;
 
         // Si el spawn aún no es válido (circuito todavía cargando),
         // no hacemos nada: el CircuitoInicializador llamará a ResetCar
         // cuando termine de inicializar.
-        if (!_spawnValido) return;
+        //if (!_spawnValido) return;
 
         ResetCar();
 
-        foreach (var checkpoint in _checkpointManager.checkpp.checkPoints)
-            checkpoint.ResetTrigger();
+        //foreach (var checkpoint in _checkpointManager.checkpp.checkPoints)
+        //    checkpoint.ResetTrigger();
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
+
+        //if (!_isInitialized) return;
+
+        //if (salidaDePista && !_reseteando)
+        //    HandleOffTrack();
+
+
         Debug.LogWarning("[Agente1_0] OnActionReceived se está llamando. Asegúrate de que esto es intencional para tu caso de uso.");
-        if (!_isInitialized) return;
+        //if (!_isInitialized) return;
 
-        //float steering = actionBuffers.ContinuousActions[0];
-        //float throttle = actionBuffers.ContinuousActions[1];
-        //float brake = actionBuffers.ContinuousActions[2];
+        Debug.Log("paso la variable");
 
-        //_prometeoCarController.SetSteering(steering);
-        //_prometeoCarController.SetThrottle(throttle);
-        //_prometeoCarController.SetBrake(brake);
+        float steering = actionBuffers.ContinuousActions[0];
+        float throttle = actionBuffers.ContinuousActions[1];
+        float brake = actionBuffers.ContinuousActions[2];
 
-        MoveAgent(actionBuffers.DiscreteActions);
+        _prometeoCarController.SetSteering(steering);
+        _prometeoCarController.SetThrottle(throttle);
+        _prometeoCarController.SetBrake(brake);
 
-        if (_checkpointManager.nextCheckPointToReach == null) return;
+        //MoveAgent(actionBuffers.DiscreteActions);
 
-        Vector3 dirToCheckpoint =
-            (_checkpointManager.nextCheckPointToReach.transform.position - obj.transform.position).normalized;
+        //if (_checkpointManager.nextCheckPointToReach == null) return;
 
-        float alignment = Vector3.Dot(obj.transform.forward, dirToCheckpoint);
+        //Vector3 dirToCheckpoint =
+        //    (_checkpointManager.nextCheckPointToReach.transform.position - obj.transform.position).normalized;
 
-        if (alignment < 0f)
-        {
-            AddReward(alignment * 0.02f);
-        }
-        else
-        {
-            AddReward(alignment * 0.01f);
-            float projectedSpeed = Vector3.Dot(_prometeoCarController.carRigidbody.linearVelocity, dirToCheckpoint);
-            AddReward(projectedSpeed * 0.001f);
-        }
+        //float alignment = Vector3.Dot(obj.transform.forward, dirToCheckpoint);
 
-        float uphill = Vector3.Dot(_prometeoCarController.carRigidbody.linearVelocity.normalized, Vector3.up);
+        //if (alignment < 0f)
+        //{
+        //    AddReward(alignment * 0.02f);
+        //}
+        //else
+        //{
+        //    AddReward(alignment * 0.01f);
+        //    float projectedSpeed = Vector3.Dot(_prometeoCarController.carRigidbody.linearVelocity, dirToCheckpoint);
+        //    AddReward(projectedSpeed * 0.001f);
+        //}
 
-        float slip = Mathf.Abs(_prometeoCarController.localVelocityX);
-        float slipFactor = uphill > 0.1f ? 0.3f : 1f;
-        AddReward(-slip * 0.01f * slipFactor);
+        //float uphill = Vector3.Dot(_prometeoCarController.carRigidbody.linearVelocity.normalized, Vector3.up);
 
-        //if (uphill > 0.1f && throttle > 0.5f)
-        //    AddReward(0.002f);
+        //float slip = Mathf.Abs(_prometeoCarController.localVelocityX);
+        //float slipFactor = uphill > 0.1f ? 0.3f : 1f;
+        //AddReward(-slip * 0.01f * slipFactor);
 
-        if (uphill > 0.1f && _prometeoCarController.carSpeed < 0.3f * _prometeoCarController.maxSpeed)
-            AddReward(-0.005f);
+        ////if (uphill > 0.1f && throttle > 0.5f)
+        ////    AddReward(0.002f);
 
-        float distToCheckpoint = Vector3.Distance(
-            obj.transform.position,
-            _checkpointManager.nextCheckPointToReach.transform.position
-        );
+        //if (uphill > 0.1f && _prometeoCarController.carSpeed < 0.3f * _prometeoCarController.maxSpeed)
+        //    AddReward(-0.005f);
 
-        AddReward(distToCheckpoint < 5f ? -0.0001f : -0.0005f);
+        //float distToCheckpoint = Vector3.Distance(
+        //    obj.transform.position,
+        //    _checkpointManager.nextCheckPointToReach.transform.position
+        //);
 
-        if (StepCount >= MaxStep)
-        {
-            ResetCar();
-            EndEpisode();
-        }
+        //AddReward(distToCheckpoint < 5f ? -0.0001f : -0.0005f);
+
+        //if (StepCount >= MaxStep)
+        //{
+        //    ResetCar();
+        //    EndEpisode();
+        //}
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -209,41 +218,43 @@ public class Agente1_0 : Agent
         }
     }
 
-    //public override void Heuristic(in ActionBuffers actionsOut)
-    //{
-    //    var actions = actionsOut.ContinuousActions;
-    //    actions[0] = Input.GetAxis("Horizontal");
-    //    actions[1] = Input.GetAxis("Vertical");
-    //    actions[2] = Input.GetKey(KeyCode.Space) ? 1f : 0f;
-    //}
-
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-        var actions = actionsOut.DiscreteActions;
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            actions[1] = 0;
-        }
-        if (!Input.GetKey(KeyCode.W))
-        {
-            actions[1] = 1;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            actions[0] = 0;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            actions[0] = 1;
-        }
-
-        if ((!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)))
-        {
-            actions[0] = 2;
-        }
+        var actions = actionsOut.ContinuousActions;
+        actions[0] = Input.GetAxis("Horizontal");
+        actions[1] = Input.GetAxis("Vertical");
+        actions[2] = Input.GetKey(KeyCode.Space) ? 1f : 0f;
     }
+
+
+    //public override void Heuristic(in ActionBuffers actionsOut) {
+    //    var actions = actionsOut.DiscreteActions;
+
+    //    Debug.LogWarning("entro en heuristica");
+
+    //    if (Input.GetKey(KeyCode.W))
+    //    {
+    //        actions[1] = 2;
+    //    }
+    //    if (Input.GetKey(KeyCode.S))
+    //    {
+    //        actions[1] = 1;
+    //    }
+
+    //    if (Input.GetKey(KeyCode.A))
+    //    {
+    //        actions[0] = 2;
+    //    }
+    //    if (Input.GetKey(KeyCode.D))
+    //    {
+    //        actions[0] = 1;
+    //    }
+
+    //    if ((!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)))
+    //    {
+    //        actions[0] = 0;
+    //    }
+    //}
 
     public void ScoredAGoal()
     {
@@ -273,21 +284,23 @@ public class Agente1_0 : Agent
 
     public void ResetCar()
     {
-        if (!_spawnValido) return;
+        //if (!_spawnValido) return;
 
-        var rb = _prometeoCarController.carRigidbody;
-        rb.linearVelocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        rb.position = _spawnPos;
-        rb.rotation = _spawnRot;
+        //Rigidbody rb = _prometeoCarController.carRigidbody;
+        //rb.linearVelocity = Vector3.zero;
+        //rb.angularVelocity = Vector3.zero;
+        //rb.position = _spawnPos;
+        //rb.rotation = _spawnRot;
 
         obj.transform.position = _spawnPos;
         obj.transform.rotation = _spawnRot;
 
         salidaDePista = false;
-        _checkpointManager.ResetCheckpoints();
-        _prometeoCarController.carSpeed = 0;
-        _prometeoCarController.ResetCarState();
+
+        Debug.Log("he entrado a reset car"); 
+        //_checkpointManager.ResetCheckpoints();
+        //_prometeoCarController.carSpeed = 0;
+        //_prometeoCarController.ResetCarState();
     }
 
     public void HandleOffTrack()
@@ -325,7 +338,8 @@ public class Agente1_0 : Agent
         int direction = (int)vectorAction[0];
         if (direction == 0)
         {
-            _prometeoCarController.TurnLeft();
+            _prometeoCarController.ResetSteeringAngle();
+            
         }
         else if (direction == 1)
         {
@@ -333,14 +347,15 @@ public class Agente1_0 : Agent
         }
         else if (direction == 2)
         {
-            _prometeoCarController.ResetSteeringAngle();
+            _prometeoCarController.TurnLeft();
         }
 
         // HACEMOS AQUI TODO EL TEMA DE ACELERACION MOVIMIENTO Y DEMAS NUMERO 1 <----- 
         int velcotiyCar = (int)vectorAction[1];
         if (velcotiyCar == 0)
         {
-            _prometeoCarController.GoForward();
+            _prometeoCarController.Brakes();
+            
         }
         else if (velcotiyCar == 1)
         {
@@ -348,7 +363,7 @@ public class Agente1_0 : Agent
         }
         else if (velcotiyCar == 2)
         {
-            _prometeoCarController.Brakes();
+            _prometeoCarController.GoForward();
         }
     }
 }

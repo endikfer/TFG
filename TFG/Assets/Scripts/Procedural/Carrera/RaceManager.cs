@@ -165,7 +165,7 @@ public class RaceManager : MonoBehaviour
             // CRÍTICO: resetear el flag 'atravesado' de cada checkpoint individualmente,
             // o en la siguiente vuelta ninguno responderá al trigger del coche.
             foreach (var cp in manager.checkpp.checkPoints)
-                cp.ResetTrigger();
+                //cp.ResetTrigger(); COMENTADO 3003
 
             // Resetear el índice y nextCheckPointToReach del manager
             manager.ResetCheckpoints();

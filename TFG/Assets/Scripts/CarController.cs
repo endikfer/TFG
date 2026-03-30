@@ -219,37 +219,37 @@ public class CarController : MonoBehaviour
 
 
     // Update is called once per frame
-    private void Update()
-    {
-        // --- 1️⃣ Actualizar velocidad local y animación de ruedas ---
-        carSpeed = (2 * Mathf.PI * frontLeftCollider.radius * frontLeftCollider.rpm * 60) / 1000;
-        localVelocityX = transform.InverseTransformDirection(carRigidbody.linearVelocity).x;
-        localVelocityZ = transform.InverseTransformDirection(carRigidbody.linearVelocity).z;
-        AnimateWheelMeshes();
+    //private void Update()
+    //{
+    //    // --- 1️⃣ Actualizar velocidad local y animación de ruedas ---
+    //    carSpeed = (2 * Mathf.PI * frontLeftCollider.radius * frontLeftCollider.rpm * 60) / 1000;
+    //    localVelocityX = transform.InverseTransformDirection(carRigidbody.linearVelocity).x;
+    //    localVelocityZ = transform.InverseTransformDirection(carRigidbody.linearVelocity).z;
+    //    AnimateWheelMeshes();
 
-        // --- 2️⃣ Leer inputs ---
-        float throttleInput = 0f;
-        if (Input.GetKey(KeyCode.W)) throttleInput = 1f;
-        if (Input.GetKey(KeyCode.S)) throttleInput = -1f;
+    //    // --- 2️⃣ Leer inputs ---
+    //    float throttleInput = 0f;
+    //    if (Input.GetKey(KeyCode.W)) throttleInput = 1f;
+    //    if (Input.GetKey(KeyCode.S)) throttleInput = -1f;
 
-        float steeringInput = 0f;
-        if (Input.GetKey(KeyCode.A)) steeringInput = -1f;
-        if (Input.GetKey(KeyCode.D)) steeringInput = 1f;
+    //    float steeringInput = 0f;
+    //    if (Input.GetKey(KeyCode.A)) steeringInput = -1f;
+    //    if (Input.GetKey(KeyCode.D)) steeringInput = 1f;
 
-        // --- 3️⃣ Aplicar dirección y acelerador ---
-        SetSteering(steeringInput);
-        SetThrottle(throttleInput);
+    //    // --- 3️⃣ Aplicar dirección y acelerador ---
+    //    SetSteering(steeringInput);
+    //    SetThrottle(throttleInput);
 
-        // --- 4️⃣ Frenado manual ---
-        if (Input.GetKey(KeyCode.Space))
-        {
-            Brakes();
-        }
+    //    // --- 4️⃣ Frenado manual ---
+    //    if (Input.GetKey(KeyCode.Space))
+    //    {
+    //        Brakes();
+    //    }
 
-        // --- 5️⃣ UI y sonidos ---
-        if (useUI) CarSpeedUI();
-        if (useSounds) CarSounds();
-    }
+    //    // --- 5️⃣ UI y sonidos ---
+    //    if (useUI) CarSpeedUI();
+    //    if (useSounds) CarSounds();
+    //}
 
 
 
@@ -667,6 +667,8 @@ public class CarController : MonoBehaviour
 
     public void TurnLeft()
     {
+
+        Debug.Log("entro en girar a la izquierda");
         steeringAxis = steeringAxis - (Time.deltaTime * 10f * steeringSpeed);
         if (steeringAxis < -1f)
         {
