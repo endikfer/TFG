@@ -80,6 +80,8 @@ public class RaceManager : MonoBehaviour
     {
         CircuitoEventos.OnCircuitoCerrado += OnCircuitoListo;
         CircuitoEventos.OnCircuitoCargado += OnCircuitoListo;
+
+        
     }
 
     private void OnDestroy()
@@ -95,15 +97,19 @@ public class RaceManager : MonoBehaviour
 
     private void OnCircuitoListo(List<PiezaCircuito> piezas, float distanciaTotal)
     {
+        InicializarCarrera(distanciaTotal);
+    }
+
+    public void InicializarCarrera(float distanciaTotal)
+    {
         LongitudCircuito = distanciaTotal;
 
-        // Calcular vueltas según el modo elegido
         if (modoCarrera == ModoCarrera.PorDistancia)
         {
             if (LongitudCircuito > 0f)
                 VueltasNecesarias = Mathf.Max(1, Mathf.RoundToInt(distanciaObjetivoCarrera / LongitudCircuito));
             else
-                VueltasNecesarias = vueltasObjetivo; // fallback si no hay longitud
+                VueltasNecesarias = vueltasObjetivo;
         }
         else
         {
@@ -112,19 +118,8 @@ public class RaceManager : MonoBehaviour
 
         VueltasCompletadas = 0;
 
-        // Mostrar "Vuelta 1 / N": la carrera empieza siempre en la vuelta 1
-        raceHUD?.ActualizarVueltas(VueltasCompletadas + 1, VueltasNecesarias);
-
         if (mostrarLogs)
-        {
-            Debug.Log($"[RaceManager] Circuito listo.\n" +
-                      $"  Longitud      : {LongitudCircuito:F1} m\n" +
-                      $"  Modo          : {modoCarrera}\n" +
-                      $"  Vueltas necesarias: {VueltasNecesarias}" +
-                      (modoCarrera == ModoCarrera.PorDistancia
-                          ? $"  (≈ {LongitudCircuito * VueltasNecesarias:F0} m totales)"
-                          : ""));
-        }
+            Debug.Log($"[RaceManager] Carrera inicializada. Vueltas: {VueltasNecesarias}");
     }
 
     // ─── API pública ──────────────────────────────────────────────────────
@@ -164,10 +159,6 @@ public class RaceManager : MonoBehaviour
 
             // CRÍTICO: resetear el flag 'atravesado' de cada checkpoint individualmente,
             // o en la siguiente vuelta ninguno responderá al trigger del coche.
-            foreach (var cp in manager.checkpp.checkPoints)
-                //cp.ResetTrigger(); COMENTADO 3003
-
-            // Resetear el índice y nextCheckPointToReach del manager
             manager.ResetCheckpoints();
 
             // Actualizar HUD mostrando la vuelta que empieza (completadas + 1)

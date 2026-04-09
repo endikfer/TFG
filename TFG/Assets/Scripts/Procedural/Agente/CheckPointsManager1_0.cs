@@ -13,16 +13,13 @@ public class CheckPointsManager1_0 : MonoBehaviour
     public float distance { get; private set; }
     public float distanceMaxToNext { get; private set; }
 
-    private int CurrentCheckpointIndex;
-    private List<CheckPoint1_0> Checkpoints = new List<CheckPoint1_0>();
-
-    // checkpp sigue existiendo para que CheckPoint1_0 y Agente1_0 accedan a la lista
-    public CheckPoints1_0 checkpp;
+    private int currentCheckpointIndex;
+    public List<CheckPoint1_0> checkpoints = new List<CheckPoint1_0>();
 
     private CheckPoint1_0 lastCheckpoint;
     public event Action<CheckPoint1_0> reachedCheckpoint;
 
-    private bool _circuitoListo = false;
+    public bool _circuitoListo = false;
 
     private void Awake()
     {
@@ -68,14 +65,13 @@ public class CheckPointsManager1_0 : MonoBehaviour
             checkpointsOrdenados[i].checkpointID = i;
 
         // Guardar en checkpp para que el resto del sistema lo use igual que antes
-        checkpp.checkPoints = checkpointsOrdenados;
+        checkpoints = checkpointsOrdenados;
 
         _circuitoListo = true;
 
         Debug.Log($"[CheckPointsManager] Circuito listo: {checkpointsOrdenados.Count} checkpoints registrados.");
 
         // Inicializar la carrera
-        Checkpoints = checkpp.checkPoints;
         ResetCheckpoints();
 
         // Si el agente ya estaba listo, calcular distancia inicial
@@ -101,8 +97,8 @@ public class CheckPointsManager1_0 : MonoBehaviour
 
     public void ResetCheckpoints()
     {
-        CurrentCheckpointIndex = 0;
-        Checkpoints = checkpp.checkPoints;
+        ResetTriggers();
+        currentCheckpointIndex = 0;
         SetNextCheckpoint();
     }
 
@@ -110,11 +106,11 @@ public class CheckPointsManager1_0 : MonoBehaviour
     {
         if (nextCheckPointToReach != checkpoint) return;
 
-        lastCheckpoint = Checkpoints[CurrentCheckpointIndex];
+        lastCheckpoint = checkpoints[currentCheckpointIndex];
         reachedCheckpoint?.Invoke(checkpoint);
-        CurrentCheckpointIndex++;
+        currentCheckpointIndex++;
 
-        if (CurrentCheckpointIndex < Checkpoints.Count)
+        if (currentCheckpointIndex < checkpoints.Count)
         {
             SetNextCheckpoint();
 
@@ -129,9 +125,36 @@ public class CheckPointsManager1_0 : MonoBehaviour
 
     private void SetNextCheckpoint()
     {
-        if (Checkpoints.Count > 0 && CurrentCheckpointIndex < Checkpoints.Count)
-            nextCheckPointToReach = Checkpoints[CurrentCheckpointIndex];
+        if (checkpoints.Count > 0 && currentCheckpointIndex < checkpoints.Count)
+            nextCheckPointToReach = checkpoints[currentCheckpointIndex];
     }
 
-    public int GetCheckpointIndex() => CurrentCheckpointIndex;
+    public int GetCheckpointIndex() => currentCheckpointIndex;
+
+    public void LimpiarCheckpoints()
+    {
+        checkpoints.Clear();
+        nextCheckPointToReach = null;
+        _circuitoListo = false;
+        currentCheckpointIndex = 0;
+    }
+
+    public void InicializarCheckpoints()
+    {
+        if (checkpoints != null && checkpoints.Count > 0)
+        {
+            for (int i = 0; i < checkpoints.Count; i++)
+                checkpoints[i].checkpointID = i;
+
+            _circuitoListo = true;
+            ResetCheckpoints();
+
+            Debug.Log($"[CheckPointsManager] Checkpoints inicializados: {checkpoints.Count}");
+        }
+    }
+    public void ResetTriggers()
+    {
+        foreach (var cp in checkpoints)
+            cp.resettrigger();
+    }
 }

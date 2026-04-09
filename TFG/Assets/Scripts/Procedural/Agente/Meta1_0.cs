@@ -34,7 +34,7 @@ public class Meta1_0 : MonoBehaviour
         if (kartAgent == null || manager == null) return;
 
         // Verificar que se han pasado TODOS los checkpoints de esta vuelta
-        if (manager.GetCheckpointIndex() != manager.checkpp.checkPoints.Count) return;
+        if (manager.GetCheckpointIndex() != manager.checkpoints.Count) return;
 
         // Delegar en el RaceManager: él decide si es vuelta intermedia o fin de carrera
         if (RaceManager.Instance != null)

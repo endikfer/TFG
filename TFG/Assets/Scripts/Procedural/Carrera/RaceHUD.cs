@@ -112,4 +112,15 @@ public class RaceHUD : MonoBehaviour
         if (panelVueltas != null)
             panelVueltas.SetActive(false);
     }
+
+    // RaceHUD
+    public void MostrarHUD()
+    {
+        if (RaceManager.Instance != null)
+        {
+            ActualizarVueltas(RaceManager.Instance.VueltasCompletadas + 1,
+                              RaceManager.Instance.VueltasNecesarias);
+            MostrarPanel();
+        }
+    }
 }

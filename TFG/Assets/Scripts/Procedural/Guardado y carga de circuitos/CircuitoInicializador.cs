@@ -218,9 +218,9 @@ public class CircuitoInicializador : MonoBehaviour
             return;
         }
 
-        if (manager.checkpp != null)
+        if (manager.checkpoints != null)
         {
-            manager.checkpp.checkPoints = checkpointsEncontrados;
+            manager.checkpoints = checkpointsEncontrados;
 
             for (int i = 0; i < checkpointsEncontrados.Count; i++)
                 checkpointsEncontrados[i].checkpointID = i;

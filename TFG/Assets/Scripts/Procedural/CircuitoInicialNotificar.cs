@@ -14,7 +14,7 @@ public class CircuitoInicialNotificador : MonoBehaviour
 
         // Recoger checkpoints directamente del circuito inicial
         CheckPointsManager1_0 manager = CheckPointsManager1_0.Instance;
-        if (manager != null && manager.checkpp != null)
+        if (manager != null && manager.checkpoints != null)
         {
             List<CheckPoint1_0> checkpoints = new List<CheckPoint1_0>(
                 circuitoParent.GetComponentsInChildren<CheckPoint1_0>());
@@ -22,7 +22,7 @@ public class CircuitoInicialNotificador : MonoBehaviour
             for (int i = 0; i < checkpoints.Count; i++)
                 checkpoints[i].checkpointID = i;
 
-            manager.checkpp.checkPoints = checkpoints;
+            manager.checkpoints = checkpoints;
             manager.ResetCheckpoints();
         }
 

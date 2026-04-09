@@ -11,6 +11,7 @@ public class Agente1_0 : Agent
     private CheckPointsManager1_0 _checkpointManager;
 
     [SerializeField] private GameObject obj;
+    private Transform spawn;
     private Vector3 _spawnPos;
     private Quaternion _spawnRot;
     private bool _spawnValido = false;
@@ -38,69 +39,73 @@ public class Agente1_0 : Agent
     public static event System.Action OnAgentReady;
     public static event System.Action OnNuevoEpisodio;
 
-    //private void Awake()
-    //{
-    //    Instance = this;
-    //    obj = this.gameObject;
-    //}
+    private void Awake()
+    {
+        Instance = this;
+        obj = this.gameObject;
+    }
 
-    //private void Start()
-    //{
-    //    _checkpointManager = CheckPointsManager1_0.Instance;
+    private void Start()
+    {
+        _checkpointManager = CheckPointsManager1_0.Instance;
 
-    //    if (_checkpointManager == null)
-    //    {
-    //        Debug.LogError("[Agente1_0] CheckPointsManager1_0 no encontrado.");
-    //        return;
-    //    }
+        if (_checkpointManager == null)
+        {
+            Debug.LogError("[Agente1_0] CheckPointsManager1_0 no encontrado.");
+            return;
+        }
 
-    //    _prometeoCarController = GetComponentInChildren<CarController>();
+        if (_prometeoCarController == null)
+        {
+            Debug.LogError("[Agente1_0] CarController no encontrado.");
+            return;
+        }
 
-    //    if (_prometeoCarController == null)
-    //    {
-    //        Debug.LogError("[Agente1_0] CarController no encontrado.");
-    //        return;
-    //    }
+        _checkpointManager.reachedCheckpoint += OnCheckpointReached;
 
-    //    _checkpointManager.reachedCheckpoint += OnCheckpointReached;
+        _isInitialized = true;
+        OnAgentReady?.Invoke();
+    }
 
-    //    _isInitialized = true;
-    //    OnAgentReady?.Invoke();
-    //}
-
-    //private void OnDestroy()
-    //{
-    //    if (_checkpointManager != null)
-    //        _checkpointManager.reachedCheckpoint -= OnCheckpointReached;
-
-    //    if (Instance == this)
-    //        Instance = null;
-    //}
+    private void OnDestroy()
+    {
+        // El agente nunca se destruye, pero por seguridad limpiamos el evento
+        if (_checkpointManager != null)
+            _checkpointManager.reachedCheckpoint -= OnCheckpointReached;
+    }
 
     private void Update()
     {
-        //if (!_isInitialized) return;
+        if (!_isInitialized) return;
 
-        //if (salidaDePista && !_reseteando)
-        //    HandleOffTrack();
+        if (salidaDePista && !_reseteando)
+            HandleOffTrack();
     }
 
     public override void OnEpisodeBegin()
     {
-        Debug.LogWarning("[Agente1_0] OnEpisodeBegin.");
-        //OnNuevoEpisodio?.Invoke();
+        OnNuevoEpisodio?.Invoke();
 
-        //if (!_isInitialized || !_circuitoListo) return;
+        if (!_isInitialized) return;
 
-        // Si el spawn aún no es válido (circuito todavía cargando),
-        // no hacemos nada: el CircuitoInicializador llamará a ResetCar
-        // cuando termine de inicializar.
-        //if (!_spawnValido) return;
+        // Primera vez: inicializar checkpoints desde escena
+        if (!_checkpointManager._circuitoListo)
+            _checkpointManager.InicializarCheckpoints();
+
+        if (RaceManager.Instance != null && RaceManager.Instance.VueltasNecesarias == 0)
+            RaceManager.Instance.InicializarCarrera(0f);
+
+        // Mostrar HUD la primera vez
+        if (RaceManager.Instance != null)
+        {
+            RaceManager.Instance?.ResetCarrera();
+            RaceManager.Instance.raceHUD?.MostrarHUD();
+        }
+            
+
+        if (!_spawnValido) return;
 
         ResetCar();
-
-        //foreach (var checkpoint in _checkpointManager.checkpp.checkPoints)
-        //    checkpoint.ResetTrigger();
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
@@ -112,10 +117,7 @@ public class Agente1_0 : Agent
         //    HandleOffTrack();
 
 
-        Debug.LogWarning("[Agente1_0] OnActionReceived se está llamando. Asegúrate de que esto es intencional para tu caso de uso.");
         //if (!_isInitialized) return;
-
-        Debug.Log("paso la variable");
 
         float steering = actionBuffers.ContinuousActions[0];
         float throttle = actionBuffers.ContinuousActions[1];
@@ -173,21 +175,24 @@ public class Agente1_0 : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        Debug.LogWarning("[Agente1_0] CollectObservations se está llamando. Asegúrate de que esto es intencional para tu caso de uso.");
-        if (!_isInitialized || _checkpointManager.nextCheckPointToReach == null)
+        if (!_isInitialized || _checkpointManager == null || _checkpointManager.nextCheckPointToReach == null)
         {
+            sensor.AddObservation(Vector3.zero); // dirToCheckpoint
+            sensor.AddObservation(Vector3.zero); // dirToNextNext
+            sensor.AddObservation(0f);           // speed
+            sensor.AddObservation(0f);           // angle
+            for (int i = 0; i < numRays; i++) sensor.AddObservation(1f);
             Debug.LogWarning("[Agente1_0] CollectObservations: agente no inicializado o checkpoint nulo. Agregando observaciones vacías.");
             return;
         }
 
-        Debug.LogWarning("[Agente1_0] CollectObservations: Listo.");
 
         Vector3 dirToCheckpoint =
             (_checkpointManager.nextCheckPointToReach.transform.position - obj.transform.position).normalized;
         sensor.AddObservation(dirToCheckpoint);
 
         int currentIndex = _checkpointManager.GetCheckpointIndex();
-        var checkpoints = _checkpointManager.checkpp.checkPoints;
+        var checkpoints = _checkpointManager.checkpoints;
 
         if (currentIndex + 1 < checkpoints.Count)
         {
@@ -284,7 +289,10 @@ public class Agente1_0 : Agent
 
     public void ResetCar()
     {
-        //if (!_spawnValido) return;
+        spawn = BuscarSpawnPoint();
+        EstablecerSpawnPoint(spawn);
+
+        if (!_spawnValido) return;
 
         //Rigidbody rb = _prometeoCarController.carRigidbody;
         //rb.linearVelocity = Vector3.zero;
@@ -292,13 +300,13 @@ public class Agente1_0 : Agent
         //rb.position = _spawnPos;
         //rb.rotation = _spawnRot;
 
+
         obj.transform.position = _spawnPos;
         obj.transform.rotation = _spawnRot;
 
         salidaDePista = false;
 
-        Debug.Log("he entrado a reset car"); 
-        //_checkpointManager.ResetCheckpoints();
+        _checkpointManager.ResetCheckpoints();
         //_prometeoCarController.carSpeed = 0;
         //_prometeoCarController.ResetCarState();
     }
@@ -330,40 +338,31 @@ public class Agente1_0 : Agent
         _circuitoListo = false;
     }
 
-    public void MoveAgent(ActionSegment<int> vectorAction)
+    private Transform BuscarSpawnPoint()
     {
+        // Busca en toda la escena un transform llamado "P1" 
+        // dentro de un objeto "Posiciones de salida"
 
-        //HACEMOS AQUI TODO EL TEMA DE GIROS Y DEMAS NUMERO 0 <-----
+        Transform spawnTransform;
+        GameObject posicionesDeSalida = GameObject.Find("Posiciones de salida");
 
-        int direction = (int)vectorAction[0];
-        if (direction == 0)
+        if (posicionesDeSalida == null)
         {
-            _prometeoCarController.ResetSteeringAngle();
-            
-        }
-        else if (direction == 1)
-        {
-            _prometeoCarController.TurnRight();
-        }
-        else if (direction == 2)
-        {
-            _prometeoCarController.TurnLeft();
+            Debug.LogWarning("[Agente1_0] No se encontró 'Posiciones de salida' en la escena. " +
+                             "Usando posición actual como spawn de emergencia.");
+            spawnTransform = obj.transform;
+            return spawnTransform;
         }
 
-        // HACEMOS AQUI TODO EL TEMA DE ACELERACION MOVIMIENTO Y DEMAS NUMERO 1 <----- 
-        int velcotiyCar = (int)vectorAction[1];
-        if (velcotiyCar == 0)
+        spawnTransform = posicionesDeSalida.transform.Find("P1");
+
+        if (spawnTransform == null)
         {
-            _prometeoCarController.Brakes();
-            
+            Debug.LogWarning("[Agente1_0] No se encontró 'P1' dentro de 'Posiciones de salida'. " +
+                             "Usando posición actual como spawn de emergencia.");
+            spawnTransform = obj.transform;
+            return spawnTransform;
         }
-        else if (velcotiyCar == 1)
-        {
-            _prometeoCarController.GoReverse();
-        }
-        else if (velcotiyCar == 2)
-        {
-            _prometeoCarController.GoForward();
-        }
+        return spawnTransform;
     }
 }

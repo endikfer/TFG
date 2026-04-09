@@ -22,19 +22,19 @@ public class CameraFollow : MonoBehaviour
 
         // Si el agente ya existe en escena en este momento, actualizamos ya.
         //if (Agente1_0.Instance != null)
-            OnAgentReady();
+            //OnAgentReady();
     }
 
-    private void OnDestroy()
-    {
-        Agente1_0.OnAgentReady -= OnAgentReady;
-    }
+    //private void OnDestroy()
+    //{
+    //    Agente1_0.OnAgentReady -= OnAgentReady;
+    //}
 
-    private void OnAgentReady()
-    {
-        carTransform = Agente1_0.Instance.transform;
-        Debug.Log("[CameraFollow] Transform del coche actualizado.");
-    }
+    //private void OnAgentReady()
+    //{
+    //    carTransform = Agente1_0.Instance.transform;
+    //    Debug.Log("[CameraFollow] Transform del coche actualizado.");
+    //}
 
     void LateUpdate()
     {
