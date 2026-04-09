@@ -111,7 +111,7 @@ public class Agente1_0 : Agent
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
 
-        //if (!_isInitialized) return;
+        if (!_isInitialized) return;
 
         //if (salidaDePista && !_reseteando)
         //    HandleOffTrack();
@@ -129,48 +129,48 @@ public class Agente1_0 : Agent
 
         //MoveAgent(actionBuffers.DiscreteActions);
 
-        //if (_checkpointManager.nextCheckPointToReach == null) return;
+        if (_checkpointManager.nextCheckPointToReach == null) return;
 
-        //Vector3 dirToCheckpoint =
-        //    (_checkpointManager.nextCheckPointToReach.transform.position - obj.transform.position).normalized;
+        Vector3 dirToCheckpoint =
+            (_checkpointManager.nextCheckPointToReach.transform.position - obj.transform.position).normalized;
 
-        //float alignment = Vector3.Dot(obj.transform.forward, dirToCheckpoint);
+        float alignment = Vector3.Dot(obj.transform.forward, dirToCheckpoint);
 
-        //if (alignment < 0f)
-        //{
-        //    AddReward(alignment * 0.02f);
-        //}
-        //else
-        //{
-        //    AddReward(alignment * 0.01f);
-        //    float projectedSpeed = Vector3.Dot(_prometeoCarController.carRigidbody.linearVelocity, dirToCheckpoint);
-        //    AddReward(projectedSpeed * 0.001f);
-        //}
+        if (alignment < 0f)
+        {
+            AddReward(alignment * 0.02f);
+        }
+        else
+        {
+            AddReward(alignment * 0.01f);
+            float projectedSpeed = Vector3.Dot(_prometeoCarController.carRigidbody.linearVelocity, dirToCheckpoint);
+            AddReward(projectedSpeed * 0.001f);
+        }
 
-        //float uphill = Vector3.Dot(_prometeoCarController.carRigidbody.linearVelocity.normalized, Vector3.up);
+        float uphill = Vector3.Dot(_prometeoCarController.carRigidbody.linearVelocity.normalized, Vector3.up);
 
-        //float slip = Mathf.Abs(_prometeoCarController.localVelocityX);
-        //float slipFactor = uphill > 0.1f ? 0.3f : 1f;
-        //AddReward(-slip * 0.01f * slipFactor);
+        float slip = Mathf.Abs(_prometeoCarController.localVelocityX);
+        float slipFactor = uphill > 0.1f ? 0.3f : 1f;
+        AddReward(-slip * 0.01f * slipFactor);
 
-        ////if (uphill > 0.1f && throttle > 0.5f)
-        ////    AddReward(0.002f);
+        //if (uphill > 0.1f && throttle > 0.5f)
+        //    AddReward(0.002f);
 
-        //if (uphill > 0.1f && _prometeoCarController.carSpeed < 0.3f * _prometeoCarController.maxSpeed)
-        //    AddReward(-0.005f);
+        if (uphill > 0.1f && _prometeoCarController.carSpeed < 0.3f * _prometeoCarController.maxSpeed)
+            AddReward(-0.005f);
 
-        //float distToCheckpoint = Vector3.Distance(
-        //    obj.transform.position,
-        //    _checkpointManager.nextCheckPointToReach.transform.position
-        //);
+        float distToCheckpoint = Vector3.Distance(
+            obj.transform.position,
+            _checkpointManager.nextCheckPointToReach.transform.position
+        );
 
-        //AddReward(distToCheckpoint < 5f ? -0.0001f : -0.0005f);
+        AddReward(distToCheckpoint < 5f ? -0.0001f : -0.0005f);
 
-        //if (StepCount >= MaxStep)
-        //{
-        //    ResetCar();
-        //    EndEpisode();
-        //}
+        if (StepCount >= MaxStep)
+        {
+            ResetCar();
+            EndEpisode();
+        }
     }
 
     public override void CollectObservations(VectorSensor sensor)
