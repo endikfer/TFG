@@ -94,22 +94,21 @@ public class EntrenamientoManager : MonoBehaviour
 
         if (rutasCircuitos.Count == 0)
         {
-            Debug.LogError("[TrainingManager] No se encontraron circuitos guardados en: " + ObtenerDirectorioBase());
-            enabled = false;
-            return;
+            Debug.LogError("[TrainingManager] No se encontraron circuitos guardados. " +
+                         "Solo se usará el circuito de escena.");
         }
+
+        indiceCircuitoActual = -1;
+        episodiosEnCircuitoActual = 0;
 
         // Suscribirse al evento de inicio de episodio del agente
         Agente1_0.OnNuevoEpisodio += OnEpisodioIniciado;
 
-        // Cargar el primer circuito
-        if (!usarCircuitoInicialDeEscena)
-            StartCoroutine(CargarCircuitoAleatorio(primeraCarga: true));
     }
 
     private void OnDestroy()
     {
-        Agente1_0.OnNuevoEpisodio += OnEpisodioIniciado;
+        Agente1_0.OnNuevoEpisodio -= OnEpisodioIniciado;
 
         if (Instance == this)
             Instance = null;
@@ -139,6 +138,16 @@ public class EntrenamientoManager : MonoBehaviour
         // 3. ¿Toca cambiar de circuito?
         if (episodiosEnCircuitoActual >= episodiosPorCircuito)
         {
+            // Solo rotar si hay circuitos de archivo disponibles
+            if (rutasCircuitos.Count == 0)
+            {
+                if (mostrarLogs)
+                    Debug.LogWarning("[TrainingManager] No hay circuitos de archivo. " +
+                                     "Reiniciando contador sobre el mismo circuito.");
+                episodiosEnCircuitoActual = 0;
+                return;
+            }
+
             cambioCircuitoPendiente = true;
             episodiosEnCircuitoActual = 0;
             StartCoroutine(CargarCircuitoAleatorio(primeraCarga: false));

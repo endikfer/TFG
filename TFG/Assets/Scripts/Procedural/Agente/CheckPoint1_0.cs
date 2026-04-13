@@ -24,7 +24,7 @@ public class CheckPoint1_0 : MonoBehaviour
 
         atravesado = true;
         manager.CheckPointReached(this);
-        Debug.Log($"Alcanzado el checkpoint {checkpointID}.");
+        Debug.LogWarning($"Alcanzado el checkpoint {checkpointID}.");
     }
 
     public void resettrigger()

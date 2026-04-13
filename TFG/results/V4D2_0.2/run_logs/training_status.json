@@ -1,0 +1,56 @@
+{
+    "Agente": {
+        "checkpoints": [
+            {
+                "steps": 499942,
+                "file_path": "results\\V4D2_0.2\\Agente\\Agente-499942.onnx",
+                "reward": 35.99202777942022,
+                "creation_time": 1775926646.8934543,
+                "auxillary_file_paths": [
+                    "results\\V4D2_0.2\\Agente\\Agente-499942.pt"
+                ]
+            },
+            {
+                "steps": 999979,
+                "file_path": "results\\V4D2_0.2\\Agente\\Agente-999979.onnx",
+                "reward": 36.45307056605816,
+                "creation_time": 1775929050.5770385,
+                "auxillary_file_paths": [
+                    "results\\V4D2_0.2\\Agente\\Agente-999979.pt"
+                ]
+            },
+            {
+                "steps": 1499983,
+                "file_path": "results\\V4D2_0.2\\Agente\\Agente-1499983.onnx",
+                "reward": 20.358460664749146,
+                "creation_time": 1775931843.151977,
+                "auxillary_file_paths": [
+                    "results\\V4D2_0.2\\Agente\\Agente-1499983.pt"
+                ]
+            },
+            {
+                "steps": 1675270,
+                "file_path": "results\\V4D2_0.2\\Agente\\Agente-1675270.onnx",
+                "reward": 37.09069508314133,
+                "creation_time": 1775932761.8280404,
+                "auxillary_file_paths": [
+                    "results\\V4D2_0.2\\Agente\\Agente-1675270.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1675270,
+            "file_path": "results\\V4D2_0.2\\Agente.onnx",
+            "reward": 37.09069508314133,
+            "creation_time": 1775932761.8280404,
+            "auxillary_file_paths": [
+                "results\\V4D2_0.2\\Agente\\Agente-1675270.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.7.1+cu118"
+    }
+}

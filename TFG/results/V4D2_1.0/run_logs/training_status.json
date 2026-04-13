@@ -1,0 +1,38 @@
+{
+    "Agente": {
+        "checkpoints": [
+            {
+                "steps": 49513,
+                "file_path": "results\\V4D2_1.0\\Agente\\Agente-49513.onnx",
+                "reward": 7.991692913805737,
+                "creation_time": 1775818678.7803383,
+                "auxillary_file_paths": [
+                    "results\\V4D2_1.0\\Agente\\Agente-49513.pt"
+                ]
+            },
+            {
+                "steps": 64890,
+                "file_path": "results\\V4D2_1.0\\Agente\\Agente-64890.onnx",
+                "reward": null,
+                "creation_time": 1775818713.5420141,
+                "auxillary_file_paths": [
+                    "results\\V4D2_1.0\\Agente\\Agente-64890.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 64890,
+            "file_path": "results\\V4D2_1.0\\Agente.onnx",
+            "reward": null,
+            "creation_time": 1775818713.5420141,
+            "auxillary_file_paths": [
+                "results\\V4D2_1.0\\Agente\\Agente-64890.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.7.1+cu118"
+    }
+}

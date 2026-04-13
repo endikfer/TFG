@@ -1,0 +1,56 @@
+{
+    "Agente": {
+        "checkpoints": [
+            {
+                "steps": 49665,
+                "file_path": "results\\PruebaBuena1\\Agente\\Agente-49665.onnx",
+                "reward": 23.471466568112373,
+                "creation_time": 1775755817.9612184,
+                "auxillary_file_paths": [
+                    "results\\PruebaBuena1\\Agente\\Agente-49665.pt"
+                ]
+            },
+            {
+                "steps": 99870,
+                "file_path": "results\\PruebaBuena1\\Agente\\Agente-99870.onnx",
+                "reward": 19.463670037686825,
+                "creation_time": 1775756613.4044666,
+                "auxillary_file_paths": [
+                    "results\\PruebaBuena1\\Agente\\Agente-99870.pt"
+                ]
+            },
+            {
+                "steps": 149808,
+                "file_path": "results\\PruebaBuena1\\Agente\\Agente-149808.onnx",
+                "reward": 36.95484638214111,
+                "creation_time": 1775757662.2146804,
+                "auxillary_file_paths": [
+                    "results\\PruebaBuena1\\Agente\\Agente-149808.pt"
+                ]
+            },
+            {
+                "steps": 182783,
+                "file_path": "results\\PruebaBuena1\\Agente\\Agente-182783.onnx",
+                "reward": 34.88901636004448,
+                "creation_time": 1775758344.5441122,
+                "auxillary_file_paths": [
+                    "results\\PruebaBuena1\\Agente\\Agente-182783.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 182783,
+            "file_path": "results\\PruebaBuena1\\Agente.onnx",
+            "reward": 34.88901636004448,
+            "creation_time": 1775758344.5441122,
+            "auxillary_file_paths": [
+                "results\\PruebaBuena1\\Agente\\Agente-182783.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.7.1+cu118"
+    }
+}

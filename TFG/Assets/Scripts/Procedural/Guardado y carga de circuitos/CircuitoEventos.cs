@@ -32,6 +32,7 @@ public static class CircuitoEventos
     public static void NotificarCircuitoCargado(List<PiezaCircuito> piezas, float distanciaTotal)
     {
         OnCircuitoCargado?.Invoke(piezas, distanciaTotal);
+        NotificarCircuitoListoParaAgente(piezas);
     }
 
     /// <summary>

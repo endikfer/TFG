@@ -1,0 +1,74 @@
+{
+    "Agente": {
+        "checkpoints": [
+            {
+                "steps": 49998,
+                "file_path": "results\\V4D2_1.1\\Agente\\Agente-49998.onnx",
+                "reward": 27.442513783772785,
+                "creation_time": 1775835677.6062424,
+                "auxillary_file_paths": [
+                    "results\\V4D2_1.1\\Agente\\Agente-49998.pt"
+                ]
+            },
+            {
+                "steps": 99389,
+                "file_path": "results\\V4D2_1.1\\Agente\\Agente-99389.onnx",
+                "reward": -249.35127133245652,
+                "creation_time": 1775835779.5417998,
+                "auxillary_file_paths": [
+                    "results\\V4D2_1.1\\Agente\\Agente-99389.pt"
+                ]
+            },
+            {
+                "steps": 149862,
+                "file_path": "results\\V4D2_1.1\\Agente\\Agente-149862.onnx",
+                "reward": -1135.88037109375,
+                "creation_time": 1775835891.871121,
+                "auxillary_file_paths": [
+                    "results\\V4D2_1.1\\Agente\\Agente-149862.pt"
+                ]
+            },
+            {
+                "steps": 199814,
+                "file_path": "results\\V4D2_1.1\\Agente\\Agente-199814.onnx",
+                "reward": -909.911496925354,
+                "creation_time": 1775835994.6494486,
+                "auxillary_file_paths": [
+                    "results\\V4D2_1.1\\Agente\\Agente-199814.pt"
+                ]
+            },
+            {
+                "steps": 249862,
+                "file_path": "results\\V4D2_1.1\\Agente\\Agente-249862.onnx",
+                "reward": -634.7126052776972,
+                "creation_time": 1775836099.0491009,
+                "auxillary_file_paths": [
+                    "results\\V4D2_1.1\\Agente\\Agente-249862.pt"
+                ]
+            },
+            {
+                "steps": 288838,
+                "file_path": "results\\V4D2_1.1\\Agente\\Agente-288838.onnx",
+                "reward": -489.85934010573794,
+                "creation_time": 1775836178.3390462,
+                "auxillary_file_paths": [
+                    "results\\V4D2_1.1\\Agente\\Agente-288838.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 288838,
+            "file_path": "results\\V4D2_1.1\\Agente.onnx",
+            "reward": -489.85934010573794,
+            "creation_time": 1775836178.3390462,
+            "auxillary_file_paths": [
+                "results\\V4D2_1.1\\Agente\\Agente-288838.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.7.1+cu118"
+    }
+}

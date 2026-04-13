@@ -38,7 +38,7 @@ behaviors:
     init_path: null
     keep_checkpoints: 5
     even_checkpoints: false
-    max_steps: 500000
+    max_steps: 10000000
     time_horizon: 64
     summary_freq: 50000
     threaded: false
@@ -59,18 +59,18 @@ engine_settings:
   width: 84
   height: 84
   quality_level: 5
-  time_scale: 1
+  time_scale: 20
   target_frame_rate: -1
   capture_frame_rate: 60
   no_graphics: false
   no_graphics_monitor: false
 environment_parameters: null
 checkpoint_settings:
-  run_id: V4D5_RWD_TEST2
+  run_id: V4D2_0.1
   initialize_from: null
   load_model: false
   resume: false
-  force: false
+  force: true
   train_model: false
   inference: false
   results_dir: results

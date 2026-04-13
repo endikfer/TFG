@@ -35,6 +35,18 @@ public class Agente1_0 : Agent
     // OnNuevoEpisodio → se dispara al inicio de cada episodio ML, ANTES de
     //                   ResetCar(). Lo escucha EntrenamientoManager.
     // ──────────────────────────────────────────────────────────────────────
+
+
+    // ─── Estado de recompensa ──────────────────────────────────────────────
+    //Recompensa 1
+    private float _prevDist = 0f;
+
+
+    //Recompensa 2
+    private Vector3 _prevPosition;
+    private Vector3 _checkpointDir;
+
+
     public static Agente1_0 Instance { get; private set; }
     public static event System.Action OnAgentReady;
     public static event System.Action OnNuevoEpisodio;
@@ -108,16 +120,75 @@ public class Agente1_0 : Agent
         ResetCar();
     }
 
+    //public override void OnActionReceived(ActionBuffers actionBuffers)
+    //{
+
+    //    if (!_isInitialized) return;
+
+    //    //if (salidaDePista && !_reseteando)
+    //    //    HandleOffTrack();
+
+
+    //    //if (!_isInitialized) return;
+
+    //    float steering = actionBuffers.ContinuousActions[0];
+    //    float throttle = actionBuffers.ContinuousActions[1];
+    //    float brake = actionBuffers.ContinuousActions[2];
+
+    //    _prometeoCarController.SetSteering(steering);
+    //    _prometeoCarController.SetThrottle(throttle);
+    //    _prometeoCarController.SetBrake(brake);
+
+    //    //MoveAgent(actionBuffers.DiscreteActions);
+
+    //    if (_checkpointManager.nextCheckPointToReach == null) return;
+
+    //    Vector3 dirToCheckpoint =
+    //        (_checkpointManager.nextCheckPointToReach.transform.position - obj.transform.position).normalized;
+
+    //    float alignment = Vector3.Dot(obj.transform.forward, dirToCheckpoint);
+
+    //    if (alignment < 0f)
+    //    {
+    //        AddReward(alignment * 0.02f);
+    //    }
+    //    else
+    //    {
+    //        AddReward(alignment * 0.01f);
+    //        float projectedSpeed = Vector3.Dot(_prometeoCarController.carRigidbody.linearVelocity, dirToCheckpoint);
+    //        AddReward(projectedSpeed * 0.001f);
+    //    }
+
+    //    float uphill = Vector3.Dot(_prometeoCarController.carRigidbody.linearVelocity.normalized, Vector3.up);
+
+    //    float slip = Mathf.Abs(_prometeoCarController.localVelocityX);
+    //    float slipFactor = uphill > 0.1f ? 0.3f : 1f;
+    //    AddReward(-slip * 0.01f * slipFactor);
+
+    //    //if (uphill > 0.1f && throttle > 0.5f)
+    //    //    AddReward(0.002f);
+
+    //    if (uphill > 0.1f && _prometeoCarController.carSpeed < 0.3f * _prometeoCarController.maxSpeed)
+    //        AddReward(-0.005f);
+
+    //    float distToCheckpoint = Vector3.Distance(
+    //        obj.transform.position,
+    //        _checkpointManager.nextCheckPointToReach.transform.position
+    //    );
+
+    //    AddReward(distToCheckpoint < 5f ? -0.0001f : -0.0005f);
+
+    //    if (StepCount >= MaxStep)
+    //    {
+    //        ResetCar();
+    //        EndEpisode();
+    //    }
+    //}
+
+    //Recompensa 1
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
-
         if (!_isInitialized) return;
-
-        //if (salidaDePista && !_reseteando)
-        //    HandleOffTrack();
-
-
-        //if (!_isInitialized) return;
 
         float steering = actionBuffers.ContinuousActions[0];
         float throttle = actionBuffers.ContinuousActions[1];
@@ -127,51 +198,71 @@ public class Agente1_0 : Agent
         _prometeoCarController.SetThrottle(throttle);
         _prometeoCarController.SetBrake(brake);
 
-        //MoveAgent(actionBuffers.DiscreteActions);
-
         if (_checkpointManager.nextCheckPointToReach == null) return;
 
-        Vector3 dirToCheckpoint =
-            (_checkpointManager.nextCheckPointToReach.transform.position - obj.transform.position).normalized;
-
-        float alignment = Vector3.Dot(obj.transform.forward, dirToCheckpoint);
-
-        if (alignment < 0f)
-        {
-            AddReward(alignment * 0.02f);
-        }
-        else
-        {
-            AddReward(alignment * 0.01f);
-            float projectedSpeed = Vector3.Dot(_prometeoCarController.carRigidbody.linearVelocity, dirToCheckpoint);
-            AddReward(projectedSpeed * 0.001f);
-        }
-
-        float uphill = Vector3.Dot(_prometeoCarController.carRigidbody.linearVelocity.normalized, Vector3.up);
-
-        float slip = Mathf.Abs(_prometeoCarController.localVelocityX);
-        float slipFactor = uphill > 0.1f ? 0.3f : 1f;
-        AddReward(-slip * 0.01f * slipFactor);
-
-        //if (uphill > 0.1f && throttle > 0.5f)
-        //    AddReward(0.002f);
-
-        if (uphill > 0.1f && _prometeoCarController.carSpeed < 0.3f * _prometeoCarController.maxSpeed)
-            AddReward(-0.005f);
-
-        float distToCheckpoint = Vector3.Distance(
+        // ── 1. Delta de distancia euclidiana ──────────────────────────────
+        // Positivo si se acerca, negativo si se aleja.
+        // LIMITACIÓN: en curvas cerradas puede penalizar la trayectoria óptima.
+        float distActual = Vector3.Distance(
             obj.transform.position,
-            _checkpointManager.nextCheckPointToReach.transform.position
-        );
+            _checkpointManager.nextCheckPointToReach.transform.position);
 
-        AddReward(distToCheckpoint < 5f ? -0.0001f : -0.0005f);
+        float delta = _prevDist - distActual;
+        AddReward(delta * 0.1f);
+        _prevDist = distActual;
 
+        // ── 2. Penalización por vivir (incentiva terminar rápido) ─────────
+        AddReward(-0.001f);
+
+        // ── 3. Penalización por deslizamiento lateral ─────────────────────
+        AddReward(-Mathf.Abs(_prometeoCarController.localVelocityX) * 0.005f);
+
+        // ── 4. Timeout ────────────────────────────────────────────────────
         if (StepCount >= MaxStep)
         {
-            ResetCar();
+            AddReward(-1f);
             EndEpisode();
         }
     }
+
+    //Recompensa 2
+    //public override void OnActionReceived(ActionBuffers actionBuffers)
+    //{
+    //    if (!_isInitialized) return;
+
+    //    float steering = actionBuffers.ContinuousActions[0];
+    //    float throttle = actionBuffers.ContinuousActions[1];
+    //    float brake = actionBuffers.ContinuousActions[2];
+
+    //    _prometeoCarController.SetSteering(steering);
+    //    _prometeoCarController.SetThrottle(throttle);
+    //    _prometeoCarController.SetBrake(brake);
+
+    //    if (_checkpointManager.nextCheckPointToReach == null) return;
+
+    //    // ── 1. Progreso proyectado sobre la dirección del camino ──────────
+    //    // Calcula cuánto se ha movido el coche en la dirección CP_ant → CP_act.
+    //    // En una curva, aunque el coche se aleje del checkpoint en distancia
+    //    // euclidiana, si avanza en la dirección correcta del tramo recibe
+    //    // recompensa positiva. Solo es negativo si va marcha atrás o lateral.
+    //    Vector3 desplazamiento = obj.transform.position - _prevPosition;
+    //    float progreso = Vector3.Dot(desplazamiento, _checkpointDir);
+    //    AddReward(progreso * 0.1f);
+    //    _prevPosition = obj.transform.position;
+
+    //    // ── 2. Penalización por vivir (incentiva terminar rápido) ─────────
+    //    AddReward(-0.001f);
+
+    //    // ── 3. Penalización por deslizamiento lateral ─────────────────────
+    //    AddReward(-Mathf.Abs(_prometeoCarController.localVelocityX) * 0.005f);
+
+    //    // ── 4. Timeout ────────────────────────────────────────────────────
+    //    if (StepCount >= MaxStep)
+    //    {
+    //        AddReward(-1f);
+    //        EndEpisode();
+    //    }
+    //}
 
     public override void CollectObservations(VectorSensor sensor)
     {
@@ -294,11 +385,11 @@ public class Agente1_0 : Agent
 
         if (!_spawnValido) return;
 
-        //Rigidbody rb = _prometeoCarController.carRigidbody;
-        //rb.linearVelocity = Vector3.zero;
-        //rb.angularVelocity = Vector3.zero;
-        //rb.position = _spawnPos;
-        //rb.rotation = _spawnRot;
+        Rigidbody rb = _prometeoCarController.carRigidbody;
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.position = _spawnPos;
+        rb.rotation = _spawnRot;
 
 
         obj.transform.position = _spawnPos;
@@ -307,8 +398,21 @@ public class Agente1_0 : Agent
         salidaDePista = false;
 
         _checkpointManager.ResetCheckpoints();
-        //_prometeoCarController.carSpeed = 0;
-        //_prometeoCarController.ResetCarState();
+        _prometeoCarController.ResetCarState();
+
+
+        // Inicializar distancia de referencia
+        //Recompensa 1
+        if (_checkpointManager.nextCheckPointToReach != null)
+        {
+            _prevDist = Vector3.Distance(
+                obj.transform.position,
+                _checkpointManager.nextCheckPointToReach.transform.position);
+        }
+
+        //Recompensa 2
+        //_prevPosition = obj.transform.position;
+        //ActualizarDireccionCheckpoint();
     }
 
     public void HandleOffTrack()
@@ -321,12 +425,40 @@ public class Agente1_0 : Agent
         _reseteando = false;
     }
 
+    //private void OnCheckpointReached(CheckPoint1_0 checkpoint)
+    //{
+    //    AddReward(1f);
+    //    AddReward(_prometeoCarController.carSpeed * 0.05f);
+    //    Debug.Log("Checkpoint superado");
+    //}
+
+    //Recompensa 1
     private void OnCheckpointReached(CheckPoint1_0 checkpoint)
     {
-        AddReward(1f);
-        AddReward(_prometeoCarController.carSpeed * 0.05f);
-        Debug.Log("Checkpoint superado");
+        AddReward(2f);
+
+        // Reiniciar distancia de referencia al siguiente checkpoint
+        if (_checkpointManager.nextCheckPointToReach != null)
+        {
+            _prevDist = Vector3.Distance(
+                obj.transform.position,
+                _checkpointManager.nextCheckPointToReach.transform.position);
+        }
+
+        Debug.Log($"[Agente V1] Checkpoint superado. Recompensa acumulada: {GetCumulativeReward():F2}");
     }
+
+    //Recompensa 2
+    //private void OnCheckpointReached(CheckPoint1_0 checkpoint)
+    //{
+    //    AddReward(2f);
+
+    //    // Actualizar dirección del camino para el siguiente tramo
+    //    ActualizarDireccionCheckpoint();
+    //    _prevPosition = obj.transform.position;
+
+    //    Debug.Log($"[Agente V2] Checkpoint superado. Recompensa acumulada: {GetCumulativeReward():F2}");
+    //}
 
     public void NotificarCircuitoListo()
     {
@@ -364,5 +496,28 @@ public class Agente1_0 : Agent
             return spawnTransform;
         }
         return spawnTransform;
+    }
+
+    //Recompensa 2
+    private void ActualizarDireccionCheckpoint()
+    {
+        if (_checkpointManager == null || _checkpointManager.nextCheckPointToReach == null)
+        {
+            _checkpointDir = obj.transform.forward; // fallback
+            return;
+        }
+
+        int idx = _checkpointManager.GetCheckpointIndex();
+        var cps = _checkpointManager.checkpoints;
+        Vector3 dest = cps[idx].transform.position;
+
+        Vector3 origen = (idx > 0)
+            ? cps[idx - 1].transform.position  // checkpoint anterior
+            : _spawnPos;                        // primer tramo: spawn → CP0
+
+        Vector3 dir = dest - origen;
+
+        // Si los dos puntos coinciden (no debería ocurrir), usar forward como fallback
+        _checkpointDir = (dir.sqrMagnitude > 0.001f) ? dir.normalized : obj.transform.forward;
     }
 }

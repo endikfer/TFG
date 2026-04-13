@@ -1,0 +1,65 @@
+{
+    "Agente": {
+        "checkpoints": [
+            {
+                "steps": 5461515,
+                "file_path": "results\\V4D2_2.0\\Agente\\Agente-5461515.onnx",
+                "reward": 37.62778091430664,
+                "creation_time": 1775924247.8732836,
+                "auxillary_file_paths": [
+                    "results\\V4D2_2.0\\Agente\\Agente-5461515.pt"
+                ]
+            },
+            {
+                "steps": 5499975,
+                "file_path": "results\\V4D2_2.0\\Agente\\Agente-5499975.onnx",
+                "reward": 30.595864954590798,
+                "creation_time": 1775988322.5482295,
+                "auxillary_file_paths": [
+                    "results\\V4D2_2.0\\Agente\\Agente-5499975.pt"
+                ]
+            },
+            {
+                "steps": 5999957,
+                "file_path": "results\\V4D2_2.0\\Agente\\Agente-5999957.onnx",
+                "reward": 33.69092112034559,
+                "creation_time": 1775990537.0243301,
+                "auxillary_file_paths": [
+                    "results\\V4D2_2.0\\Agente\\Agente-5999957.pt"
+                ]
+            },
+            {
+                "steps": 6499951,
+                "file_path": "results\\V4D2_2.0\\Agente\\Agente-6499951.onnx",
+                "reward": 35.13956981897354,
+                "creation_time": 1775992807.3644803,
+                "auxillary_file_paths": [
+                    "results\\V4D2_2.0\\Agente\\Agente-6499951.pt"
+                ]
+            },
+            {
+                "steps": 6650095,
+                "file_path": "results\\V4D2_2.0\\Agente\\Agente-6650095.onnx",
+                "reward": 35.895250988006595,
+                "creation_time": 1775993513.2269917,
+                "auxillary_file_paths": [
+                    "results\\V4D2_2.0\\Agente\\Agente-6650095.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 6650095,
+            "file_path": "results\\V4D2_2.0\\Agente.onnx",
+            "reward": 35.895250988006595,
+            "creation_time": 1775993513.2269917,
+            "auxillary_file_paths": [
+                "results\\V4D2_2.0\\Agente\\Agente-6650095.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.7.1+cu118"
+    }
+}

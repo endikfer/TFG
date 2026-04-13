@@ -327,6 +327,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1781606499}
     - target: {fileID: 4655337296933678370, guid: 23b00314a76a4394e9e8429c890d303a, type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: b29b601be00ef794097796e07c51b346, type: 3}
+    - target: {fileID: 4655337296933678370, guid: 23b00314a76a4394e9e8429c890d303a, type: 3}
       propertyPath: m_BrainParameters.VectorActionSpaceType
       value: 1
       objectReference: {fileID: 0}
@@ -349,10 +353,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 642287924342879162, guid: 23b00314a76a4394e9e8429c890d303a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1781606503}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23b00314a76a4394e9e8429c890d303a, type: 3}
 --- !u!114 &154207100 stripped
 MonoBehaviour:
@@ -812,7 +813,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &384799893
 Transform:
   m_ObjectHideFlags: 0
@@ -1299,12 +1300,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1783,11 +1784,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 776907429}
   m_CullTransparentMesh: 1
---- !u!4 &812821110 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7448819905270749925, guid: a9688e0cbe6d08c4bb3f4cc5cadd894e, type: 3}
-  m_PrefabInstance: {fileID: 5992125911941630651}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &812843789
 GameObject:
   m_ObjectHideFlags: 0
@@ -3736,14 +3732,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1701516257}
   - component: {fileID: 1701516256}
-  - component: {fileID: 1701516258}
   m_Layer: 0
   m_Name: EntrenamientoManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1701516256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3777,20 +3772,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1701516258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1701516255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8f3825ad2d402b43aaf7bdb6cc79c07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CircuitoInicialNotificador
-  circuitoParent: {fileID: 717170410}
-  spawnPointInicial: {fileID: 812821110}
 --- !u!114 &1727393113 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5440438730980430607, guid: a9688e0cbe6d08c4bb3f4cc5cadd894e, type: 3}
@@ -3802,51 +3783,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cec02bfbd57745149b93658f40814d0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheckPoint1_0
---- !u!1 &1756918707
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1756918709}
-  - component: {fileID: 1756918708}
-  m_Layer: 0
-  m_Name: AgenteManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1756918708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1756918707}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d41c8580b3df6fb4eaaeaa9e0629be75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AgenteSpawn
-  cochePrefab: {fileID: 642287924342879162, guid: 23b00314a76a4394e9e8429c890d303a, type: 3}
---- !u!4 &1756918709
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1756918707}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.06568, y: 0, z: -1.24401}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1775108850 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7124687596451268256, guid: a9688e0cbe6d08c4bb3f4cc5cadd894e, type: 3}
@@ -3879,20 +3815,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 261786959625234688, guid: 23b00314a76a4394e9e8429c890d303a, type: 3}
   m_PrefabInstance: {fileID: 52371562}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1781606503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1781606493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
-  DecisionPeriod: 2
-  TakeActionsBetweenDecisions: 1
 --- !u!1 &1809780251
 GameObject:
   m_ObjectHideFlags: 0
@@ -4310,7 +4232,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0.2, y: 0.9}
-  m_AnchoredPosition: {x: 0.2000122, y: 0}
+  m_AnchoredPosition: {x: 0.20019531, y: 0}
   m_SizeDelta: {x: 1536, y: 1188}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2028073270
@@ -4374,6 +4296,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Circuito
       objectReference: {fileID: 0}
+    - target: {fileID: 1631613054463631309, guid: a9688e0cbe6d08c4bb3f4cc5cadd894e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2482506885414555284, guid: a9688e0cbe6d08c4bb3f4cc5cadd894e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4434,7 +4360,6 @@ SceneRoots:
   - {fileID: 624125088}
   - {fileID: 1630820173}
   - {fileID: 187408685}
-  - {fileID: 1756918709}
   - {fileID: 812843792}
   - {fileID: 1701516257}
   - {fileID: 52371562}
