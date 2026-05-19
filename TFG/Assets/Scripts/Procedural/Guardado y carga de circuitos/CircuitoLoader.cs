@@ -53,12 +53,16 @@ public class CircuitoLoader : MonoBehaviour
 
     private void Start()
     {
-        panelCarga.SetActive(false);
-        botonCerrarPanel.onClick.AddListener(() =>
-        {
+        if (panelCarga != null)
             panelCarga.SetActive(false);
-            generador.Regenerar();
-        });
+
+        if (botonCerrarPanel != null)
+            botonCerrarPanel.onClick.AddListener(() =>
+            {
+                if (panelCarga != null)
+                    panelCarga.SetActive(false);
+                generador.Regenerar();
+            });
     }
 
     // ── API pública ───────────────────────────────────────────────────────
@@ -136,7 +140,8 @@ public class CircuitoLoader : MonoBehaviour
 
     private void CargarCircuito(string rutaArchivo)
     {
-        panelCarga.SetActive(false);
+        if (panelCarga != null)
+            panelCarga.SetActive(false);
 
         if (!File.Exists(rutaArchivo))
         {
