@@ -8,6 +8,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Procedural 1.unity
     guid: e049ad93168f1fd43a2e1b67613cccc5
+  - enabled: 1
+    path: Assets/Scenes/Inicio.unity
+    guid: 69ab931958ad5b54a84c5e72885af1da
+  - enabled: 1
+    path: Assets/Scenes/EVE.unity
+    guid: 3a721c523a278674cad3f50a8e88badc
+  - enabled: 1
+    path: Assets/Scenes/Entrenar.unity
+    guid: 02188b340b3291d4a86dbe0c1cb11345
+  - enabled: 1
+    path: Assets/Scenes/Generar.unity
+    guid: ec1525d6d36f5da4bbd84883a821b642
+  - enabled: 1
+    path: Assets/Scenes/PVE.unity
+    guid: ed2b7741a444e7846b241d47dc047f5b
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

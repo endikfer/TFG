@@ -4589,10 +4589,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Circuito
       objectReference: {fileID: 0}
-    - target: {fileID: 1631613054463631309, guid: a9688e0cbe6d08c4bb3f4cc5cadd894e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2482506885414555284, guid: a9688e0cbe6d08c4bb3f4cc5cadd894e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4633,10 +4629,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7161543811842911915, guid: a9688e0cbe6d08c4bb3f4cc5cadd894e, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 5511181869816858048, guid: a9688e0cbe6d08c4bb3f4cc5cadd894e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e0375898a47fd574bbfb3175b6f89d6d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

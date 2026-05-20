@@ -76,18 +76,56 @@ public class RaceManager : MonoBehaviour
         Instance = this;
     }
 
+    //private void Start()
+    //{
+    //    CircuitoEventos.OnCircuitoCerrado += OnCircuitoListo;
+    //    CircuitoEventos.OnCircuitoCargado += OnCircuitoListo;
+    //}
+
+    //private void OnDestroy()
+    //{
+    //    CircuitoEventos.OnCircuitoCerrado -= OnCircuitoListo;
+    //    CircuitoEventos.OnCircuitoCargado -= OnCircuitoListo;
+
+    //    if (Instance == this)
+    //        Instance = null;
+    //}
+
     private void Start()
     {
         CircuitoEventos.OnCircuitoCerrado += OnCircuitoListo;
         CircuitoEventos.OnCircuitoCargado += OnCircuitoListo;
 
-        
+        // Inicializar distancia del circuito en escena
+        PiezaCircuito[] piezasEnEscena = FindObjectsByType<PiezaCircuito>(FindObjectsSortMode.None);
+        if (piezasEnEscena.Length > 0)
+        {
+            float distanciaTotal = 0f;
+            foreach (var pieza in piezasEnEscena)
+                distanciaTotal += pieza.longitud;
+
+            InicializarCarrera(distanciaTotal);
+        }
+
+        // Esperar a que el agente esté listo para mostrar el HUD
+        Agente1_0.OnAgentReady += OnAgenteListo;
+
+        // Si el agente ya estaba listo antes de que nos suscribiéramos
+        if (Agente1_0.Instance != null)
+            OnAgenteListo();
+    }
+
+    private void OnAgenteListo()
+    {
+        Agente1_0.OnAgentReady -= OnAgenteListo;
+        raceHUD?.MostrarHUD();
     }
 
     private void OnDestroy()
     {
         CircuitoEventos.OnCircuitoCerrado -= OnCircuitoListo;
         CircuitoEventos.OnCircuitoCargado -= OnCircuitoListo;
+        Agente1_0.OnAgentReady -= OnAgenteListo;
 
         if (Instance == this)
             Instance = null;
