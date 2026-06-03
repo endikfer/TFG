@@ -2,47 +2,35 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 /// <summary>
-/// Escucha el evento OnCircuitoCerrado, muestra un panel para que el usuario
-/// asigne un nombre y guarda el circuito en un archivo JSON.
-/// - En el Editor guarda dentro del proyecto Unity (sincronizable con GitHub)
-/// - En build guarda en Application.persistentDataPath (ruta estándar por plataforma)
+/// Escucha el evento OnCircuitoCerrado y guarda el circuito en JSON.
+///
+/// En la escena Generar el nombre lo establece GeneradorUI antes de lanzar
+/// la generación mediante EstablecerNombreBase(). CircuitoSaver ya no
+/// muestra ningún panel propio: toda la UI de nombre la gestiona GeneradorUI.
+///
+/// - Editor: guarda en la raíz del proyecto (sincronizable con GitHub)
+/// - Build:  guarda en Application.persistentDataPath
 /// </summary>
 public class CircuitoSaver : MonoBehaviour
 {
     [Header("Configuración de guardado")]
-    [Tooltip("Subcarpeta donde se guardarán los circuitos.")]
     public string carpetaGuardado = "CircuitosGuardados";
 
-    [Header("UI de nombrado")]
-    [Tooltip("Panel que aparece al cerrar un circuito para pedir el nombre.")]
-    public GameObject panelGuardado;
-
-    [Tooltip("Campo de texto donde el usuario escribe el nombre.")]
-    public TMP_InputField inputNombre;
-
-    [Tooltip("Botón que confirma el guardado.")]
-    public Button botonGuardar;
-
-    [Tooltip("Texto que aparece cuando el nombre ya está en uso.")]
-    public TMP_Text textoError;
-
-    public Button botonCerrarPanel;
-
     [Header("Modo lote")]
-    [Tooltip("Cuando está activo, el circuito se guarda automáticamente sin mostrar el panel de nombre. " +
-             "Se activa automáticamente desde Generador2 al iniciar la generación en lote.")]
+    [Tooltip("Cuando está activo el circuito se guarda automáticamente con nombreBase_N.")]
     public bool modoLoteActivo = false;
 
     [Header("Debug")]
     public bool mostrarLogs = true;
 
-    // Guardamos los datos pendientes hasta que el usuario confirme el nombre
-    private List<PiezaCircuito> piezasPendientes;
-    private float distanciaPendiente;
+    // Nombre base establecido desde GeneradorUI antes de lanzar la generación
+    private string nombreBase = "";
+
+    // Contador para modo lote
+    private int contadorLote = 0;
 
     // ── Modelos de datos serializables ──────────────────────────────────────
 
@@ -51,8 +39,8 @@ public class CircuitoSaver : MonoBehaviour
     {
         public string tipo;
         public string nombrePrefab;
-        public float px, py, pz;   // posición world
-        public float rx, ry, rz;   // rotación euler
+        public float px, py, pz;
+        public float rx, ry, rz;
     }
 
     [Serializable]
@@ -69,17 +57,6 @@ public class CircuitoSaver : MonoBehaviour
 
     private void Start()
     {
-        // Conectar el botón al método de confirmación
-        botonGuardar.onClick.AddListener(OnBotonGuardarPulsado);
-
-        // Asegurarse de que el panel empieza oculto
-        panelGuardado.SetActive(false);
-
-        botonCerrarPanel.onClick.AddListener(() =>
-        {
-            panelGuardado.SetActive(false);
-        });
-
         if (mostrarLogs)
             Debug.Log($"📁 Ruta de guardado activa:\n   {ObtenerDirectorioBase()}");
     }
@@ -94,89 +71,89 @@ public class CircuitoSaver : MonoBehaviour
         CircuitoEventos.OnCircuitoCerrado -= HandleCircuitoCerrado;
     }
 
+    // ── API pública ─────────────────────────────────────────────────────────
+
+    /// <summary>
+    /// Llamado por GeneradorUI antes de lanzar la generación.
+    /// Establece el nombre base y resetea el contador de lote.
+    /// </summary>
+    public void EstablecerNombreBase(string nombre)
+    {
+        nombreBase = nombre.Trim();
+        contadorLote = 0;
+
+        if (mostrarLogs)
+            Debug.Log($"[CircuitoSaver] Nombre base establecido: '{nombreBase}'");
+    }
+
     // ── Handler del evento ──────────────────────────────────────────────────
 
     private void HandleCircuitoCerrado(List<PiezaCircuito> piezas, float distanciaTotal)
     {
-        // En modo lote: guardar automáticamente sin mostrar panel
+        string nombre;
+
         if (modoLoteActivo)
         {
-            string nombreAuto = GenerarNombreAutomatico();
-            GuardarCircuito(piezas, distanciaTotal, nombreAuto);
-            return;
+            // Modo lote: nombreBase_N con el primer número libre
+            contadorLote++;
+            nombre = GenerarNombreLote(nombreBase, contadorLote);
         }
-
-        // Modo normal: mostrar panel para que el usuario asigne nombre
-        piezasPendientes = piezas;
-        distanciaPendiente = distanciaTotal;
-
-        inputNombre.text = "";
-        if (textoError != null) textoError.gameObject.SetActive(false);
-        panelGuardado.SetActive(true);
-        inputNombre.Select();
-    }
-
-    // ── Confirmación del usuario ────────────────────────────────────────────
-
-    private void OnBotonGuardarPulsado()
-    {
-        string nombre = inputNombre.text.Trim();
-
-        // Si el usuario no escribió nada, asignar timestamp automático
-        if (string.IsNullOrEmpty(nombre))
-            nombre = $"circuito_{DateTime.Now:yyyyMMdd_HHmmss}";
-
-        // Comprobar si ya existe un archivo con ese nombre
-        string rutaCompleta = Path.Combine(ObtenerDirectorioBase(), $"{nombre}.json");
-        if (File.Exists(rutaCompleta))
+        else
         {
-            // Mostrar mensaje de error y NO cerrar el panel
-            if (textoError != null)
-            {
-                textoError.text = $"Ya existe un circuito con el nombre '{nombre}'. Elige otro nombre.";
-                textoError.gameObject.SetActive(true);
-            }
-            if (mostrarLogs)
-                Debug.LogWarning($"⚠️ Ya existe un archivo llamado '{nombre}.json'. Guardado cancelado.");
-            return;
+            // Modo normal: usar el nombre base directamente
+            // Si ya existe, añadir timestamp para evitar colisión
+            nombre = ResolverNombreUnico(nombreBase);
         }
 
-        // Nombre disponible, proceder con el guardado
-        if (textoError != null) textoError.gameObject.SetActive(false);
-        panelGuardado.SetActive(false);
-        GuardarCircuito(piezasPendientes, distanciaPendiente, nombre);
+        GuardarCircuito(piezas, distanciaTotal, nombre);
     }
 
-    // ── Guardado automático (modo lote) ────────────────────────────────────
+    // ── Resolución de nombres ───────────────────────────────────────────────
 
     /// <summary>
-    /// Genera el siguiente nombre disponible con formato "circuito_N",
-    /// buscando el primer número que no esté ya en uso en la carpeta de guardado.
+    /// Para modo normal: si el nombre ya existe añade un sufijo numérico.
     /// </summary>
-    private string GenerarNombreAutomatico()
+    private string ResolverNombreUnico(string base_)
     {
+        if (string.IsNullOrEmpty(base_))
+            base_ = $"circuito_{DateTime.Now:yyyyMMdd_HHmmss}";
+
         string directorio = ObtenerDirectorioBase();
-        int numero = 1;
+        string candidato = base_;
+        int intento = 1;
 
-        while (true)
+        while (File.Exists(Path.Combine(directorio, $"{candidato}.json")))
         {
-            string nombre = $"circuito_{numero}";
-            string ruta = Path.Combine(directorio, $"{nombre}.json");
-
-            if (!File.Exists(ruta))
-                return nombre;
-
-            numero++;
+            candidato = $"{base_}_{intento}";
+            intento++;
         }
+
+        return candidato;
+    }
+
+    /// <summary>
+    /// Para modo lote: nombreBase_N con el primer número libre a partir de contador.
+    /// </summary>
+    private string GenerarNombreLote(string base_, int contador)
+    {
+        if (string.IsNullOrEmpty(base_))
+            base_ = "circuito";
+
+        string directorio = ObtenerDirectorioBase();
+        string candidato = $"{base_}_{contador}";
+
+        // Si por alguna razón ya existe ese número, buscar el siguiente libre
+        while (File.Exists(Path.Combine(directorio, $"{candidato}.json")))
+        {
+            contador++;
+            candidato = $"{base_}_{contador}";
+        }
+
+        return candidato;
     }
 
     // ── Ruta de guardado ────────────────────────────────────────────────────
 
-    /// <summary>
-    /// Devuelve la ruta base según el contexto:
-    /// - Editor:  raíz del proyecto Unity  →  se sincroniza con GitHub
-    /// - Build:   persistentDataPath        →  ruta estándar por plataforma
-    /// </summary>
     private string ObtenerDirectorioBase()
     {
 #if UNITY_EDITOR
@@ -191,7 +168,6 @@ public class CircuitoSaver : MonoBehaviour
 
     private void GuardarCircuito(List<PiezaCircuito> piezas, float distanciaTotal, string nombre)
     {
-        // Construir el modelo de datos
         DatosCircuito datos = new DatosCircuito
         {
             nombre = nombre,
@@ -218,38 +194,27 @@ public class CircuitoSaver : MonoBehaviour
             });
         }
 
-        // Serializar a JSON
         string json = JsonUtility.ToJson(datos, prettyPrint: true);
-
-        // Preparar directorio
         string directorioBase = ObtenerDirectorioBase();
 
         if (!Directory.Exists(directorioBase))
             Directory.CreateDirectory(directorioBase);
 
-        // Si el usuario escribió un nombre se usa tal cual; si es timestamp ya es único
-        string nombreArchivo = $"{nombre}.json";
-        string rutaCompleta = Path.Combine(directorioBase, nombreArchivo);
-
-        // Escribir
+        string rutaCompleta = Path.Combine(directorioBase, $"{nombre}.json");
         File.WriteAllText(rutaCompleta, json);
 
         if (mostrarLogs)
         {
             Debug.Log($"💾 Circuito guardado:\n" +
                       $"   Nombre   : {nombre}\n" +
-                      $"   Archivo  : {nombreArchivo}\n" +
                       $"   Ruta     : {rutaCompleta}\n" +
                       $"   Piezas   : {datos.numeroPiezas}\n" +
                       $"   Distancia: {distanciaTotal:F1}m");
         }
     }
 
-    // ── Utilidad: listar circuitos guardados ────────────────────────────────
+    // ── Utilidad pública ────────────────────────────────────────────────────
 
-    /// <summary>
-    /// Devuelve todas las rutas de circuitos guardados, ordenadas por fecha (más reciente primero).
-    /// </summary>
     public string[] ObtenerCircuitosGuardados()
     {
         string directorio = ObtenerDirectorioBase();
@@ -258,7 +223,8 @@ public class CircuitoSaver : MonoBehaviour
             return Array.Empty<string>();
 
         string[] archivos = Directory.GetFiles(directorio, "*.json");
-        Array.Sort(archivos, (a, b) => File.GetLastWriteTime(b).CompareTo(File.GetLastWriteTime(a)));
+        Array.Sort(archivos, (a, b) =>
+            File.GetLastWriteTime(b).CompareTo(File.GetLastWriteTime(a)));
 
         return archivos;
     }

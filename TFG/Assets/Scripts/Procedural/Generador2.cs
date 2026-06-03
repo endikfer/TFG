@@ -68,6 +68,8 @@ public class Generador2 : MonoBehaviour
     public bool mostrarDebugGizmos = true;
     public bool mostrarLogs = true;
 
+    public bool generacionManual = false;
+
     // Contador interno de circuitos generados en el lote actual
     private int circuitosGenerados = 0;
 
@@ -102,6 +104,8 @@ public class Generador2 : MonoBehaviour
             Debug.Log("🏋️ Generador2: modo entrenamiento activo. Generación automática desactivada.");
             return;
         }
+
+        if (generacionManual) return;
 
         if (modoLote)
             StartCoroutine(GenerarLote());

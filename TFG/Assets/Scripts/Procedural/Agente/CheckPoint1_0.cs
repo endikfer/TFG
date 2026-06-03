@@ -13,8 +13,7 @@ public class CheckPoint1_0 : MonoBehaviour
         // El circuito carga primero, el singleton ya existe en este punto
         manager = CheckPointsManager1_0.Instance;
 
-        if (manager == null)
-            Debug.LogError("[CheckPoint2] CheckPointsManager3.Instance es null. ¿Se cargó el circuito correctamente?");
+        if (CheckPointsManager1_0.Instance == null) return;
     }
 
     private void OnTriggerEnter(Collider other)

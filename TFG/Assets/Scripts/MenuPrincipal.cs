@@ -54,7 +54,12 @@ public class MenuPrincipal : MonoBehaviour
     // ── Botones subpanel jugar ────────────────────────────────────────────
 
     public void OnBotonEntrenar() => SceneManager.LoadScene("Entrenar");
-    public void OnBotonGenerarCircuitos() => SceneManager.LoadScene("Generar");
+
+    public void OnBotonGenerarCircuitos()
+    {
+        PlayerPrefs.SetString("EscenaOrigen", SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("Generar");
+    }
     public void OnBotonEVE() => SceneManager.LoadScene("EVE");
     public void OnBotonPVE() => SceneManager.LoadScene("PVE");
 
