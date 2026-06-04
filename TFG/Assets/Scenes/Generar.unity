@@ -1644,7 +1644,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7769485267057304475, guid: 38410d1a12aa5ac4ca53bf386008b8a4, type: 3}
       propertyPath: m_Name
-      value: Boton_Secundario
+      value: Boton_Generar
       objectReference: {fileID: 0}
     - target: {fileID: 9074562117840508585, guid: 38410d1a12aa5ac4ca53bf386008b8a4, type: 3}
       propertyPath: m_text
@@ -1672,6 +1672,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1423225994674995350, guid: 38410d1a12aa5ac4ca53bf386008b8a4, type: 3}
   m_PrefabInstance: {fileID: 367264326}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &367264328 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5937603307222491029, guid: 38410d1a12aa5ac4ca53bf386008b8a4, type: 3}
+  m_PrefabInstance: {fileID: 367264326}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &405537172
 GameObject:
   m_ObjectHideFlags: 0
@@ -3199,7 +3210,7 @@ MonoBehaviour:
   maxIntentosPorPieza: 15
   maxReintentosCierre: 40
   maxPiezasTotal: 200
-  maxReintentosGlobales: 20
+  maxReintentosGlobales: 100
   maxCurvasConsecutivas: 2
   maxCurvasIntercaladas: 3
   baseRectaProb: 0.6
@@ -3210,9 +3221,9 @@ MonoBehaviour:
   modoLote: 0
   circuitosObjetivo: 10
   circuitoSaver: {fileID: 683814878}
+  generacionManual: 1
   mostrarDebugGizmos: 1
   mostrarLogs: 0
-  generacionManual: 1
 --- !u!1 &694383655
 GameObject:
   m_ObjectHideFlags: 0
@@ -3550,6 +3561,7 @@ GameObject:
   - component: {fileID: 784665825}
   - component: {fileID: 784665824}
   - component: {fileID: 784665827}
+  - component: {fileID: 784665828}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -3648,6 +3660,26 @@ MonoBehaviour:
   textoErrorNombre: {fileID: 22532097}
   botonConfirmar: {fileID: 448258742}
   botonCancelar: {fileID: 2128832188}
+--- !u!114 &784665828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784665823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96e7611c7c694e64aad9395e65e79879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuResultado
+  generador: {fileID: 683814879}
+  generadorUI: {fileID: 784665827}
+  canvasResultado: {fileID: 1175567359}
+  textoTitulo: {fileID: 2047735383}
+  textoInfo: {fileID: 1379608401}
+  sliderProgreso: {fileID: 1374633574}
+  botonGenerarOtro: {fileID: 367264328}
+  botonVolverMenu: {fileID: 816435755}
 --- !u!1 &803075200
 GameObject:
   m_ObjectHideFlags: 0
@@ -3928,7 +3960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7769485267057304475, guid: 38410d1a12aa5ac4ca53bf386008b8a4, type: 3}
       propertyPath: m_Name
-      value: Boton_Secundario (1)
+      value: Boton_Volver
       objectReference: {fileID: 0}
     - target: {fileID: 9074562117840508585, guid: 38410d1a12aa5ac4ca53bf386008b8a4, type: 3}
       propertyPath: m_text
@@ -3956,6 +3988,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1423225994674995350, guid: 38410d1a12aa5ac4ca53bf386008b8a4, type: 3}
   m_PrefabInstance: {fileID: 816435753}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &816435755 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5937603307222491029, guid: 38410d1a12aa5ac4ca53bf386008b8a4, type: 3}
+  m_PrefabInstance: {fileID: 816435753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &857376419
 GameObject:
   m_ObjectHideFlags: 0
@@ -5724,7 +5767,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1092131822}
   m_FillRect: {fileID: 695551043}
   m_HandleRect: {fileID: 1092131821}

@@ -64,11 +64,13 @@ public class Generador2 : MonoBehaviour
     [Tooltip("Referencia al CircuitoSaver para activar el guardado automático en modo lote.")]
     public CircuitoSaver circuitoSaver;
 
+    [Header("Modo manual")]
+    [Tooltip("Si está activo el generador no arranca solo. La UI lo dispara con Regenerar().")]
+    public bool generacionManual = false;
+
     [Header("Debug")]
     public bool mostrarDebugGizmos = true;
     public bool mostrarLogs = true;
-
-    public bool generacionManual = false;
 
     // Contador interno de circuitos generados en el lote actual
     private int circuitosGenerados = 0;
@@ -87,6 +89,9 @@ public class Generador2 : MonoBehaviour
     private HashSet<string> combinacionesIntentadas = new HashSet<string>();
     private int intentosCierreSinProgreso = 0;
     private const int maxIntentosSinProgreso = 20;
+
+    public static event System.Action<int, int> OnProgresoLote;
+    public static event System.Action<int, int> OnLoteCompletado;
 
     void Start()
     {
@@ -155,6 +160,7 @@ public class Generador2 : MonoBehaviour
                 {
                     exito = true;
                     circuitosGenerados++;
+                    OnProgresoLote?.Invoke(circuitosGenerados, circuitosObjetivo);
                     Debug.Log($"✅ Lote: circuito {circuitosGenerados}/{circuitosObjetivo} generado y guardado.");
                 }
                 else if (intentoGlobal < maxReintentosGlobales)
@@ -178,8 +184,8 @@ public class Generador2 : MonoBehaviour
 
         // Finalizar modo lote
         circuitoSaver.modoLoteActivo = false;
-
         Debug.Log($"🏁 MODO LOTE COMPLETADO: {circuitosGenerados}/{circuitosObjetivo} circuitos guardados.");
+        OnLoteCompletado?.Invoke(circuitosGenerados, circuitosObjetivo);
     }
 
     IEnumerator GenerarCircuitoConReintentos()

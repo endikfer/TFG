@@ -271,4 +271,10 @@ public class MenuGenerar : MonoBehaviour
             textoPreviewLote.text = $"Se guardarán como: {base_}_1, {base_}_2 ... {base_}_{cantidad}";
         }
     }
+
+    public void MostrarPanelParametros()
+    {
+        panelNombre.SetActive(false);
+        panelParametros.SetActive(true);
+    }
 }
